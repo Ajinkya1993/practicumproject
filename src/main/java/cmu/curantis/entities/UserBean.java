@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,97 +15,98 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="caregiver_information_table")
+@Table(name="caregiver_circle_info")
 public class UserBean {
 
-	@Embeddable
-	public class Identity implements Serializable {
-		
-	    @Column(name = "circle_id")
-	    private long circle_id;
+    @Embeddable
+    public class Identity implements Serializable {
+        
+        @GeneratedValue(strategy=GenerationType.AUTO)
+        @Column(name = "circle_id")
+        private long circleid;
 
-	    @Column(name = "email")
-	    private String email;
-
-	    //getter, setter methods
-	    public long getCircleID() {
-	    	return circle_id;
-	    }
-	    
-	    public String getEmail() {
-	    	return email;
-	    }
-	    
-	    public void setEmail(String emailadd) {
-	    	email = emailadd;
-	    }
-	}
-	
-	@EmbeddedId
-    private Identity prim_id;
-	
-	@Column(name = "circle_name")
-    private String circlename;
-	
-	@Column(name = "primary_caregiver")
-    private boolean primarycaregiver;
+        @Column(name = "email")
+        private String email;
+        
+        //getter, setter methods
+        public long getCircleID() {
+            return circleid;
+        }
+        
+        public String getEmail() {
+            return email;
+        }
+        
+        public void setEmail(String emailadd) {
+            email = emailadd;
+        }
+    }
     
-	@Column(name = "relationship_nature")
-    private String relationship_nature;
+    @EmbeddedId
+    private Identity primid;
     
-	@Column(name = "georelationship")
+    @Column(name = "circle_name")
+    private String circleName;
+    
+    @Column(name = "primary_caregiver")
+    private boolean primaryCaregiver;
+    
+    @Column(name = "relationship_nature")
+    private String relationshipNature;
+    
+    @Column(name = "georelationship")
     private String georelationship;
     
-	@Column(name = "trigger_event")
-    private String triggerevent;
+    @Column(name = "trigger_event")
+    private String triggerEvent;
     
-	@Column(name = "join_status")
-    private Boolean join_status;
+    @Column(name = "join_status")
+    private Boolean joinStatus;
      
     public String getCirclename() {
-    	return circlename;
+        return circleName;
     }
     
     public void setCirclename(String circlenm) {
-    	circlename = circlenm;
+        circleName = circlenm;
     }
     
-    public boolean getPrimarycaregiver() {
-    	return primarycaregiver;
+    public boolean getPrimaryCaregiver() {
+        return primaryCaregiver;
     }
     
-    public void setPrimarycaregiver(boolean primarycg) {
-    	primarycaregiver = primarycg;
+    public void setPrimaryCaregiver(boolean primarycg) {
+        primaryCaregiver = primarycg;
     }
     public String getRelationshipNature() {
-    	return relationship_nature;
+        return relationshipNature;
     }
     
     public void setRelationshipNature(String relnat) {
-    	relationship_nature = relnat;
+        relationshipNature = relnat;
     }
     
     public String getGeorelationship() {
-    	return georelationship;
+        return georelationship;
     }
     
     public void setGeorelationship(String georel) {
-    	georelationship = georel;
+        georelationship = georel;
     }
     
-    public String getTriggerevent() {
-    	return triggerevent;
+    public String getTriggerEvent() {
+        return triggerEvent;
     }
     
-    public void setTriggerevent(String triggereve) {
-    	triggerevent = triggereve;
+    public void setTriggerEvent(String triggereve) {
+        triggerEvent = triggereve;
     }
     
-    public Boolean getJoinstatus() {
-    	return join_status;
+    public Boolean getJoinStatus() {
+        return joinStatus;
     }
     
-    public void setJoinstatus(Boolean joinstat) {
-    	join_status = joinstat;
+    public void setJoinStatus(Boolean joinstat) {
+        joinStatus = joinstat;
     }
 }

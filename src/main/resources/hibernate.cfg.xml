@@ -13,5 +13,7 @@
   <property name="hibernate.hbm2ddl.auto">update</property>
   <mapping class="cmu.curantis.entities.Employee"/>
   <mapping class="cmu.curantis.entities.UserBean"/>
+  <mapping class="cmu.curantis.entities.CaregiverInfoBean"/>
+  <mapping class="cmu.curantis.entities.CircleSubsBean"/>
  </session-factory>
 </hibernate-configuration>

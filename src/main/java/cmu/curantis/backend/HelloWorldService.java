@@ -21,9 +21,11 @@ import cmu.curantis.entities.Employee;
 	    @GET
 	    @Produces("application/text")
 	    public String getEmployee() {
-	        EmployeeDAO dao = new EmployeeDAO();
+	       
+	    	EmployeeDAO dao = new EmployeeDAO();
 	        List employees = dao.getEmployees();
 	        System.out.println(employees.get(0).toString());
+	        
 	        return "";
 	    }
 	 
