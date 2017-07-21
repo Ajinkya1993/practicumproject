@@ -1,9 +1,10 @@
-package cmu.curantis.backend;
+package cmu.curantis.dao;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
- 
+
+import cmu.curantis.entities.Employee; 
 public class EmployeeDAO {
     
     public void addEmployee(Employee bean){

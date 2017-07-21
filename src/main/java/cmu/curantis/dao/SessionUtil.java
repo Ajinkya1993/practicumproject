@@ -1,4 +1,4 @@
-package cmu.curantis.backend;
+package cmu.curantis.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -12,7 +12,8 @@ public class SessionUtil {
             return instance;
     }
     
-    private SessionUtil(){
+    @SuppressWarnings("deprecation")
+	private SessionUtil(){
         Configuration configuration = new Configuration();
         configuration.configure("hibernate.cfg.xml");
                 

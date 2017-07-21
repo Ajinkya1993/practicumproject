@@ -11,9 +11,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Produces;
 
- 
-import cmu.curantis.backend.Employee;
-import cmu.curantis.backend.EmployeeDAO;
+import cmu.curantis.dao.EmployeeDAO;
+import cmu.curantis.entities.Employee;
  
 	
 	@Path("/employees")

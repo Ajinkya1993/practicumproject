@@ -1,4 +1,4 @@
-package cmu.curantis.backend;
+package cmu.curantis.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
