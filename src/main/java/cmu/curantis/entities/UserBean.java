@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class UserBean {
 
 	@Embeddable
-	public class Identity {
+	public class Identity implements Serializable {
 		
 	    @Column(name = "circle_id")
 	    private long circle_id;
