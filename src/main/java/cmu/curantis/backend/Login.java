@@ -1,5 +1,26 @@
 package cmu.curantis.backend;
 
-public class Login {
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
+import cmu.curantis.inputbeans.LoginInput;
+import cmu.curantis.outputbeans.LoginOutput;
+
+@Path("/login")
+public class Login {
+	
+	@POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+	public LoginOutput login(LoginInput input) {
+		LoginOutput output = new LoginOutput();
+		output.setFirstName("Jing");
+		output.setLastName("Zhu");
+		output.setSuccess(true);
+		output.setMessage("Login Success!");
+		return output;
+	}
 }
