@@ -20,8 +20,9 @@ public class UserBean {
 
     @Embeddable
     public class Identity implements Serializable {
-        
-        @GeneratedValue(strategy=GenerationType.AUTO)
+
+		private static final long serialVersionUID = 1L;
+
         @Column(name = "circle_id")
         private long circleid;
 
@@ -31,6 +32,10 @@ public class UserBean {
         //getter, setter methods
         public long getCircleID() {
             return circleid;
+        }
+        
+        public void setCircleID(long cicid) {
+            circleid = cicid;
         }
         
         public String getEmail() {
@@ -62,7 +67,11 @@ public class UserBean {
     
     @Column(name = "join_status")
     private Boolean joinStatus;
-     
+    
+    public Identity getIdentity() {
+    	return primid;
+    }
+    
     public String getCirclename() {
         return circleName;
     }
