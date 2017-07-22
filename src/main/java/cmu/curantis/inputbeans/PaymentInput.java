@@ -11,7 +11,6 @@ public class PaymentInput {
 	private String expirationDate;
 	private String cvvNo;
 	private String cardType;
-	private String message;
 	
 	public String getCardmemberFirstName() {
 		return cardmemberFirstName;
@@ -54,11 +53,5 @@ public class PaymentInput {
 	}
 	public void setCardType(String cardType) {
 		this.cardType = cardType;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
 	}	
 }

@@ -2,7 +2,6 @@ package cmu.curantis.outputbeans;
 
 public class PaymentOutput {
 	private boolean success;
-	private String cardNo;
 	private String message;
 	
 	public boolean isSuccess() {
@@ -11,13 +10,6 @@ public class PaymentOutput {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-	public String getCardNo() {
-		return cardNo;
-	}
-	public void setCardNo(String cardNo) {
-		this.cardNo = cardNo;
-	}
-
 	public String getMessage() {
 		return message;
 	}
