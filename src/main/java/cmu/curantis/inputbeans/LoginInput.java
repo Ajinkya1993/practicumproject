@@ -4,13 +4,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class LoginInput {
-	private String emial;
+	private String email;
 	private String password;
-	public String getEmial() {
-		return emial;
+	public String getEmail() {
+		return email;
 	}
-	public void setEmial(String emial) {
-		this.emial = emial;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getPassword() {
 		return password;
