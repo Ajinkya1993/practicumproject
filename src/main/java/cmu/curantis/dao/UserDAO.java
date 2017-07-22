@@ -8,7 +8,7 @@ import org.hibernate.mapping.List;
 import cmu.curantis.entities.UserBean;
 
 public class UserDAO {
-	private Boolean create(Session session, UserBean ub) {
+	public Boolean create(Session session, UserBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
@@ -33,7 +33,7 @@ public class UserDAO {
 		
 	}
 	
-	private List read(Session session, UserBean ub) {
+	public List read(Session session, UserBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
@@ -46,7 +46,7 @@ public class UserDAO {
 		return list;
 	}
 	
-	private Boolean update(Session session, UserBean ub) {
+	public Boolean update(Session session, UserBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
@@ -60,7 +60,7 @@ public class UserDAO {
 		return true;
 	}
 	
-	private Boolean delete(Session session, UserBean ub) {
+	public Boolean delete(Session session, UserBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");

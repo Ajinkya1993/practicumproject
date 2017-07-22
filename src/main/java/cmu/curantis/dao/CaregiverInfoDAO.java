@@ -85,7 +85,7 @@ public class CaregiverInfoDAO {
         return true;
     }
     
-    public boolean updateEmployee(Session session, CaregiverInfoBean caregiver){
+    public boolean updateCaregiverInfo(Session session, CaregiverInfoBean caregiver){
     	Query query = session.createQuery("from caregiver_information where email = :email");
 		query.setString("email", String.valueOf(caregiver.getEmail()));
 		List<CaregiverInfoBean> caregivers =  query.list();
