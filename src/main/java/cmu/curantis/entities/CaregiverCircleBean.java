@@ -72,6 +72,10 @@ public class CaregiverCircleBean {
     	return primid;
     }
     
+    public void setIdentity() {
+    	primid = new Identity();
+    }
+    
     public String getCirclename() {
         return circleName;
     }

@@ -10,23 +10,28 @@ import cmu.curantis.entities.CaregiverCircleBean;
 
 public class CaregiverCircleDAO {
 	public Boolean create(Session session, CaregiverCircleBean ub) {
-		String em = ub.getIdentity().getEmail();
+		String emailid = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
-		query.setParameter("em", em);
-		query.setParameter("cicid", cicid);
-		List list = (List) query.list();
-		if(((java.util.List) list).size() > 0) {
+		if(emailid == null || cicid < 0) {
+			return false;
+		}
+		Query query = session.createQuery("FROM UserBean WHERE email = :email AND circle_id = :circle_id");
+        query.setString("email",emailid);
+        query.setLong("circle_id",cicid);
+        List<CaregiverCircleBean> lst =  query.list();
+		
+		if(lst.size() > 0) {
 			return false;
 		}
 		
 		CaregiverCircleBean newub = new CaregiverCircleBean();
+		newub.setIdentity();
 		newub.getIdentity().setCircleID(cicid);
-		newub.getIdentity().setEmail(em);
+		newub.getIdentity().setEmail(emailid);
 		newub.setCirclename(ub.getCirclename());
 		newub.setGeorelationship(ub.getGeorelationship());
 		newub.setJoinStatus(ub.getJoinStatus());
-		newub.setPrimaryCaregiver(ub.getPrimaryCaregiver());  //Check if the primary caregiver exists?
+		newub.setPrimaryCaregiver(ub.getPrimaryCaregiver());
 		newub.setRelationshipNature(ub.getRelationshipNature());
 		newub.setTriggerEvent(ub.getTriggerEvent());
 		session.save(newub);
@@ -34,62 +39,58 @@ public class CaregiverCircleDAO {
 		
 	}
 	
-	public List read(Session session, CaregiverCircleBean ub) {  //Should be (Session session, String email) instead of CaregiverCircleBean ub
-		String em = ub.getIdentity().getEmail();
+	public CaregiverCircleBean read(Session session, CaregiverCircleBean ub) {
+		String email = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
-		query.setParameter("em", em);
-		query.setParameter("cicid", cicid);
-		List list = (List) query.list();
-		if(((java.util.List) list).size() == 0 || list == null) {
+		Query query = session.createQuery("FROM UserBean WHERE email = :email AND circle_id = :circle_id");
+		query.setString("email", email);
+		query.setLong("circle_id", cicid);
+		List<CaregiverCircleBean> list = query.list();
+		if(list == null || list.size() == 0) {
+			return null;
+		}
+		return list.get(0);
+	}
+	
+	public List<CaregiverCircleBean> readcircle(Session session, CaregiverCircleBean ub) {
+		long cicid = ub.getIdentity().getCircleID();
+		Query query = session.createQuery("FROM UserBean WHERE circle_id = :circle_id");
+		query.setLong("circle_id", cicid);
+		List<CaregiverCircleBean> list = query.list();
+		if(list == null || list.size() == 0) {
 			return null;
 		}
 		return list;
-	}
-	public List<CaregiverCircleBean> getCircleByEmail(Session session, String email) {
-	    String q = "select * from caregiver_circle_info where email = :email";
-	    Query query = session.createQuery(q);
-	    query.setString("email", email);
-	    List<CaregiverCircleBean> circleList = query.list();
-	    return circleList;
-	}
-	public List<CaregiverCircleBean> getCircleByCircleId(Session session, long circleId) {
-	    String q = "select * from caregiver_circle_info where circle_id = :circleId";
-        Query query = session.createQuery(q);
-        query.setLong("circleId", circleId);
-        List<CaregiverCircleBean> circleList = query.list();
-        return circleList;
 	}
 	
 	public Boolean update(Session session, CaregiverCircleBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
-		query.setParameter("em", em);
-		query.setParameter("cicid", cicid);
-		List list = (List) query.list();
-		if(((java.util.List) list).size() == 0 || list == null) {
+		Query query = session.createQuery("FROM UserBean WHERE email = :em AND circle_id = :cicid");
+		query.setString("em", em);
+		query.setLong("cicid", cicid); 
+		List<CaregiverCircleBean> list = query.list();
+		if(list == null || list.size() == 0) {
 			return false;
 		}
-		session.saveOrUpdate(ub);
+		CaregiverCircleBean mybean = (CaregiverCircleBean)session.merge(ub);
+		session.saveOrUpdate(mybean);
 		return true;
 	}
 	
 	public Boolean delete(Session session, CaregiverCircleBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
-		query.setParameter("em", em);
-		query.setParameter("cicid", cicid);
-		List list = (List) query.list();
-		if(((java.util.List) list).size() == 0 || list == null) {
+		Query query = session.createQuery("from UserBean where circle_id = :circleid AND email = :email");
+		query.setLong("circleid", cicid);
+		query.setString("email", em);
+		List<CaregiverCircleBean> list =  query.list();
+		if (list == null || list.size() == 0) {
 			return false;
 		}
-		Query querydel = session.createQuery("DELETE FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
-        querydel.setParameter("em",em);
-        querydel.setParameter("cicid",cicid);
-        querydel.executeUpdate();
-        session.close();
+		CaregiverCircleBean mybean = (CaregiverCircleBean)session.merge(ub);
+		
+		session.delete(mybean);		    
 		return true;
 	}
 }
