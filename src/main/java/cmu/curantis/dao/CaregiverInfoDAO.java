@@ -24,7 +24,8 @@ public class CaregiverInfoDAO {
         		return false;
         	}
         }
-        session.saveOrUpdate(bean);
+        CaregiverInfoBean mybean = (CaregiverInfoBean)session.merge(bean);
+        session.saveOrUpdate(mybean);
         return true;
     }
 	
