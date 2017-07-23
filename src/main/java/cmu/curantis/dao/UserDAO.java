@@ -10,7 +10,7 @@ public class UserDAO {
 	public Boolean create(Session session, UserBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
+		Query query = session.createQuery("FROM UserDAO WHERE email = :em AND circle_id = :cicid");
 		query.setParameter("em", em);
 		query.setParameter("cicid", cicid);
 		List list = (List) query.list();
@@ -35,11 +35,11 @@ public class UserDAO {
 	public List read(Session session, UserBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
+		Query query = session.createQuery("FROM UserDAO WHERE email = :em AND circle_id = :cicid");
 		query.setParameter("em", em);
 		query.setParameter("cicid", cicid);
 		List list = (List) query.list();
-		if(((java.util.List) list).size() == 0 || list == null) {
+		if(list == null || ((java.util.List) list).size() == 0) {
 			return null;
 		}
 		return list;
@@ -48,11 +48,11 @@ public class UserDAO {
 	public Boolean update(Session session, UserBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
+		Query query = session.createQuery("FROM UserDAO WHERE email = :em AND circle_id = :cicid");
 		query.setParameter("em", em);
 		query.setParameter("cicid", cicid);
 		List list = (List) query.list();
-		if(((java.util.List) list).size() == 0 || list == null) {
+		if(list == null || ((java.util.List) list).size() == 0 || list == null) {
 			return false;
 		}
 		session.saveOrUpdate(ub);
@@ -62,14 +62,14 @@ public class UserDAO {
 	public Boolean delete(Session session, UserBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
+		Query query = session.createQuery("FROM UserDAO WHERE email = :em AND circle_id = :cicid");
 		query.setParameter("em", em);
 		query.setParameter("cicid", cicid);
 		List list = (List) query.list();
-		if(((java.util.List) list).size() == 0 || list == null) {
+		if(list == null || ((java.util.List) list).size() == 0) {
 			return false;
 		}
-		Query querydel = session.createQuery("DELETE FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
+		Query querydel = session.createQuery("DELETE UserDAO WHERE email = :em AND circle_id = :cicid");
         querydel.setParameter("em",em);
         querydel.setParameter("cicid",cicid);
         querydel.executeUpdate();
