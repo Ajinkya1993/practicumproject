@@ -15,7 +15,9 @@ public class CircleSubsDAO {
 	/*
 	 * Returns the new circle id for this circle. Returns -1 on error.
 	 */
-	public long addCircleSubs(Session session, CircleSubsBean bean){
+	public long addCircleSubs(Session session, String name){
+		CircleSubsBean bean = new CircleSubsBean();
+		bean.setCircleName(name);
 		session.save(bean);
 		List<CircleSubsBean> result = session.createQuery("from CircleSubsBean ORDER BY circle_id DESC").setMaxResults(1).list();
 		if (result == null || result.size() == 0) {

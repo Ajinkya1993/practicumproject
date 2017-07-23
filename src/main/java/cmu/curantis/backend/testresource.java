@@ -54,7 +54,7 @@ public class testresource {
 		CircleSubsDAO dao = new CircleSubsDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
-        System.out.println(dao.addCircleSubs(session, bean));                
+        System.out.println(dao.addCircleSubs(session, bean.getCircleName()));                
         tx.commit();
         session.close();
 		
