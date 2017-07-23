@@ -24,6 +24,12 @@ public class Login {
 	public LoginOutput login(LoginInput input) {
 		LoginOutput output = new LoginOutput();
 		
+		if (input.getEmail() == null || input.getPassword() == null) {
+			output.setMessage("Missing email or password!");
+        	output.setSuccess(false);
+        	return output;
+		}
+		
 		CaregiverInfoDAO caregiverdao = new CaregiverInfoDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
