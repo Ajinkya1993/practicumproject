@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class PaymentInput {
+	private String email;
+	private String circleid;
 	private String cardmemberFirstName;
 	private String cardmemberMiddleName;
 	private String cardMemberLastName;
@@ -12,6 +14,18 @@ public class PaymentInput {
 	private String cvvNo;
 	private String cardType;
 	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getCircleid() {
+		return circleid;
+	}
+	public void setCircleid(String circleid) {
+		this.circleid = circleid;
+	}
 	public String getCardmemberFirstName() {
 		return cardmemberFirstName;
 	}
