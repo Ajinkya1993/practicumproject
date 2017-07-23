@@ -42,6 +42,7 @@ public class AddToCircle {
         } else {
             //Update the circle table
             CaregiverCircleBean newCaregiver = new CaregiverCircleBean();
+            newCaregiver.setIdentity();
             newCaregiver.getIdentity().setCircleID(input.getCircleId());
             newCaregiver.setCirclename(input.getCircleName());
             newCaregiver.setGeorelationship(input.getGeoRel());
