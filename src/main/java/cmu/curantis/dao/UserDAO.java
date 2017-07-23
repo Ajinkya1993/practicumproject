@@ -39,6 +39,7 @@ public class UserDAO {
 		query.setParameter("em", em);
 		query.setParameter("cicid", cicid);
 		List list = (List) query.list();
+
 		if(list == null || ((java.util.List) list).size() == 0) {
 			return null;
 		}
