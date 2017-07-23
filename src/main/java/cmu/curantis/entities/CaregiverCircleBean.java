@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="caregiver_circle_info")
-public class UserBean {
+public class CaregiverCircleBean {
 
     @Embeddable
     public static class Identity implements Serializable {

@@ -10,8 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import cmu.curantis.dao.SessionUtil;
-import cmu.curantis.dao.UserDAO;
-import cmu.curantis.entities.UserBean;
+import cmu.curantis.dao.caregiverCircleDAO;
+import cmu.curantis.entities.CaregiverCircleBean;
 
 @Path("/testvarun")
 public class testUserDAO {
@@ -21,7 +21,7 @@ public class testUserDAO {
 	@Path("/testdelete")
 	public void testdelete () {
 		
-		UserBean ub = new UserBean();
+		CaregiverCircleBean ub = new CaregiverCircleBean();
 		ub.setCirclename("varunscircle");
 		ub.setGeorelationship("Uncle");
 		ub.setJoinStatus(true);
@@ -48,7 +48,7 @@ public class testUserDAO {
 	@Path("/testadd")
 	public void testadd () {
 		
-		UserBean ub = new UserBean();
+		CaregiverCircleBean ub = new CaregiverCircleBean();
 		ub.setCirclename("varunscircle");
 		ub.setGeorelationship("Uncle");
 		ub.setJoinStatus(true);
@@ -73,7 +73,7 @@ public class testUserDAO {
 	@Path("/testget")
 	public void testget () {
 		
-		UserBean ub = new UserBean();
+		CaregiverCircleBean ub = new CaregiverCircleBean();
 		ub.setCirclename("varunscircle");
 		ub.setGeorelationship("Uncle");
 		ub.setJoinStatus(true);
@@ -98,7 +98,7 @@ public class testUserDAO {
 	@Path("/testupdate")
 	public void testupdate () {
 		
-		UserBean ub = new UserBean();
+		CaregiverCircleBean ub = new CaregiverCircleBean();
 		ub.setCirclename("varunscircle");
 		ub.setGeorelationship("Uncle");
 		ub.setJoinStatus(true);
