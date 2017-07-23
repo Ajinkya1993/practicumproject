@@ -1,14 +1,10 @@
 package cmu.curantis.dao;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.json.JSONException;
-
 import cmu.curantis.entities.CaregiverInfoBean;
-import cmu.curantis.entities.UserBean;
+
 
 public class CaregiverInfoDAO {
 	
@@ -58,7 +54,7 @@ public class CaregiverInfoDAO {
 			return false;
 		}
 		CaregiverInfoBean mybean = (CaregiverInfoBean)session.merge(bean);
-		session.delete(mybean);		    
+		session.delete(mybean);    
 		return true;
     }
     
