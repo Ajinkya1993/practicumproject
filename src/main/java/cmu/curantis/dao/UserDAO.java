@@ -11,7 +11,6 @@ import cmu.curantis.entities.UserBean;
 
 public class UserDAO {
 	public Boolean create(Session session, UserBean ub) {
-		UserBean userbee = new UserBean();
 		String emailid = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		if(emailid == null || cicid < 0) {
@@ -46,6 +45,17 @@ public class UserDAO {
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("FROM UserBean WHERE email = :email AND circle_id = :circle_id");
 		query.setString("email", email);
+		query.setLong("circle_id", cicid);
+		List<UserBean> list = query.list();
+		if(list == null || list.size() == 0) {
+			return null;
+		}
+		return list;
+	}
+	
+	public List readcircle(Session session, UserBean ub) {
+		long cicid = ub.getIdentity().getCircleID();
+		Query query = session.createQuery("FROM UserBean WHERE circle_id = :circle_id");
 		query.setLong("circle_id", cicid);
 		List<UserBean> list = query.list();
 		if(list == null || list.size() == 0) {
