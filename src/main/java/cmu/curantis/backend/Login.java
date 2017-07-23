@@ -40,6 +40,8 @@ public class Login {
         	output.setMessage("Login success!");
         	output.setSuccess(true);
         }
+        tx.commit();
+        session.close();
 		
 		return output;
 	}
