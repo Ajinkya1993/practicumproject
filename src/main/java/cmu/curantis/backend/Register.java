@@ -26,25 +26,23 @@ public class Register {
 		CaregiverInfoDAO caregiverdao = new CaregiverInfoDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
-        CaregiverInfoBean caregiver = caregiverdao.getCaregiverInfo(session, input.getEmail());
-        if (caregiver != null && caregiver.getRegisteredStatus()) {
-        	output.setMessage("Account already exist!");
-        	output.setSuccess(false);
-        } else {
-        	caregiver = new CaregiverInfoBean();
-        	caregiver.setEmail(input.getEmail());
-        	caregiver.setFirstName(input.getFirstName());
-        	caregiver.setMiddleName(input.getMiddleName());
-        	caregiver.setLastName(input.getLastName());
-        	caregiver.setPassword(input.getPassword());
-        	caregiver.setAddress(input.getAddress());
-        	caregiver.setPhoneNumber(input.getPhoneNo());
-        	caregiver.setRegisteredStatus(true);
-        	session.saveOrUpdate(caregiver);
+        CaregiverInfoBean caregiver = new CaregiverInfoBean();
+    	caregiver.setEmail(input.getEmail());
+    	caregiver.setFirstName(input.getFirstName());
+    	caregiver.setMiddleName(input.getMiddleName());
+    	caregiver.setLastName(input.getLastName());
+    	caregiver.setPassword(input.getPassword());
+    	caregiver.setAddress(input.getAddress());
+    	caregiver.setPhoneNumber(input.getPhoneNo());
+    	caregiver.setRegisteredStatus(true);
+        if (caregiverdao.addCaregiverInfo(session, caregiver)) {
         	output.setFirstName(input.getFirstName());
         	output.setLastName(input.getLastName());
         	output.setMessage("Register success!");
         	output.setSuccess(true);
+        } else {
+        	output.setMessage("Account already exist!");
+        	output.setSuccess(false);
         }
         tx.commit();
         session.close();
