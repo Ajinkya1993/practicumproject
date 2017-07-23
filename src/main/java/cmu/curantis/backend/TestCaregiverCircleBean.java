@@ -86,7 +86,7 @@ public class TestCaregiverCircleBean {
 		caregiverCircleDAO udao = new caregiverCircleDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
-        System.out.println(udao.read(session, ub));                
+        System.out.println(udao.getByCircleId(session, ub.getIdentity().getCircleID()));                
         tx.commit();
         session.close();
 		
