@@ -22,6 +22,12 @@ public class CreateCircle {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 	public CircleOutput createCircle(CircleInput input) {
+	    CircleOutput output = new CircleOutput();
+	    if (input.getCircleName() == null || input.getEmail() == null) {
+	        output.setMessage("Missing circle name or email!");
+	        output.setSuccess(false);
+	        return output;
+	    }
 	    CaregiverCircleDAO caregiverCircleDAO = new CaregiverCircleDAO();
 	    CircleSubsDAO circleSubsDAO = new CircleSubsDAO();
 	    Session session = SessionUtil.getSession(); 
@@ -43,8 +49,7 @@ public class CreateCircle {
 	    caregiverCircle.setTriggerEvent(input.getTriggerEvent());
 	    caregiverCircleDAO.create(session, caregiverCircle);
 		//System.out.println(input.getCircleName());
-		CircleOutput output = new CircleOutput();
-		output.setCircleId(input.getCircleId());
+		output.setCircleId(circleId);
 		output.setSuccess(true);
 		output.setMessage("Circle created!");
 		
