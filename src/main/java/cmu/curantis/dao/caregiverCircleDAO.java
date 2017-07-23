@@ -40,7 +40,7 @@ public class caregiverCircleDAO {
 		
 	}
 	
-	public List read(Session session, CaregiverCircleBean ub) {
+	public CaregiverCircleBean read(Session session, CaregiverCircleBean ub) {
 		String email = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("FROM UserBean WHERE email = :email AND circle_id = :circle_id");
@@ -50,10 +50,10 @@ public class caregiverCircleDAO {
 		if(list == null || list.size() == 0) {
 			return null;
 		}
-		return list;
+		return list.get(0);
 	}
 	
-	public List readcircle(Session session, CaregiverCircleBean ub) {
+	public List<CaregiverCircleBean> readcircle(Session session, CaregiverCircleBean ub) {
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("FROM UserBean WHERE circle_id = :circle_id");
 		query.setLong("circle_id", cicid);

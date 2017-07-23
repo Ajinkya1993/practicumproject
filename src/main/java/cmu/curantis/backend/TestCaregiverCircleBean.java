@@ -14,7 +14,7 @@ import cmu.curantis.dao.caregiverCircleDAO;
 import cmu.curantis.entities.CaregiverCircleBean;
 
 @Path("/testvarun")
-public class testUserDAO {
+public class TestCaregiverCircleBean {
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -31,7 +31,7 @@ public class testUserDAO {
 		ub.setIdentity();
 		ub.getIdentity().setCircleID(1);
 		ub.getIdentity().setEmail("varunp@andrew.cmu.edu");
-		UserDAO udao = new UserDAO();
+		caregiverCircleDAO udao = new caregiverCircleDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
         udao.delete(session, ub);
@@ -58,7 +58,7 @@ public class testUserDAO {
 		ub.setIdentity();
 		ub.getIdentity().setCircleID(1);
 		ub.getIdentity().setEmail("varunp@andrew.cmu.edu");
-		UserDAO udao = new UserDAO();
+		caregiverCircleDAO udao = new caregiverCircleDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
         System.out.println(udao.create(session, ub));                
@@ -83,7 +83,7 @@ public class testUserDAO {
 		ub.setIdentity();
 		ub.getIdentity().setCircleID(1);
 		ub.getIdentity().setEmail("varunp@andrew.cmu.edu");
-		UserDAO udao = new UserDAO();
+		caregiverCircleDAO udao = new caregiverCircleDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
         System.out.println(udao.read(session, ub));                
@@ -108,7 +108,7 @@ public class testUserDAO {
 		ub.setIdentity();
 		ub.getIdentity().setCircleID(1);
 		ub.getIdentity().setEmail("varunp@andrew.cmu.edu");
-		UserDAO udao = new UserDAO();
+		caregiverCircleDAO udao = new caregiverCircleDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
         System.out.println(udao.update(session, ub));
