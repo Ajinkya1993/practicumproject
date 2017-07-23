@@ -9,12 +9,8 @@ import javax.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import cmu.curantis.dao.CaregiverInfoDAO;
-import cmu.curantis.dao.CircleSubsDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.dao.UserDAO;
-import cmu.curantis.entities.CaregiverInfoBean;
-import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.entities.UserBean;
 
 @Path("/testuser")
@@ -31,12 +27,14 @@ public class testUserDAO {
 		ub.setPrimaryCaregiver(true);
 		ub.setRelationshipNature("nephew");
 		ub.setTriggerEvent("illness");
+		ub.setIdentity();
 		ub.getIdentity().setCircleID(1);
 		ub.getIdentity().setEmail("varunp@andrew.cmu.edu");
 		UserDAO udao = new UserDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
-        udao.create(session, ub);       
+        //udao.create(session, ub);
+        udao.read(session, ub);
         tx.commit();
         session.close();
 		
