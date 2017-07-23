@@ -28,21 +28,20 @@ public class JoinCircle {
 	    Transaction tx = session.beginTransaction();
 	    CircleOutput output = new CircleOutput();
 	   
-	    CaregiverCircleBean curCircle = new CaregiverCircleBean();
-	    List<CaregiverCircleBean> circleList = caregiverCircleDAO.read(session, curCircle);
-	    if (circleList == null || circleList.size() == 0) {
+	    CaregiverCircleBean circle = caregiverCircleDAO.getByEmailAndId(session, input.getEmail(), input.getCircleId());
+	    if (circle == null) {
 	        output.setMessage("No circle!");
 	        output.setSuccess(false);
 	    } else {
-	        curCircle = circleList.get(0);
-	        if (curCircle.getJoinStatus()) {
+	        
+	        if (circle.getJoinStatus()) {
 	            output.setMessage("Joined already!");
 	            output.setSuccess(false);
 	        } else {
-	            curCircle.setGeorelationship(input.getGeoRel());
-	            curCircle.setRelationshipNature(input.getNatureOfRel());
-	            curCircle.setJoinStatus(true);
-	            caregiverCircleDAO.update(session, curCircle);
+	            circle.setGeorelationship(input.getGeoRel());
+	            circle.setRelationshipNature(input.getNatureOfRel());
+	            circle.setJoinStatus(true);
+	            caregiverCircleDAO.update(session, circle);
 	            //Should also return the list of caregiver in the circle in output.
 	            output.setCircleId(input.getCircleId());
 	            output.setSuccess(true);
