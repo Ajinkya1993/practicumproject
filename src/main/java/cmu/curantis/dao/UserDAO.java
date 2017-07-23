@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmu.curantis.entities.CaregiverInfoBean;
+import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.entities.UserBean;
 
 public class UserDAO {
@@ -57,31 +58,30 @@ public class UserDAO {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("FROM UserBean WHERE email = :em AND circle_id = :cicid");
-		query.setParameter("em", em);
-		query.setParameter("cicid", cicid); 
+		query.setString("em", em);
+		query.setLong("cicid", cicid); 
 		List<UserBean> list = query.list();
 		if(list == null || list.size() == 0) {
 			return false;
 		}
-		session.saveOrUpdate(ub);
+		UserBean mybean = (UserBean)session.merge(ub);
+		session.saveOrUpdate(mybean);
 		return true;
 	}
 	
 	public Boolean delete(Session session, UserBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("FROM UserBean WHERE email = :em AND circle_id = :cicid");
-		query.setParameter("em", em);
-		query.setParameter("cicid", cicid);
-		List<UserBean> list = query.list();
-		if(list == null || list.size() == 0) {
+		Query query = session.createQuery("from UserBean where circle_id = :circleid AND email = :email");
+		query.setLong("circleid", cicid);
+		query.setString("email", em);
+		List<UserBean> list =  query.list();
+		if (list == null || list.size() == 0) {
 			return false;
 		}
-		Query querydel = session.createQuery("DELETE UserBean WHERE email = :em AND circle_id = :cicid");
-        querydel.setParameter("em",em);
-        querydel.setParameter("cicid",cicid);
-        querydel.executeUpdate();
-        session.close();
+		UserBean mybean = (UserBean)session.merge(ub);
+		
+		session.delete(mybean);		    
 		return true;
 	}
 }

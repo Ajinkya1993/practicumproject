@@ -35,7 +35,8 @@ public class testUserDAO {
         Transaction tx = session.beginTransaction();
         //udao.create(session, ub);
         //udao.read(session, ub);
-        udao.update(session, ub);
+        //udao.update(session, ub);
+        udao.delete(session, ub);
         tx.commit();
         session.close();
 		
