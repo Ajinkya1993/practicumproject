@@ -28,34 +28,33 @@ public class AddToCircle {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public CircleOutput addToCircle(CircleInput input) {
+        CircleOutput output = new CircleOutput();
+        if (input.getCircleId() == 0 || input.getEmail() == null) {
+            output.setMessage("Missing email or circleId!");
+            output.setSuccess(false);
+            return output;
+        } 
         CaregiverCircleDAO caregiverCircleDAO = new CaregiverCircleDAO(); 
         CaregiverInfoDAO caregiverInfoDAO =  new CaregiverInfoDAO();
         CircleSubsDAO circleSubsDAO = new CircleSubsDAO();
         
         Session session = SessionUtil.getSession();
         Transaction tx = session.beginTransaction();
-        CircleOutput output = new CircleOutput();
+        
         //First check if this email already exists in this circle
         CaregiverCircleBean circleBean = caregiverCircleDAO.getByEmailAndId(session, input.getEmail(), input.getCircleId());
         CaregiverInfoBean cgToAdd = new CaregiverInfoBean();
         cgToAdd.setEmail(input.getEmail());
         CaregiverInfoBean caregiverInfoBean = caregiverInfoDAO.getCaregiverInfo(session, cgToAdd);
         CircleSubsBean subsBean = new CircleSubsBean();
+        subsBean.setCircleId(input.getCircleId());
         CircleSubsBean circleSubsBean = circleSubsDAO.getCircleSubs(session, subsBean);
         
         //Check if the circleId exists
         if (circleSubsBean == null) {
             output.setMessage("Wrong circleId!");
             output.setSuccess(false);
-        }
-        //Check if the invited persion exists in the caregiver info table
-        if (caregiverInfoBean == null) {
-            //Add to the caregiver info table
-            cgToAdd.setRegisteredStatus(false);
-            caregiverInfoDAO.addCaregiverInfo(session, cgToAdd);
-        }
-        //Check if the invited person has already joined the circle
-        if (circleBean != null) {
+        } else if (circleBean != null) { //Check if the invited person has already joined the circle
             output.setMessage("Member already exists in this circle!");
             output.setSuccess(false); 
         } else {
@@ -80,6 +79,11 @@ public class AddToCircle {
                 output.setCircleId(input.getCircleId());
                 output.setSuccess(false);
             }
+            if (caregiverInfoBean == null) { //Check if the invited persion exists in the caregiver info table
+                //Add to the caregiver info table
+                cgToAdd.setRegisteredStatus(false);
+                caregiverInfoDAO.addCaregiverInfo(session, cgToAdd);
+            } 
         }
         
         tx.commit();

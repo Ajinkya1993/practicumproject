@@ -21,17 +21,21 @@ public class JoinCircle {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 	public CircleOutput joinCircle(CircleInput input) {
+	    CircleOutput output = new CircleOutput();
+	    if (input.getEmail() == null || input.getCircleId() == 0) {
+	        output.setMessage("Missing email or circleId!");
+	        output.setSuccess(false);
+	        return output;
+	    }
 	    CaregiverCircleDAO caregiverCircleDAO = new CaregiverCircleDAO();
 	    Session session = SessionUtil.getSession();
 	    Transaction tx = session.beginTransaction();
-	    CircleOutput output = new CircleOutput();
 	   
 	    CaregiverCircleBean circle = caregiverCircleDAO.getByEmailAndId(session, input.getEmail(), input.getCircleId());
 	    if (circle == null) {
-	        output.setMessage("No circle!");
+	        output.setMessage("Not invited to this circle!");
 	        output.setSuccess(false);
 	    } else {
-	        
 	        if (circle.getJoinStatus()) {
 	            output.setMessage("Joined already!");
 	            output.setSuccess(false);
