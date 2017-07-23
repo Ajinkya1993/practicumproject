@@ -62,6 +62,7 @@ public class AddToCircle {
             //Update the circle table
             CaregiverCircleBean newCaregiver = new CaregiverCircleBean();
             newCaregiver.setIdentity();
+            newCaregiver.getIdentity().setEmail(input.getEmail());
             newCaregiver.getIdentity().setCircleID(input.getCircleId());
             newCaregiver.setCirclename(input.getCircleName());
             newCaregiver.setGeorelationship(input.getGeoRel());
@@ -69,10 +70,16 @@ public class AddToCircle {
             newCaregiver.setRelationshipNature(input.getNatureOfRel());
             newCaregiver.setTriggerEvent(input.getTriggerEvent());
             newCaregiver.setJoinStatus(false);
-            caregiverCircleDAO.create(session, newCaregiver);
-            output.setCircleId(input.getCircleId());
-            output.setMessage("Added to circle!");
-            output.setSuccess(true);
+            boolean status = caregiverCircleDAO.create(session, newCaregiver);
+            if (status) {
+                output.setCircleId(input.getCircleId());
+                output.setMessage("Added to circle!");
+                output.setSuccess(true);
+            } else {
+                output.setMessage("Adding to circle failed!");
+                output.setCircleId(input.getCircleId());
+                output.setSuccess(false);
+            }
         }
         
         tx.commit();
