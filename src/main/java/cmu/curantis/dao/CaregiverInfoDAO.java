@@ -43,11 +43,11 @@ public class CaregiverInfoDAO {
     }
 	
 	 public CaregiverInfoBean getCaregiverInfo(Session session, String email){
-    	String q2 = "select * from caregiver_information where email = :email";
+    	String q2 = "from CaregiverInfoBean where email = :email";
         Query query2 = session.createQuery(q2);
         query2.setString("email",email);
-        if(query2.list() == null) {
-        	return (CaregiverInfoBean)query2.list();
+        if(query2.list().size() == 0) {
+        	return null;
         }
         return (CaregiverInfoBean) query2.list().get(0);
     }
