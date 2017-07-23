@@ -17,7 +17,7 @@ public class CaregiverInfoDAO {
         		return false;
         	}
         }
-        session.save(bean);
+        session.saveOrUpdate(bean);
         return true;
     }
 	
