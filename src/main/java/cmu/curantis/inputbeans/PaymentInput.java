@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class PaymentInput {
 	private String email;
-	private String circleid;
+	private long circleid;
 	private String cardmemberFirstName;
 	private String cardmemberMiddleName;
 	private String cardMemberLastName;
@@ -20,10 +20,10 @@ public class PaymentInput {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getCircleid() {
+	public long getCircleid() {
 		return circleid;
 	}
-	public void setCircleid(String circleid) {
+	public void setCircleid(long circleid) {
 		this.circleid = circleid;
 	}
 	public String getCardmemberFirstName() {

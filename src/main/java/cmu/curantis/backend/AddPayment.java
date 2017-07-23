@@ -32,12 +32,7 @@ public class AddPayment {
 		CircleSubsDAO circlesubsdao = new CircleSubsDAO();
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		
-		CaregiverCircleBean bean = new CaregiverCircleBean();
-		bean.setByEmailAndId(input.getEmail());
-		CaregiverCircleBean circleBean = caregivercircledao.getCircleInfo(session,email,circleId);
-		
-		
+		CaregiverCircleBean circleBean = caregivercircledao.getByEmailAndId(session, input.getEmail(), input.getCircleid());
 		if (circleBean == null) {
 			output.setMessage("Circle Does Not Exist or You Are Not in the Circle!");
 			output.setSuccess(false);
