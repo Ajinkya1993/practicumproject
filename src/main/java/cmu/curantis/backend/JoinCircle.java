@@ -1,11 +1,19 @@
 package cmu.curantis.backend;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import cmu.curantis.dao.CaregiverCircleDAO;
+import cmu.curantis.dao.SessionUtil;
+import cmu.curantis.entities.CaregiverCircleBean;
 import cmu.curantis.inputbeans.CircleInput;
 import cmu.curantis.outputbeans.CircleOutput;
 
@@ -14,11 +22,39 @@ public class JoinCircle {
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-	public CircleOutput createCircle(CircleInput input) {
-		CircleOutput output = new CircleOutput();
-		output.setCircleId(1);
-		output.setSuccess(true);
-		output.setMessage("Circle joined!");
+	public CircleOutput joinCircle(CircleInput input) {
+	    CaregiverCircleDAO caregiverCircleDAO = new CaregiverCircleDAO();
+	    Session session = SessionUtil.getSession();
+	    Transaction tx = session.beginTransaction();
+	    CircleOutput output = new CircleOutput();
+	    List<CaregiverCircleBean> circleList = caregiverCircleDAO.getCircleByEmail(session, input.getEmail());
+	    CaregiverCircleBean curCircle = new CaregiverCircleBean();
+	    if (circleList == null || circleList.size() == 0) {
+	        output.setMessage("No invited circle!");
+	        output.setSuccess(false);
+	    } else {
+	        for (CaregiverCircleBean c : circleList) {
+	            if (c.getIdentity().getCircleID() == input.getCircleId()) {
+	                curCircle = c;
+	                break;
+	            }
+	        }
+	        if (curCircle.getJoinStatus()) {
+	            output.setMessage("Joined already!");
+	            output.setSuccess(false);
+	        } else {
+	            curCircle.setGeorelationship(input.getGeoRel());
+	            curCircle.setRelationshipNature(input.getNatureOfRel());
+	            curCircle.setJoinStatus(true);
+	            caregiverCircleDAO.update(session, curCircle);
+	            //Should also return the list of caregiver in the circle in output.
+	            output.setCircleId(input.getCircleId());
+	            output.setSuccess(true);
+	            output.setMessage("Circle joined!");
+	        }
+	    }
+	    tx.commit();
+	    session.close();
 		return output;
 	}
 }
