@@ -41,6 +41,7 @@ public class AddPayment {
 			output.setSuccess(false);
 		} else {
 			CircleSubsBean circleSubsBean = new CircleSubsBean();
+			circleSubsBean.setCircleId(input.getCircleid());
 			circleSubsBean.setCardMemberFirstName(input.getCardmemberFirstName());
 			circleSubsBean.setCardMemberMiddleName(input.getCardmemberMiddleName());
 			circleSubsBean.setCardMemberLastName(input.getCardMemberLastName());
