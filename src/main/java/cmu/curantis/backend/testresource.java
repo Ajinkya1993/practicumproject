@@ -16,7 +16,7 @@ import cmu.curantis.entities.CaregiverInfoBean;
 import cmu.curantis.entities.CircleSubsBean;
 
 
-@Path("/test")
+@Path("/testAjinkya")
 public class testresource {
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
