@@ -27,7 +27,9 @@ public class Login {
 		CaregiverInfoDAO caregiverdao = new CaregiverInfoDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
-        CaregiverInfoBean caregiver = caregiverdao.getCaregiverInfo(session, input.getEmail());
+        CaregiverInfoBean bean = new CaregiverInfoBean();
+        bean.setEmail(input.getEmail());
+        CaregiverInfoBean caregiver = caregiverdao.getCaregiverInfo(session, bean);
         if (caregiver == null || !caregiver.getRegisteredStatus()) {
         	output.setMessage("Account doesn't exist!");
         	output.setSuccess(false);
