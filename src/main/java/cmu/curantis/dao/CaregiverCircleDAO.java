@@ -5,10 +5,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.mapping.List;
 
-import cmu.curantis.entities.UserBean;
+import cmu.curantis.entities.CaregiverCircleBean;
 
-public class UserDAO {
-	public Boolean create(Session session, UserBean ub) {
+public class CaregiverCircleDAO {
+	public Boolean create(Session session, CaregiverCircleBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
@@ -19,7 +19,7 @@ public class UserDAO {
 			return false;
 		}
 		
-		UserBean newub = new UserBean();
+		CaregiverCircleBean newub = new CaregiverCircleBean();
 		newub.getIdentity().setCircleID(cicid);
 		newub.getIdentity().setEmail(em);
 		newub.setCirclename(ub.getCirclename());
@@ -33,7 +33,7 @@ public class UserDAO {
 		
 	}
 	
-	public List read(Session session, UserBean ub) {
+	public List read(Session session, CaregiverCircleBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
@@ -46,7 +46,7 @@ public class UserDAO {
 		return list;
 	}
 	
-	public Boolean update(Session session, UserBean ub) {
+	public Boolean update(Session session, CaregiverCircleBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");
@@ -60,7 +60,7 @@ public class UserDAO {
 		return true;
 	}
 	
-	public Boolean delete(Session session, UserBean ub) {
+	public Boolean delete(Session session, CaregiverCircleBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
 		Query query = session.createQuery("SELECT * FROM caregiver_circle_info WHERE email = :em AND circle_id = :cicid");

@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import cmu.curantis.entities.CaregiverInfoBean;
 import cmu.curantis.entities.Employee;
-import cmu.curantis.entities.UserBean;
+import cmu.curantis.entities.CaregiverCircleBean;
 
 public class CaregiverInfoDAO {
 	
@@ -57,8 +57,8 @@ public class CaregiverInfoDAO {
         Query query = session.createQuery(q);
         query.setLong("circle_id",circleId);
         List<CaregiverInfoBean> cgs = new ArrayList();
-        List<UserBean> caregivers =  query.list();
-        for(UserBean u: caregivers) {
+        List<CaregiverCircleBean> caregivers =  query.list();
+        for(CaregiverCircleBean u: caregivers) {
         	String emailId = u.getIdentity().getEmail();
         	String q2 = "select * from caregiver_information where email = :email";
             Query query2 = session.createQuery(q2);
