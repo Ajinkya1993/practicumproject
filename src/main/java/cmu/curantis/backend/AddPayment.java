@@ -32,7 +32,8 @@ public class AddPayment {
 		CircleSubsDAO circlesubsdao = new CircleSubsDAO();
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		CaregiverCircleBean circleBean = caregivercircledao.getByEmailAndId(session, input.getEmail(), input.getCircleid());
+		CaregiverCircleBean circleBean = caregivercircledao.getByEmailAndId(session, input.getEmail(),
+				input.getCircleid());
 		if (circleBean == null) {
 			output.setMessage("Circle Does Not Exist or You Are Not in the Circle!");
 			output.setSuccess(false);
@@ -50,8 +51,13 @@ public class AddPayment {
 			circleSubsBean.setCvvNo(input.getCvvNo());
 			circleSubsBean.setExpirationDate(input.getExpirationDate());
 			circlesubsdao.updateCircleSubs(session, circleSubsBean);
-			output.setMessage("Add Payment Success!");
-			output.setSuccess(true);
+			if (!circlesubsdao.updateCircleSubs(session, circleSubsBean)) {
+				output.setMessage("Circle does not exist!");
+				output.setSuccess(false);
+			} else {
+				output.setMessage("Add Payment Success!");
+				output.setSuccess(true);
+			}
 		}
 		tx.commit();
 		session.close();
