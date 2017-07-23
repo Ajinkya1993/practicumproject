@@ -13,7 +13,6 @@ import cmu.curantis.dao.CaregiverCircleDAO;
 import cmu.curantis.dao.CircleSubsDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverCircleBean;
-import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.inputbeans.CircleInput;
 import cmu.curantis.outputbeans.CircleOutput;
 

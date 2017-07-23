@@ -1,7 +1,5 @@
 package cmu.curantis.backend;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -42,7 +40,6 @@ public class JoinCircle {
 	            circle.setRelationshipNature(input.getNatureOfRel());
 	            circle.setJoinStatus(true);
 	            caregiverCircleDAO.update(session, circle);
-	            //Should also return the list of caregiver in the circle in output.
 	            output.setCircleId(input.getCircleId());
 	            output.setSuccess(true);
 	            output.setMessage("Circle joined!");
