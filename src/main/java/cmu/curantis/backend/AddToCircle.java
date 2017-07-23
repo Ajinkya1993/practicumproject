@@ -32,7 +32,6 @@ public class AddToCircle {
         Transaction tx = session.beginTransaction();
         CircleOutput output = new CircleOutput();
         //First check if this email already exists in this circle
-        List<CaregiverCircleBean> members = caregiverCircleDAO.getByCircleId(session, input.getCircleId());
         CaregiverCircleBean circleBean = caregiverCircleDAO.getByEmailAndId(session, input.getEmail(), input.getCircleId());
         CaregiverInfoBean cgToAdd = new CaregiverInfoBean();
         cgToAdd.setEmail(input.getEmail());
