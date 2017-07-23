@@ -6,11 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -19,7 +14,7 @@ import javax.persistence.Table;
 public class UserBean {
 
     @Embeddable
-    public class Identity implements Serializable {
+    public static class Identity implements Serializable {
 
 		private static final long serialVersionUID = 1L;
 
@@ -70,6 +65,10 @@ public class UserBean {
     
     public Identity getIdentity() {
     	return primid;
+    }
+    
+    public void setIdentity() {
+    	primid = new Identity();
     }
     
     public String getCirclename() {

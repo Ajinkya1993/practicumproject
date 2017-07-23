@@ -17,7 +17,7 @@ public class CircleSubsDAO {
 	 */
 	public int addCircleSubs(Session session, CircleSubsBean bean){
 		session.save(bean);
-		List<CircleSubsBean> result = session.createQuery("from circle_subscription ORDER BY circle_id DESC").setMaxResults(1).list();
+		List<CircleSubsBean> result = session.createQuery("from CircleSubsBean ORDER BY circle_id DESC").setMaxResults(1).list();
 		if (result == null || result.size() == 0) {
 			return -1;
 		}
@@ -25,7 +25,7 @@ public class CircleSubsDAO {
     }
 	
 	 public CircleSubsBean getCircleSubs(Session session, CircleSubsBean bean){
-        Query query = session.createQuery("from circle_subscription where circle_id = :circleid");
+        Query query = session.createQuery("from CircleSubsBean where circle_id = :circleid");
 	    query.setString("circleid", String.valueOf(bean.getCircleId()));
 	    List<CircleSubsBean> circles =  query.list();
 	    if (circles == null || circles.size() == 0) {
@@ -38,13 +38,14 @@ public class CircleSubsDAO {
 	  * Updates row only if it exists. Returns false when row does not exist.
 	  */
 	public boolean updateCircleSubs(Session session, CircleSubsBean bean){
-		Query query = session.createQuery("from circle_subscription where circle_id = :circleid");
+		Query query = session.createQuery("from CircleSubsBean where circle_id = :circleid");
 		query.setString("circleid", String.valueOf(bean.getCircleId()));
 		List<CircleSubsBean> circles =  query.list();
 		if (circles == null || circles.size() == 0) {
 			return false;
 		}
-		session.saveOrUpdate(bean);		    
+		CircleSubsBean mybean = (CircleSubsBean)session.merge(bean);
+		session.saveOrUpdate(mybean);		    
 		return true;
 	}
 	
@@ -52,13 +53,15 @@ public class CircleSubsDAO {
 	 * Returns true on deletion. Returns false when row to be deleted is not found.
 	 */
 	public boolean deleteCircleSubs (Session session, CircleSubsBean bean) {
-		Query query = session.createQuery("from circle_subscription where circle_id = :circleid");
+		Query query = session.createQuery("from CircleSubsBean where circle_id = :circleid");
 		query.setString("circleid", String.valueOf(bean.getCircleId()));
 		List<CircleSubsBean> circles =  query.list();
 		if (circles == null || circles.size() == 0) {
 			return false;
 		}
-		session.delete(bean);		    
+		CircleSubsBean mybean = (CircleSubsBean)session.merge(bean);
+		
+		session.delete(mybean);		    
 		return true;
 	}
 	 
