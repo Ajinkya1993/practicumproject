@@ -14,9 +14,11 @@ import org.hibernate.Transaction;
 
 import cmu.curantis.dao.CaregiverCircleDAO;
 import cmu.curantis.dao.CaregiverInfoDAO;
+import cmu.curantis.dao.CircleSubsDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverCircleBean;
 import cmu.curantis.entities.CaregiverInfoBean;
+import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.inputbeans.CircleInput;
 import cmu.curantis.outputbeans.CircleOutput;
 
@@ -28,6 +30,8 @@ public class AddToCircle {
     public CircleOutput addToCircle(CircleInput input) {
         CaregiverCircleDAO caregiverCircleDAO = new CaregiverCircleDAO(); 
         CaregiverInfoDAO caregiverInfoDAO =  new CaregiverInfoDAO();
+        CircleSubsDAO circleSubsDAO = new CircleSubsDAO();
+        
         Session session = SessionUtil.getSession();
         Transaction tx = session.beginTransaction();
         CircleOutput output = new CircleOutput();
@@ -36,6 +40,21 @@ public class AddToCircle {
         CaregiverInfoBean cgToAdd = new CaregiverInfoBean();
         cgToAdd.setEmail(input.getEmail());
         CaregiverInfoBean caregiverInfoBean = caregiverInfoDAO.getCaregiverInfo(session, cgToAdd);
+        CircleSubsBean subsBean = new CircleSubsBean();
+        CircleSubsBean circleSubsBean = circleSubsDAO.getCircleSubs(session, subsBean);
+        
+        //Check if the circleId exists
+        if (circleSubsBean == null) {
+            output.setMessage("Wrong circleId!");
+            output.setSuccess(false);
+        }
+        //Check if the invited persion exists in the caregiver info table
+        if (caregiverInfoBean == null) {
+            //Add to the caregiver info table
+            cgToAdd.setRegisteredStatus(false);
+            caregiverInfoDAO.addCaregiverInfo(session, cgToAdd);
+        }
+        //Check if the invited person has already joined the circle
         if (circleBean != null) {
             output.setMessage("Member already exists in this circle!");
             output.setSuccess(false); 
@@ -51,14 +70,11 @@ public class AddToCircle {
             newCaregiver.setTriggerEvent(input.getTriggerEvent());
             newCaregiver.setJoinStatus(false);
             caregiverCircleDAO.create(session, newCaregiver);
+            output.setCircleId(input.getCircleId());
             output.setMessage("Added to circle!");
             output.setSuccess(true);
         }
-        if (caregiverInfoBean == null) {
-            //Add to the caregiver info table
-            cgToAdd.setRegisteredStatus(false);
-            caregiverInfoDAO.addCaregiverInfo(session, cgToAdd);
-        }
+        
         tx.commit();
         session.close();
         return output;

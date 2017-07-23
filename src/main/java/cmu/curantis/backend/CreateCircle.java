@@ -44,7 +44,7 @@ public class CreateCircle {
 	    caregiverCircleDAO.create(session, caregiverCircle);
 		//System.out.println(input.getCircleName());
 		CircleOutput output = new CircleOutput();
-		output.setCircleId(1);
+		output.setCircleId(input.getCircleId());
 		output.setSuccess(true);
 		output.setMessage("Circle created!");
 		
