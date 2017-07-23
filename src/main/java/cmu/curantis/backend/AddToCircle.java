@@ -28,7 +28,7 @@ public class AddToCircle {
         Transaction tx = session.beginTransaction();
         CircleOutput output = new CircleOutput();
         //First check if this email already exists in this circle
-        List<CaregiverCircleBean> members = caregiverCircleDAO.getCircleByCircleId(session, input.getCircleId());
+        List<CaregiverCircleBean> members = caregiverCircleDAO.getByCircleId(session, input.getCircleId());
         for (CaregiverCircleBean c : members) {
             if (c.getIdentity().getCircleID() == input.getCircleId()) {
                 output.setMessage("Member already exists in this circle!");

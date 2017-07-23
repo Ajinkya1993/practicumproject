@@ -39,29 +39,36 @@ public class CaregiverCircleDAO {
 		
 	}
 	
-	public CaregiverCircleBean read(Session session, CaregiverCircleBean ub) {
-		String email = ub.getIdentity().getEmail();
-		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("FROM UserBean WHERE email = :email AND circle_id = :circle_id");
-		query.setString("email", email);
-		query.setLong("circle_id", cicid);
-		List<CaregiverCircleBean> list = query.list();
-		if(list == null || list.size() == 0) {
-			return null;
-		}
-		return list.get(0);
-	}
-	
-	public List<CaregiverCircleBean> readcircle(Session session, CaregiverCircleBean ub) {
-		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("FROM UserBean WHERE circle_id = :circle_id");
-		query.setLong("circle_id", cicid);
-		List<CaregiverCircleBean> list = query.list();
-		if(list == null || list.size() == 0) {
-			return null;
-		}
-		return list;
-	}
+	public List<CaregiverCircleBean> getByEmail(Session session, String email) {
+        Query query = session.createQuery("FROM UserBean WHERE email = :email");
+        query.setString("email", email);
+        List<CaregiverCircleBean> list = query.list();
+        if(list == null || list.size() == 0) {
+            return null;
+        }
+        return list;
+    }
+    
+    public CaregiverCircleBean getByEmailAndId(Session session, String email, long cicid) {
+        Query query = session.createQuery("FROM UserBean WHERE email = :email AND circle_id = :circle_id");
+        query.setString("email", email);
+        query.setLong("circle_id", cicid);
+        List<CaregiverCircleBean> list = query.list();
+        if(list == null || list.size() == 0) {
+            return null;
+        }
+        return list.get(0);
+    }
+    
+    public List<CaregiverCircleBean> getByCircleId(Session session, long cicid) {
+        Query query = session.createQuery("FROM UserBean WHERE circle_id = :circle_id");
+        query.setLong("circle_id", cicid);
+        List<CaregiverCircleBean> list = query.list();
+        if(list == null || list.size() == 0) {
+            return null;
+        }
+        return list;
+    }
 	
 	public Boolean update(Session session, CaregiverCircleBean ub) {
 		String em = ub.getIdentity().getEmail();
