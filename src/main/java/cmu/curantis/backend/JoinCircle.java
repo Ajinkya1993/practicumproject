@@ -27,18 +27,14 @@ public class JoinCircle {
 	    Session session = SessionUtil.getSession();
 	    Transaction tx = session.beginTransaction();
 	    CircleOutput output = new CircleOutput();
-	    List<CaregiverCircleBean> circleList = caregiverCircleDAO.getCircleByEmail(session, input.getEmail());
+	   
 	    CaregiverCircleBean curCircle = new CaregiverCircleBean();
+	    List<CaregiverCircleBean> circleList = caregiverCircleDAO.read(session, curCircle);
 	    if (circleList == null || circleList.size() == 0) {
-	        output.setMessage("No invited circle!");
+	        output.setMessage("No circle!");
 	        output.setSuccess(false);
 	    } else {
-	        for (CaregiverCircleBean c : circleList) {
-	            if (c.getIdentity().getCircleID() == input.getCircleId()) {
-	                curCircle = c;
-	                break;
-	            }
-	        }
+	        curCircle = circleList.get(0);
 	        if (curCircle.getJoinStatus()) {
 	            output.setMessage("Joined already!");
 	            output.setSuccess(false);
