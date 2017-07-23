@@ -12,7 +12,7 @@ public class CaregiverCircleDAO {
 	public Boolean create(Session session, CaregiverCircleBean ub) {
 		String emailid = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		if(emailid == null || cicid < 0) {
+		if(emailid == null || cicid <= 0) {
 			return false;
 		}
 		Query query = session.createQuery("FROM CaregiverCircleBean WHERE email = :email AND circle_id = :circle_id");
