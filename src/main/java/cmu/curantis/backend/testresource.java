@@ -29,7 +29,7 @@ public class testresource {
 		CircleSubsDAO dao = new CircleSubsDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
-        dao.addCircleSubs(session, bean);        
+        System.out.println(dao.addCircleSubs(session, bean));        
         tx.commit();
         session.close();
 		

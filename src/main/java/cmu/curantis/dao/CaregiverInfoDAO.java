@@ -5,12 +5,9 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import cmu.curantis.entities.CaregiverInfoBean;
-import cmu.curantis.entities.Employee;
 import cmu.curantis.entities.UserBean;
 
 public class CaregiverInfoDAO {
@@ -21,8 +18,7 @@ public class CaregiverInfoDAO {
 		if(emailCheck == null) {
 			return false;
 		}
-		String q = "select * from caregiver_information where email = :email";
-        Query query = session.createQuery(q);
+		Query query = session.createQuery("from caregiver_information where email = :email");
         query.setString("email",emailCheck);
         List<CaregiverInfoBean> caregivers =  query.list();
         if(caregivers != null) {
@@ -42,26 +38,24 @@ public class CaregiverInfoDAO {
         return true;
     }
 	
-	 public CaregiverInfoBean getCaregiverInfo(Session session, String email){
-    	String q2 = "select * from caregiver_information where email = :email";
-        Query query2 = session.createQuery(q2);
-        query2.setString("email",email);
-        if(query2.list() == null) {
-        	return (CaregiverInfoBean)query2.list();
-        }
-        return (CaregiverInfoBean) query2.list().get(0);
+	 public CaregiverInfoBean getCaregiverInfo(Session session, CaregiverInfoBean bean){
+		Query query = session.createQuery("from caregiver_information where email = :email");
+		query.setString("email", bean.getEmail());
+		List<CaregiverInfoBean> caregivers =  query.list();
+	    if (caregivers == null || caregivers.size() == 0) {
+	    	return null;
+	    }
+	    return caregivers.get(0);
     }
  
-    public List<CaregiverInfoBean> getCaregiverInfoOfCircle(Session session,Long circleId){
-    	String q = "select * from caregiver_circle_info where circle_id = :circleId";
-        Query query = session.createQuery(q);
-        query.setLong("circle_id",circleId);
+    public List<CaregiverInfoBean> getCaregiverInfoOfCircle(Session session,String circleId){
+    	Query query = session.createQuery("from from caregiver_circle_info where circle_id = :circleId");
+        query.setString("circle_id",circleId);
         List<CaregiverInfoBean> cgs = new ArrayList();
         List<UserBean> caregivers =  query.list();
         for(UserBean u: caregivers) {
         	String emailId = u.getIdentity().getEmail();
-        	String q2 = "select * from caregiver_information where email = :email";
-            Query query2 = session.createQuery(q2);
+        	Query query2 = session.createQuery("from caregiver_information where email = :email");
             query2.setString("email",emailId);
             cgs.add((CaregiverInfoBean) query2.list().get(0));
         }
@@ -69,20 +63,15 @@ public class CaregiverInfoDAO {
         return cgs;
     }
  
-    public boolean deleteCaregiverInfo(Session session, String email) {
-		String q = "select * from caregiver_information where email = :email";
-        Query query = session.createQuery(q);
-        query.setString("email",email);
-        List<CaregiverInfoBean> caregivers =  query.list();
-        if(caregivers == null) {
-        	return false;
-        }
-        String hql = "delete from caregiver_information where email = :email";
-        Query query2 = session.createQuery(hql);
-        query2.setString("email",email);
-        query2.executeUpdate();
-        session.close();
-        return true;
+    public boolean deleteCaregiverInfo(Session session, CaregiverInfoBean bean) {
+    	Query query = session.createQuery("from caregiver_information where email = :email");
+		query.setString("email", bean.getEmail());
+		List<CaregiverInfoBean> caregivers =  query.list();
+		if (caregivers == null || caregivers.size() == 0) {
+			return false;
+		}
+		session.delete(bean);		    
+		return true;
     }
     
     public boolean updateEmployee(Session session, CaregiverInfoBean caregiver){
@@ -92,8 +81,8 @@ public class CaregiverInfoDAO {
 		if (caregivers == null || caregivers.size() == 0) {
 			return false;
 		}
-		session.saveOrUpdate(caregiver);		    
-		return true;
+		session.saveOrUpdate(caregiver);	    
+		return true; 
     }
 
 }
