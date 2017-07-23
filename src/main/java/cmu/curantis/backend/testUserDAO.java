@@ -25,7 +25,7 @@ public class testUserDAO {
 		ub.setGeorelationship("Uncle");
 		ub.setJoinStatus(true);
 		ub.setPrimaryCaregiver(true);
-		ub.setRelationshipNature("nephew");
+		ub.setRelationshipNature("SON");
 		ub.setTriggerEvent("illness");
 		ub.setIdentity();
 		ub.getIdentity().setCircleID(1);
@@ -34,7 +34,8 @@ public class testUserDAO {
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
         //udao.create(session, ub);
-        udao.read(session, ub);
+        //udao.read(session, ub);
+        udao.update(session, ub);
         tx.commit();
         session.close();
 		

@@ -56,9 +56,9 @@ public class UserDAO {
 	public Boolean update(Session session, UserBean ub) {
 		String em = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
-		Query query = session.createQuery("FROM UserDAO WHERE email = :em AND circle_id = :cicid");
+		Query query = session.createQuery("FROM UserBean WHERE email = :em AND circle_id = :cicid");
 		query.setParameter("em", em);
-		query.setParameter("cicid", cicid);
+		query.setParameter("cicid", cicid); 
 		List<UserBean> list = query.list();
 		if(list == null || list.size() == 0) {
 			return false;
