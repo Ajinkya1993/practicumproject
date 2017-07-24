@@ -46,7 +46,33 @@ public class CircleSubsDAO {
 		if (circles == null || circles.size() == 0) {
 			return false;
 		}
+		CircleSubsBean oribean = circles.get(0);
+		if (bean.getCircleName() == null || bean.getCircleName().length() == 0) {
+			bean.setCircleName(oribean.getCircleName());
+		}
+		if (bean.getLovedoneAddress() == null || bean.getLovedoneAddress().length()==0) {
+			bean.setLovedoneAddress(oribean.getLovedoneAddress());
+		}
+		if (bean.getServicesSubscribed() == null || bean.getServicesSubscribed().length()==0) {
+			bean.setServicesSubscribed(oribean.getServicesSubscribed());
+		}
+		
 		CircleSubsBean mybean = (CircleSubsBean)session.merge(bean);
+		session.saveOrUpdate(mybean);		    
+		return true;
+	}
+	
+	public boolean updateCircleName(Session session, CircleSubsBean bean){
+		Query query = session.createQuery("from CircleSubsBean where circle_id = :circleid");
+		query.setString("circleid", String.valueOf(bean.getCircleId()));
+		List<CircleSubsBean> circles =  query.list();
+		if (circles == null || circles.size() == 0) {
+			return false;
+		}
+		CircleSubsBean oribean = circles.get(0);
+		oribean.setCircleName(bean.getCircleName());
+		
+		CircleSubsBean mybean = (CircleSubsBean)session.merge(oribean);
 		session.saveOrUpdate(mybean);		    
 		return true;
 	}

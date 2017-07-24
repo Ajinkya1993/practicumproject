@@ -89,12 +89,12 @@ public class testresource {
 		CircleSubsBean bean = new CircleSubsBean();
 		bean.setCardMemberFirstName("Ajinkya");
 		bean.setCardMemberLastName("Nimbalkar");
-		bean.setCircleId(3);
-		bean.setCircleName("mycircle");
+		bean.setCircleId(8);
+		bean.setCircleName("mycircle2");
 		CircleSubsDAO dao = new CircleSubsDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
-        System.out.println(dao.updateCircleSubs(session, bean));
+        System.out.println(dao.updateCircleName(session, bean));
         
         tx.commit();
         session.close();
