@@ -1,12 +1,20 @@
 package cmu.curantis.inputbeans;
 
 public class CircleInput {
+    private String currentEmail;
 	private String email;
 	private long circleId;
 	private String circleName;
 	private String triggerEvent;
 	private String natureOfRel;
 	private String geoRel;
+	
+	public String getCurrentEmail() {
+	    return currentEmail;
+	}
+	public void setCurrentEmail(String currentEmail) {
+	    this.currentEmail = currentEmail;
+	}
 	public String getEmail() {
 		return email;
 	}

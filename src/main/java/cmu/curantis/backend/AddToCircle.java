@@ -29,7 +29,8 @@ public class AddToCircle {
     @Produces(MediaType.APPLICATION_JSON)
     public CircleOutput addToCircle(CircleInput input) {
         CircleOutput output = new CircleOutput();
-        if (input.getCircleId() == 0 || input.getEmail() == null || input.getEmail().length() == 0) {
+        if (input.getCircleId() == 0 || input.getEmail() == null || input.getEmail().length() == 0
+                || input.getCurrentEmail() == null || input.getCurrentEmail().length() == 0) {
             output.setMessage("Missing email or circleId!");
             output.setSuccess(false);
             return output;
@@ -41,8 +42,8 @@ public class AddToCircle {
         Session session = SessionUtil.getSession();
         Transaction tx = session.beginTransaction();
         
-        //First check if this email already exists in this circle
         CaregiverCircleBean circleBean = caregiverCircleDAO.getByEmailAndId(session, input.getEmail(), input.getCircleId());
+        CaregiverCircleBean curCG = caregiverCircleDAO.getByEmailAndId(session, input.getCurrentEmail(), input.getCircleId());
         CaregiverInfoBean cgToAdd = new CaregiverInfoBean();
         cgToAdd.setEmail(input.getEmail());
         CaregiverInfoBean caregiverInfoBean = caregiverInfoDAO.getCaregiverInfo(session, cgToAdd);
@@ -50,9 +51,11 @@ public class AddToCircle {
         subsBean.setCircleId(input.getCircleId());
         CircleSubsBean circleSubsBean = circleSubsDAO.getCircleSubs(session, subsBean);
         
-        //Check if the circleId exists
-        if (circleSubsBean == null) {
+        if (circleSubsBean == null) {  //Check if the circleId exists
             output.setMessage("Wrong circleId!");
+            output.setSuccess(false);
+        } else if (curCG == null || !curCG.getPrimaryCaregiver()) { // Check if the current user is the primary caregiver for this circle
+            output.setMessage("Not primary caregiver for this circle!");
             output.setSuccess(false);
         } else if (circleBean != null) { //Check if the invited person has already joined the circle
             output.setMessage("Member already exists in this circle!");
