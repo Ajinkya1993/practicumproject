@@ -1,5 +1,8 @@
 package cmu.curantis.inputbeans;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class CircleInput {
     private String email;
 	private String emailToAdd;
