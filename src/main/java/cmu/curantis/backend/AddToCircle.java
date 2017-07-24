@@ -80,15 +80,8 @@ public class AddToCircle {
                 if (caregiverInfoBean == null) { //Check if the invited persion exists in the caregiver info table
                     //Add to the caregiver info table
                     cgToAdd.setRegisteredStatus(false);
-                    boolean status2 = caregiverInfoDAO.addCaregiverInfo(session, cgToAdd);
-                    if (status2) {
-                        String message = output.getMessage() + " & Added to caregiver info table!";
-                        output.setMessage(message);
-                    } else {
-                        String message = output.getMessage() + " BUT Add to caregiver info table failed!";
-                        output.setMessage(message);
-                    }
-                } 
+                    caregiverInfoDAO.addCaregiverInfo(session, cgToAdd);
+                }
             } else {
                 output.setMessage("Adding to circle failed!");
                 output.setCircleId(input.getCircleId());
