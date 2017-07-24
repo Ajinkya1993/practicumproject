@@ -81,7 +81,7 @@ public class caregiverCircleDAO {
 			return false;
 		}
 		CaregiverCircleBean mybean = (CaregiverCircleBean)session.merge(ub);
-		session.saveOrUpdate(mybean);
+		session.update(mybean);
 		return true;
 	}
 	
