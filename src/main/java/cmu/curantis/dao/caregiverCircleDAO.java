@@ -81,6 +81,20 @@ public class caregiverCircleDAO {
 		if(list == null || list.size() == 0) {
 			return false;
 		}
+		CaregiverCircleBean crcb = list.get(0);
+		//updation of circle name is included here and not in another method.
+		if(ub.getCirclename() == null || ub.getCirclename().length() == 0) {
+			ub.setCirclename(crcb.getCirclename());
+		}
+		if(ub.getGeorelationship() == null || ub.getGeorelationship().length() == 0) {
+			ub.setGeorelationship(crcb.getGeorelationship());
+		}
+		if(ub.getRelationshipNature() == null || ub.getRelationshipNature().length() == 0) {
+			ub.setRelationshipNature(crcb.getGeorelationship());
+		}
+		if(ub.getTriggerEvent() == null || ub.getTriggerEvent().length() == 0) {
+			ub.setTriggerEvent(crcb.getTriggerEvent());
+		}
 		CaregiverCircleBean mybean = (CaregiverCircleBean)session.merge(ub);
 		session.saveOrUpdate(mybean);
 		return true;
