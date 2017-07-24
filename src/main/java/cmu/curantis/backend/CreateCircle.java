@@ -23,7 +23,7 @@ public class CreateCircle {
     @Produces(MediaType.APPLICATION_JSON)
 	public CircleOutput createCircle(CircleInput input) {
 	    CircleOutput output = new CircleOutput();
-	    if (input.getCircleName() == null || input.getCurrentEmail() == null || input.getCurrentEmail().length() == 0) {
+	    if (input.getCircleName() == null || input.getEmail() == null || input.getEmail().length() == 0) {
 	        output.setMessage("Missing circle name or email!");
 	        output.setSuccess(false);
 	        return output;
@@ -37,7 +37,7 @@ public class CreateCircle {
 	    long circleId = circleSubsDAO.addCircleSubs(session, input.getCircleName());
 	    caregiverCircle.setIdentity();
 	    caregiverCircle.getIdentity().setCircleID(circleId);
-	    caregiverCircle.getIdentity().setEmail(input.getCurrentEmail());
+	    caregiverCircle.getIdentity().setEmail(input.getEmail());
 	    caregiverCircle.setCirclename(input.getCircleName());
 	    caregiverCircle.setPrimaryCaregiver(true);
 	    caregiverCircle.setGeorelationship(input.getGeoRel());

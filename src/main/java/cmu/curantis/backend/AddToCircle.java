@@ -30,7 +30,7 @@ public class AddToCircle {
     public CircleOutput addToCircle(CircleInput input) {
         CircleOutput output = new CircleOutput();
         if (input.getCircleId() == 0 || input.getEmail() == null || input.getEmail().length() == 0
-                || input.getCurrentEmail() == null || input.getCurrentEmail().length() == 0) {
+                || input.getEmailToAdd() == null || input.getEmailToAdd().length() == 0) {
             output.setMessage("Missing email or circleId!");
             output.setSuccess(false);
             return output;
@@ -42,10 +42,10 @@ public class AddToCircle {
         Session session = SessionUtil.getSession();
         Transaction tx = session.beginTransaction();
         
-        CaregiverCircleBean circleBean = caregiverCircleDAO.getByEmailAndId(session, input.getEmail(), input.getCircleId());
-        CaregiverCircleBean curCG = caregiverCircleDAO.getByEmailAndId(session, input.getCurrentEmail(), input.getCircleId());
+        CaregiverCircleBean circleBean = caregiverCircleDAO.getByEmailAndId(session, input.getEmailToAdd(), input.getCircleId());
+        CaregiverCircleBean curCG = caregiverCircleDAO.getByEmailAndId(session, input.getEmail(), input.getCircleId());
         CaregiverInfoBean cgToAdd = new CaregiverInfoBean();
-        cgToAdd.setEmail(input.getEmail());
+        cgToAdd.setEmail(input.getEmailToAdd());
         CaregiverInfoBean caregiverInfoBean = caregiverInfoDAO.getCaregiverInfo(session, cgToAdd);
         CircleSubsBean subsBean = new CircleSubsBean();
         subsBean.setCircleId(input.getCircleId());
@@ -64,7 +64,7 @@ public class AddToCircle {
             //Update the circle table
             CaregiverCircleBean newCaregiver = new CaregiverCircleBean();
             newCaregiver.setIdentity();
-            newCaregiver.getIdentity().setEmail(input.getEmail());
+            newCaregiver.getIdentity().setEmail(input.getEmailToAdd());
             newCaregiver.getIdentity().setCircleID(input.getCircleId());
             newCaregiver.setCirclename(input.getCircleName());
             newCaregiver.setGeorelationship(input.getGeoRel());
@@ -77,16 +77,17 @@ public class AddToCircle {
                 output.setCircleId(input.getCircleId());
                 output.setMessage("Added to circle!");
                 output.setSuccess(true);
+                if (caregiverInfoBean == null) { //Check if the invited persion exists in the caregiver info table
+                    //Add to the caregiver info table
+                    cgToAdd.setRegisteredStatus(false);
+                    caregiverInfoDAO.addCaregiverInfo(session, cgToAdd);
+                } 
             } else {
                 output.setMessage("Adding to circle failed!");
                 output.setCircleId(input.getCircleId());
                 output.setSuccess(false);
             }
-            if (caregiverInfoBean == null) { //Check if the invited persion exists in the caregiver info table
-                //Add to the caregiver info table
-                cgToAdd.setRegisteredStatus(false);
-                caregiverInfoDAO.addCaregiverInfo(session, cgToAdd);
-            } 
+            
         }
         
         tx.commit();

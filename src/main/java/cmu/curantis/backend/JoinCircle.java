@@ -22,7 +22,7 @@ public class JoinCircle {
     @Produces(MediaType.APPLICATION_JSON)
 	public CircleOutput joinCircle(CircleInput input) {
 	    CircleOutput output = new CircleOutput();
-	    if (input.getCurrentEmail() == null || input.getCircleId() == 0 || input.getCurrentEmail().length() == 0) {
+	    if (input.getEmail() == null || input.getCircleId() == 0 || input.getEmail().length() == 0) {
 	        output.setMessage("Missing email or circleId!");
 	        output.setSuccess(false);
 	        return output;
@@ -31,7 +31,7 @@ public class JoinCircle {
 	    Session session = SessionUtil.getSession();
 	    Transaction tx = session.beginTransaction();
 	   
-	    CaregiverCircleBean circle = caregiverCircleDAO.getByEmailAndId(session, input.getCurrentEmail(), input.getCircleId());
+	    CaregiverCircleBean circle = caregiverCircleDAO.getByEmailAndId(session, input.getEmail(), input.getCircleId());
 	    if (circle == null) {
 	        output.setMessage("Not invited to this circle!");
 	        output.setSuccess(false);
