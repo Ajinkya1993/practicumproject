@@ -6,6 +6,7 @@ import org.hibernate.Session;
 
 import cmu.curantis.entities.CaregiverCircleBean;
 import cmu.curantis.entities.CaregiverInfoBean;
+import cmu.curantis.entities.CircleSubsBean;
 
 
 public class CaregiverInfoDAO {
@@ -33,21 +34,6 @@ public class CaregiverInfoDAO {
 	    return caregivers.get(0);
     }
  
-    /*public List<CaregiverInfoBean> getCaregiverInfoOfCircle(Session session,String circleId){
-    	Query query = session.createQuery("from UserBean where circle_id = :circleId");
-        query.setString("circleId",circleId);
-        List<CaregiverInfoBean> cgs = new ArrayList();
-        List<UserBean> caregivers =  query.list();
-        for(UserBean u: caregivers) {
-        	String emailId = u.getIdentity().getEmail();
-        	Query query2 = session.createQuery("from CaregiverInfoBean where email = :email_id");
-            query2.setString("email_id",emailId);
-            cgs.add((CaregiverInfoBean) query2.list().get(0));
-        }
-        session.close();
-        return cgs;
-    }*/
- 
     public boolean deleteCaregiverInfo(Session session, CaregiverInfoBean bean) {
     	Query query = session.createQuery("from CaregiverInfoBean where email = :email_id");
 		query.setString("email_id", String.valueOf(bean.getEmail()));
@@ -67,6 +53,23 @@ public class CaregiverInfoDAO {
 		if (caregivers == null || caregivers.size() == 0) {
 			return false;
 		}
+		CaregiverInfoBean dbbean = caregivers.get(0);
+		if (bean.getFirstName() == null || bean.getFirstName().length()==0) {
+			bean.setFirstName(dbbean.getFirstName());
+		}
+		if (bean.getLastName() == null || bean.getLastName().length()==0) {
+			bean.setLastName(dbbean.getLastName());
+		}
+		if (bean.getMiddleName() == null || bean.getMiddleName().length()==0) {
+			bean.setMiddleName(dbbean.getMiddleName());
+		}
+		if (bean.getAddress() == null || bean.getAddress().length() == 0) {
+			bean.setAddress(dbbean.getAddress());
+		}
+		if (bean.getPhoneNumber() == null || bean.getPhoneNumber().length()==0) {
+			bean.setPhoneNumber(dbbean.getPhoneNumber());
+		}
+		
 		CaregiverInfoBean mybean = (CaregiverInfoBean)session.merge(bean);
 		session.saveOrUpdate(mybean);	    
 		return true; 
