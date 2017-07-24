@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import cmu.curantis.dao.CaregiverCircleDAO;
+import cmu.curantis.dao.caregiverCircleDAO;
 import cmu.curantis.dao.CircleSubsDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverCircleBean;
@@ -28,7 +28,7 @@ public class CreateCircle {
 	        output.setSuccess(false);
 	        return output;
 	    }
-	    CaregiverCircleDAO caregiverCircleDAO = new CaregiverCircleDAO();
+	    caregiverCircleDAO caregiverCircleDAO = new caregiverCircleDAO();
 	    CircleSubsDAO circleSubsDAO = new CircleSubsDAO();
 	    Session session = SessionUtil.getSession(); 
 	    Transaction tx = session.beginTransaction();

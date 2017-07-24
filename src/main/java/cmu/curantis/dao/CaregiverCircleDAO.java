@@ -8,7 +8,7 @@ import org.hibernate.Session;
 
 import cmu.curantis.entities.CaregiverCircleBean;
 
-public class CaregiverCircleDAO {
+public class caregiverCircleDAO {
 	public Boolean create(Session session, CaregiverCircleBean ub) {
 		String emailid = ub.getIdentity().getEmail();
 		long cicid = ub.getIdentity().getCircleID();
