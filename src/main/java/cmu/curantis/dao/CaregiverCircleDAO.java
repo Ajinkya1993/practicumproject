@@ -1,6 +1,5 @@
 package cmu.curantis.dao;
 
-
 import java.util.List;
 
 import org.hibernate.Query;
