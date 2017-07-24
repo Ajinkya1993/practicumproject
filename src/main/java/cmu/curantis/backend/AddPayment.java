@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import cmu.curantis.dao.caregiverCircleDAO;
+import cmu.curantis.dao.CaregiverCircleDAO;
 import cmu.curantis.dao.CaregiverInfoDAO;
 import cmu.curantis.dao.CircleSubsDAO;
 import cmu.curantis.dao.SessionUtil;
@@ -28,7 +28,7 @@ public class AddPayment {
 	@Produces(MediaType.APPLICATION_JSON)
 	public PaymentOutput register(PaymentInput input) {
 		PaymentOutput output = new PaymentOutput();
-		caregiverCircleDAO caregivercircledao = new caregiverCircleDAO();
+		CaregiverCircleDAO caregivercircledao = new CaregiverCircleDAO();
 		CircleSubsDAO circlesubsdao = new CircleSubsDAO();
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
