@@ -33,7 +33,7 @@ public class AddPayment {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		CaregiverCircleBean circleBean = caregivercircledao.getByEmailAndId(session, input.getEmail(),
-				input.getCircleid());
+				input.getCircleId());
 		if (circleBean == null) {
 			output.setMessage("Circle Does Not Exist or You Are Not in the Circle!");
 			output.setSuccess(false);
@@ -42,7 +42,7 @@ public class AddPayment {
 			output.setSuccess(false);
 		} else {
 			CircleSubsBean circleSubsBean = new CircleSubsBean();
-			circleSubsBean.setCircleId(input.getCircleid());
+			circleSubsBean.setCircleId(input.getCircleId());
 			circleSubsBean.setCardMemberFirstName(input.getCardmemberFirstName());
 			circleSubsBean.setCardMemberMiddleName(input.getCardmemberMiddleName());
 			circleSubsBean.setCardMemberLastName(input.getCardMemberLastName());
