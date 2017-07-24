@@ -29,7 +29,7 @@ public class AddToCircle {
     @Produces(MediaType.APPLICATION_JSON)
     public CircleOutput addToCircle(CircleInput input) {
         CircleOutput output = new CircleOutput();
-        if (input.getCircleId() == 0 || input.getEmail() == null) {
+        if (input.getCircleId() == 0 || input.getEmail() == null || input.getEmail().length() == 0) {
             output.setMessage("Missing email or circleId!");
             output.setSuccess(false);
             return output;

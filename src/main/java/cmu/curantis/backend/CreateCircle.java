@@ -23,7 +23,7 @@ public class CreateCircle {
     @Produces(MediaType.APPLICATION_JSON)
 	public CircleOutput createCircle(CircleInput input) {
 	    CircleOutput output = new CircleOutput();
-	    if (input.getCircleName() == null || input.getEmail() == null) {
+	    if (input.getCircleName() == null || input.getEmail() == null || input.getEmail().length() == 0) {
 	        output.setMessage("Missing circle name or email!");
 	        output.setSuccess(false);
 	        return output;

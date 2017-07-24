@@ -22,7 +22,7 @@ public class JoinCircle {
     @Produces(MediaType.APPLICATION_JSON)
 	public CircleOutput joinCircle(CircleInput input) {
 	    CircleOutput output = new CircleOutput();
-	    if (input.getEmail() == null || input.getCircleId() == 0) {
+	    if (input.getEmail() == null || input.getCircleId() == 0 || input.getEmail().length() == 0) {
 	        output.setMessage("Missing email or circleId!");
 	        output.setSuccess(false);
 	        return output;
