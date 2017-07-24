@@ -43,10 +43,15 @@ public class JoinCircle {
 	            circle.setGeorelationship(input.getGeoRel());
 	            circle.setRelationshipNature(input.getNatureOfRel());
 	            circle.setJoinStatus(true);
-	            caregiverCircleDAO.update(session, circle);
-	            output.setCircleId(input.getCircleId());
-	            output.setSuccess(true);
-	            output.setMessage("Circle joined!");
+	            boolean status = caregiverCircleDAO.update(session, circle);
+	            if (status) {
+	                output.setCircleId(input.getCircleId());
+	                output.setSuccess(true);
+	                output.setMessage("Circle joined!");
+	            } else {
+	                output.setMessage("Join circle failed!");
+	                output.setSuccess(false);
+	            }
 	        }
 	    }
 	    tx.commit();

@@ -45,10 +45,15 @@ public class CreateCircle {
 	    caregiverCircle.setJoinStatus(true);
 	    caregiverCircle.setRelationshipNature(input.getNatureOfRel());
 	    caregiverCircle.setTriggerEvent(input.getTriggerEvent());
-	    caregiverCircleDAO.create(session, caregiverCircle);
-		output.setCircleId(circleId);
-		output.setSuccess(true);
-		output.setMessage("Circle created!");
+	    boolean status = caregiverCircleDAO.create(session, caregiverCircle);
+	    if (status) {
+	        output.setCircleId(circleId);
+	        output.setSuccess(true);
+	        output.setMessage("Circle created!");
+	    } else {
+	        output.setMessage("Creating circle failed!");
+	        output.setSuccess(false);
+	    }
 		
 		tx.commit();
 		session.close();
