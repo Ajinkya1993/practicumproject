@@ -66,11 +66,9 @@ public class AddToCircle {
             newCaregiver.setIdentity();
             newCaregiver.getIdentity().setEmail(input.getEmailToAdd());
             newCaregiver.getIdentity().setCircleID(input.getCircleId());
-            newCaregiver.setCirclename(input.getCircleName());
-            newCaregiver.setGeorelationship(input.getGeoRel());
+            newCaregiver.setCirclename(curCG.getCirclename());
             newCaregiver.setPrimaryCaregiver(false);
-            newCaregiver.setRelationshipNature(input.getNatureOfRel());
-            newCaregiver.setTriggerEvent(input.getTriggerEvent());
+            newCaregiver.setTriggerEvent(curCG.getTriggerEvent());
             newCaregiver.setJoinStatus(false);
             boolean status = caregiverCircleDAO.create(session, newCaregiver);
             if (status) {
