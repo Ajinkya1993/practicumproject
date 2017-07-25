@@ -67,6 +67,16 @@ public class CaregiverCircleDAO {
         }
         return list;
     }
+    
+    public Boolean circleExists(Session session, String cname) {
+        Query query = session.createQuery("FROM CaregiverCircleBean WHERE circle_name = :circle_name");
+        query.setString("circle_name", cname);
+        List<CaregiverCircleBean> list = query.list();
+        if(list == null || list.size() == 0) {
+            return false;
+        }
+        return true;
+    }
 	
 	public Boolean update(Session session, CaregiverCircleBean ub) {
 		String em = ub.getIdentity().getEmail();

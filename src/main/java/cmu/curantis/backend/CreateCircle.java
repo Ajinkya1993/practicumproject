@@ -34,7 +34,16 @@ public class CreateCircle {
 	    Session session = SessionUtil.getSession(); 
 	    Transaction tx = session.beginTransaction();
 	    
+	    //check if circle name is unique
+	    boolean circleexists = caregiverCircleDAO.circleExists(session, input.getCircleName());
+	    if(circleexists) {
+	    	output.setMessage("Circle name exists!");
+	        output.setSuccess(false);
+	        return output;
+	    }
+	   
 	    CaregiverCircleBean caregiverCircle = new CaregiverCircleBean();
+	    
 	    long circleId = circleSubsDAO.addCircleSubs(session, input.getCircleName());
 	    caregiverCircle.setIdentity();
 	    caregiverCircle.getIdentity().setCircleID(circleId);
