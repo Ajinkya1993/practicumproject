@@ -23,7 +23,7 @@ public class Register {
 	public LoginOutput register(RegisterInput input) {
 		LoginOutput output = new LoginOutput();
 		
-		if (input.getEmail() == null || input.getPassword() == null) {
+		if (input.getEmail() == null || input.getEmail().length() == 0 || input.getPassword() == null || input.getPassword().length() == 0) {
 			output.setMessage("Missing email or password!");
         	output.setSuccess(false);
         	return output;
