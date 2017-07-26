@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class CaregiverCircleBean {
 
     @Embeddable
-    public class Identity implements Serializable {
+    public static class Identity implements Serializable {
 
 		private static final long serialVersionUID = 1L;
 

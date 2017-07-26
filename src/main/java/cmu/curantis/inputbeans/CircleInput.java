@@ -1,17 +1,28 @@
 package cmu.curantis.inputbeans;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class CircleInput {
-	private String email;
+    private String email;
+	private String emailToAdd;
 	private long circleId;
 	private String circleName;
 	private String triggerEvent;
 	private String natureOfRel;
 	private String geoRel;
+	
 	public String getEmail() {
-		return email;
+	    return email;
 	}
 	public void setEmail(String email) {
-		this.email = email;
+	    this.email = email;
+	}
+	public String getEmailToAdd() {
+		return emailToAdd;
+	}
+	public void setEmailToAdd(String emailToAdd) {
+		this.emailToAdd = emailToAdd;
 	}
 	public long getCircleId() {
 		return circleId;
