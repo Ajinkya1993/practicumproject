@@ -15,5 +15,6 @@
   <mapping class="cmu.curantis.entities.CaregiverCircleBean"/>
   <mapping class="cmu.curantis.entities.CaregiverInfoBean"/>
   <mapping class="cmu.curantis.entities.CircleSubsBean"/>
+  <mapping class="cmu.curantis.entities.DocumentMgmtBean"/>
  </session-factory>
 </hibernate-configuration>
