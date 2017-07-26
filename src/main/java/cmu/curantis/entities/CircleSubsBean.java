@@ -14,7 +14,7 @@ public class CircleSubsBean {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "circle_id")
-	private int circleId;
+	private long circleId;
 
 	@Column(name = "circle_name")
 	private String circleName;
@@ -46,11 +46,11 @@ public class CircleSubsBean {
 	@Column(name = "card_type")
 	private String cardType;
 
-	public int getCircleId() {
+	public long getCircleId() {
 		return circleId;
 	}
 
-	public void setCircleId(int circleId) {
+	public void setCircleId(long circleId) {
 		this.circleId = circleId;
 	}
 

@@ -32,7 +32,8 @@ public class AddPayment {
 		CircleSubsDAO circlesubsdao = new CircleSubsDAO();
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		CaregiverCircleBean circleBean = caregivercircledao.getByEmailAndId(session, input.getEmail(), input.getCircleid());
+		CaregiverCircleBean circleBean = caregivercircledao.getByEmailAndId(session, input.getEmail(),
+				input.getCircleId());
 		if (circleBean == null) {
 			output.setMessage("Circle Does Not Exist or You Are Not in the Circle!");
 			output.setSuccess(false);
@@ -41,6 +42,7 @@ public class AddPayment {
 			output.setSuccess(false);
 		} else {
 			CircleSubsBean circleSubsBean = new CircleSubsBean();
+			circleSubsBean.setCircleId(input.getCircleId());
 			circleSubsBean.setCardMemberFirstName(input.getCardmemberFirstName());
 			circleSubsBean.setCardMemberMiddleName(input.getCardmemberMiddleName());
 			circleSubsBean.setCardMemberLastName(input.getCardMemberLastName());
@@ -49,8 +51,13 @@ public class AddPayment {
 			circleSubsBean.setCvvNo(input.getCvvNo());
 			circleSubsBean.setExpirationDate(input.getExpirationDate());
 			circlesubsdao.updateCircleSubs(session, circleSubsBean);
-			output.setMessage("Add Payment Success!");
-			output.setSuccess(true);
+			if (!circlesubsdao.updateCircleSubs(session, circleSubsBean)) {
+				output.setMessage("Circle does not exist!");
+				output.setSuccess(false);
+			} else {
+				output.setMessage("Add Payment Success!");
+				output.setSuccess(true);
+			}
 		}
 		tx.commit();
 		session.close();
