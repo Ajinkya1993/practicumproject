@@ -3,6 +3,8 @@ package cmu.curantis.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.json.JSONException;
@@ -38,7 +40,7 @@ public class DocumentMgmtDAO {
 		
 		Query query = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey AND documentName = :docname");
         query.setString("mainkey", mainkey);
-        query.setString("documentName",docname);
+        query.setString("docname",docname);
         
         List<DocumentMgmtBean> list =  query.list();
 		
@@ -46,7 +48,7 @@ public class DocumentMgmtDAO {
 			return false;
 		}
 		
-		CircleSubsBean mybean = (CircleSubsBean)session.merge(dmb);
+		DocumentMgmtBean mybean = (DocumentMgmtBean)session.merge(dmb);
 		session.save(mybean);
 		return true;
 	}
@@ -66,6 +68,7 @@ public class DocumentMgmtDAO {
         }
         List<Docnest> result = new ArrayList<Docnest>();
         for (DocumentMgmtBean bean: list) {
+        	System.out.println("in DAO: " + bean.getIdentity().getDocumentName());
         	result.add(new Docnest(bean.getIdentity().getDocumentName(), bean.getDocumentUrl()));
         }
         return result;
@@ -91,7 +94,7 @@ public class DocumentMgmtDAO {
 		
 		Query query = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey AND documentName = :docname");
         query.setString("mainkey", mainkey);
-        query.setString("documentName",docname);
+        query.setString("docname",docname);
         
         List<DocumentMgmtBean> list =  query.list();
 		
@@ -99,8 +102,8 @@ public class DocumentMgmtDAO {
 			return obj;
 		}
 		
-		obj.append("accessLevel",  list.get(0).getAccessLevel());
-		obj.append("success",  true);
+		obj.put("accessLevel",  list.get(0).getAccessLevel());
+		obj.put("success",  true);
 		return obj;
 	}
 	
@@ -120,7 +123,7 @@ public class DocumentMgmtDAO {
 		
 		Query query = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey AND documentName = :docname");
         query.setString("mainkey", mainkey);
-        query.setString("documentName",docname);
+        query.setString("docname",docname);
         
         List<DocumentMgmtBean> list =  query.list();
 		
@@ -158,7 +161,7 @@ public class DocumentMgmtDAO {
 		
 		Query query = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey AND documentName = :docname");
         query.setString("mainkey", mainkey);
-        query.setString("documentName",docname);
+        query.setString("docname",docname);
         
         List<DocumentMgmtBean> list =  query.list();
 		
@@ -172,12 +175,13 @@ public class DocumentMgmtDAO {
         return true;
 	}
 	
+	@XmlRootElement
 	public class Docnest {
 		public String docname;
 		public String docurl;
 		
 		public Docnest (String dname, String durl) {
-			docname = docname;
+			docname = dname;
 			docurl = durl;
 		}
 		
