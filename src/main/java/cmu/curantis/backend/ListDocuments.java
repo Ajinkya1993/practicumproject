@@ -40,8 +40,8 @@ public class ListDocuments {
 		List<DocumentMgmtDAO.Docnest> result = dao.getByMainkey(session, mainKey);
 		tx.commit();
 		if (result == null) {
-			output.setMessage("No documents exist!");
-			output.setSuccess(true);
+			output.setMessage("No documents available!");
+			output.setSuccess(false);
 			output.setListofdocs(null);
 			return output;
 		}
