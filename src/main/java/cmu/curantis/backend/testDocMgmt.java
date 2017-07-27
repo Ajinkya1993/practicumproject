@@ -35,7 +35,7 @@ public class testDocMgmt {
 		DocumentMgmtBean bean = new DocumentMgmtBean();
 		bean.setIdentity();
 		bean.getIdentity().setDocumentName("mydoc");
-		bean.getIdentity().setMainkey("10>ajinkya>housing");
+		bean.getIdentity().setMainkey("10>ajinkya>1");
 		bean.setDocumentUrl("www.s3doc.com");
 		bean.setAccessLevel(true);
 		DocumentMgmtDAO dao = new DocumentMgmtDAO();
@@ -64,7 +64,7 @@ public class testDocMgmt {
 		DocumentMgmtBean bean = new DocumentMgmtBean();
 		bean.setIdentity();
 		bean.getIdentity().setDocumentName("mydoc");
-		bean.getIdentity().setMainkey("10>ajinkya>housing");
+		bean.getIdentity().setMainkey("10>ajinkya>1");
 		bean.setDocumentUrl(input.getDocumentUrl());
 		bean.setAccessLevel(input.getAccessLevel());
 		DocumentMgmtDAO dao = new DocumentMgmtDAO();
@@ -93,7 +93,7 @@ public class testDocMgmt {
 		DocumentMgmtBean bean = new DocumentMgmtBean();
 		bean.setIdentity();
 		bean.getIdentity().setDocumentName("mydoc");
-		bean.getIdentity().setMainkey("10>ajinkya>housing");
+		bean.getIdentity().setMainkey("10>ajinkya>1");
 		DocumentMgmtDAO dao = new DocumentMgmtDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
@@ -118,7 +118,7 @@ public class testDocMgmt {
 		DocumentOutput output = new DocumentOutput();
 		
 		DocumentMgmtBean bean = new DocumentMgmtBean();
-		String mainkey =  new String("10>ajinkya>housing");
+		String mainkey =  new String("10>ajinkya>1");
 		DocumentMgmtDAO dao = new DocumentMgmtDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
@@ -158,7 +158,7 @@ public class testDocMgmt {
 		DocumentMgmtBean bean = new DocumentMgmtBean();
 		bean.setIdentity();
 		bean.getIdentity().setDocumentName("mydoc");
-		bean.getIdentity().setMainkey("10>ajinkya>housing");
+		bean.getIdentity().setMainkey("10>ajinkya>1");
 		DocumentMgmtDAO dao = new DocumentMgmtDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
