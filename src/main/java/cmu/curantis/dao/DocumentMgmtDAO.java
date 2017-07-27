@@ -146,9 +146,8 @@ public class DocumentMgmtDAO {
 	}
 	
 	/*
-	 * lets you update the document URL or accesslevel for
-	 * a document identified by mainkey and docname
-	 * returns true on successful update. false on error (eg. doc not found).
+	 * lets you delete a document identified by mainkey and docname
+	 * returns true on successful deletion. false on error (eg. doc not found).
 	 */
 	public boolean deleteDocument(Session session, DocumentMgmtBean dmb){
 		String mainkey = dmb.getIdentity().getMainkey();
