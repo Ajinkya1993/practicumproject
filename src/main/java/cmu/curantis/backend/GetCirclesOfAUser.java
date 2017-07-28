@@ -1,32 +1,30 @@
 package cmu.curantis.backend;
-
-import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import org.json.JSONException;
 
 import cmu.curantis.dao.CaregiverCircleDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverCircleBean;
 import cmu.curantis.inputbeans.CircleInput;
+import cmu.curantis.outputbeans.CircleInfo;
 import cmu.curantis.outputbeans.CircleListOutput;
 
 @Path("/getcirclesofauser")
 public class GetCirclesOfAUser {
-    @GET
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public CircleListOutput getCirclesOfAUser(CircleInput input) {
+    public CircleListOutput getCirclesOfAUser(CircleInput input) throws JSONException {
         CircleListOutput output = new CircleListOutput();
         if (input == null || input.getEmail() == null || input.getEmail().length() == 0) {
             output.setMessage("Missing Email!");
@@ -43,15 +41,15 @@ public class GetCirclesOfAUser {
             output.setMessage("No circle for this caregiver!");
             output.setSuccess(false);
         } else {
-            JsonArray array = new JsonArray();
+            List<CircleInfo> circleList = new ArrayList<CircleInfo>();
             for (CaregiverCircleBean circle : beans) {
-                JsonObject obj = new JsonObject();
-                obj.addProperty("circleId", circle.getIdentity().getCircleID());
-                obj.addProperty("circleName", circle.getCirclename());
-                array.add(obj);
+                CircleInfo obj = new CircleInfo();
+                obj.setCircleId(circle.getIdentity().getCircleID());
+                obj.setCircleName(circle.getCirclename());
+                circleList.add(obj);
             }
             output.setMessage("These are the circles this caregiver is in!");
-            output.setList(array);
+            output.setList(circleList);
             output.setSuccess(true);
         }
         

@@ -4,16 +4,13 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 @XmlRootElement
-public class CircleListOutput {
-    private List<CircleInfo> list;
-    private boolean success;
-    private String message;
-    public List<CircleInfo> getList() {
+public class UserListOutput {
+    private List<UserOfCircle> list;
+    public List<UserOfCircle> getList() {
         return list;
     }
-    public void setList(List<CircleInfo> list) {
+    public void setList(List<UserOfCircle> list) {
         this.list = list;
     }
     public boolean isSuccess() {
@@ -28,5 +25,6 @@ public class CircleListOutput {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+    private boolean success;
+    private String message;
 }
