@@ -26,44 +26,49 @@ public class ShareDocument {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		String targetEmail = input.getTargetEmail();
-		String updateMainkey = input.getCircleId() + ">" + targetEmail + ">" +input.getService();
+		String updateMainkey = input.getCircleId() + ">" + targetEmail + ">" + input.getService();
 		/**
-		 * Success cases:
-		 * 1. already exist, just update access level
+		 * Success cases: 1. already exist, just update access level 
 		 * 2. user not exist, adding a new row into the database
 		 */
 		List<Docnest> list = docmgmt.getByMainkey(session, updateMainkey);
 		boolean flag = false;
 		Docnest docnest = null;
-		for (Docnest doc : list) {
-			if (doc.getDocname().equals(input.getDocumentName())) {
-				flag = true;
-				docnest = doc;
-			}
-		}
-		if (flag) {
-			DocumentMgmtBean updateBean = new DocumentMgmtBean();
-			updateBean.setAccessLevel(input.getAccessLevel());
-			updateBean.setDocumentUrl(docnest.docurl);
-			updateBean.setIdentity();
-			updateBean.getIdentity().setDocumentName(docnest.docname);
-			updateBean.getIdentity().setMainkey(updateMainkey);
-			docmgmt.updateDocument(session, updateBean);
+		if (list == null || list.size() == 0) {
+			output.setMessage("No Document Exist!");
+			output.setSuccess(false);
 		} else {
-			List<Docnest> docList = docmgmt.getByMainkey(session, input.getMainkey());
-			String url = null;
-			for (Docnest d : docList) {
-				if (d.getDocname().equals(input.getDocumentName())) {
-					url = d.getDocurl();
+
+			for (Docnest doc : list) {
+				if (doc.getDocname().equals(input.getDocumentName())) {
+					flag = true;
+					docnest = doc;
 				}
 			}
-			DocumentMgmtBean updateBean = new DocumentMgmtBean();
-			updateBean.setDocumentUrl(url);
-			updateBean.setAccessLevel(input.getAccessLevel());
-			updateBean.setIdentity();
-			updateBean.getIdentity().setDocumentName(input.getDocumentName());
-			updateBean.getIdentity().setMainkey(updateMainkey);
-			docmgmt.create(session, updateBean);
+			if (flag) {
+				DocumentMgmtBean updateBean = new DocumentMgmtBean();
+				updateBean.setAccessLevel(input.getAccessLevel());
+				updateBean.setDocumentUrl(docnest.docurl);
+				updateBean.setIdentity();
+				updateBean.getIdentity().setDocumentName(docnest.docname);
+				updateBean.getIdentity().setMainkey(updateMainkey);
+				docmgmt.updateDocument(session, updateBean);
+			} else {
+				List<Docnest> docList = docmgmt.getByMainkey(session, input.getMainkey());
+				String url = null;
+				for (Docnest d : docList) {
+					if (d.getDocname().equals(input.getDocumentName())) {
+						url = d.getDocurl();
+					}
+				}
+				DocumentMgmtBean updateBean = new DocumentMgmtBean();
+				updateBean.setDocumentUrl(url);
+				updateBean.setAccessLevel(input.getAccessLevel());
+				updateBean.setIdentity();
+				updateBean.getIdentity().setDocumentName(input.getDocumentName());
+				updateBean.getIdentity().setMainkey(updateMainkey);
+				docmgmt.create(session, updateBean);
+			}
 		}
 		output.setMessage("Shared Document Success!");
 		output.setSuccess(true);

@@ -1,5 +1,8 @@
 package cmu.curantis.outputbeans;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class CircleOutput {
 	private boolean success;
 	private long circleId;

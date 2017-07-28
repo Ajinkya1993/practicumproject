@@ -1,7 +1,10 @@
 package cmu.curantis.outputbeans;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.google.gson.JsonArray;
 
+@XmlRootElement
 public class CircleListOutput {
     private JsonArray list;
     private boolean success;

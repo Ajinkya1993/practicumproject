@@ -2,6 +2,9 @@ package cmu.curantis.outputbeans;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class DocumentPeopleOutput {
 	private boolean success;
 	private String message;
