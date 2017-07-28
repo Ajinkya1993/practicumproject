@@ -79,6 +79,9 @@ public class ListDocPeople {
 			} catch (JSONException e) {
 				output.setSuccess(false);
 				output.setMessage("Error!");
+				tx.commit();
+		        session.close();
+		        return output;
 			}
 		}
 		
