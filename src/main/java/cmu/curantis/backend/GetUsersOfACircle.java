@@ -11,9 +11,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import cmu.curantis.dao.CaregiverCircleDAO;
 import cmu.curantis.dao.CaregiverInfoDAO;
@@ -28,7 +28,7 @@ public class GetUsersOfACircle {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public CircleListOutput getUsersOfACircle(CircleInput input) {
+    public CircleListOutput getUsersOfACircle(CircleInput input) throws JSONException {
         CircleListOutput output = new CircleListOutput();
         if (input == null || input.getCircleId() == 0) {
             output.setMessage("Missing circleId!");
@@ -45,11 +45,11 @@ public class GetUsersOfACircle {
             output.setMessage("No caregiver in this circle!");
             output.setSuccess(false);
         } else {
-            JsonArray array = new JsonArray();
+            JSONArray array = new JSONArray();
             for (CaregiverCircleBean circleBean : beans) {
-                JsonObject obj = new JsonObject();
+                JSONObject obj = new JSONObject();
                 String email = circleBean.getIdentity().getEmail();
-                obj.addProperty("email", email);
+                obj.put("email", email);
                 
                 CaregiverInfoBean queryBean = new CaregiverInfoBean();
                 queryBean.setEmail(email);
@@ -58,11 +58,11 @@ public class GetUsersOfACircle {
                     output.setMessage("User not in caregiver info table!");
                     output.setSuccess(false);
                 } else {
-                    obj.addProperty("First Name", infoBean.getFirstName());
-                    obj.addProperty("Middle Name", infoBean.getMiddleName());
-                    obj.addProperty("Last Name", infoBean.getLastName());
+                    obj.put("First Name", infoBean.getFirstName());
+                    obj.put("Middle Name", infoBean.getMiddleName());
+                    obj.put("Last Name", infoBean.getLastName());
                 }
-                array.add(obj);
+                array.put(obj);
             }
             output.setList(array);
             output.setMessage("These are caregivers in this circle!");

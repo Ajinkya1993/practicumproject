@@ -2,17 +2,19 @@ package cmu.curantis.outputbeans;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.google.gson.JsonArray;
+import org.json.JSONArray;
+
+
 
 @XmlRootElement
 public class CircleListOutput {
-    private JsonArray list;
+    private JSONArray list;
     private boolean success;
     private String message;
-    public JsonArray getList() {
+    public JSONArray getList() {
         return list;
     }
-    public void setList(JsonArray list) {
+    public void setList(JSONArray list) {
         this.list = list;
     }
     public boolean isSuccess() {
