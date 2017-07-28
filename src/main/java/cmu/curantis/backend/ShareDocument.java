@@ -43,7 +43,10 @@ public class ShareDocument {
 		String targetMainkey = input.getCircleId() + ">" + targetEmail + ">" + input.getService();
 		String mainkey = input.getCircleId() + ">" + email + ">" + input.getService();
 		
-		if (input.getAccessLevel() == false) {
+		DocumentMgmtBean mainbean = docmgmt.getByPrimarykey(session, mainkey, docname);
+		
+		
+		if (mainbean == null || mainbean.getAccessLevel() == false) {
 			output.setMessage("You do not have the permission to share this document");
 			output.setSuccess(false);
 			tx.commit();

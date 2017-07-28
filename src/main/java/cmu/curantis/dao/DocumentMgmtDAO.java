@@ -51,7 +51,24 @@ public class DocumentMgmtDAO {
 		return true;
 	}
 	
+	/*
+	 * Returns the particular documentbean for the given composite primary key-> (mainkey, docname)
+	 * returns nulll when not existing
+	 * returns the bean when found
+	 */
 	
+	public DocumentMgmtBean getByPrimarykey(Session session, String mainkey, String docname) {
+		Query query = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey AND documentName = :docname");
+        query.setString("mainkey", mainkey);
+        query.setString("docname",docname);
+        List<DocumentMgmtBean> list =  query.list();
+		
+		if(list == null && list.size() == 0) {
+			return null;
+		}
+		return list.get(0);
+	}	       
+        
 	/*
 	 * Returns the list of documents for the particular mainkey
 	 * the list is consists of docnest objects -> docnest -> (docname, docurl)
