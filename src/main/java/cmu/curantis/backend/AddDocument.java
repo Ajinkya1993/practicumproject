@@ -40,6 +40,11 @@ public class AddDocument {
         //method to get the list of users of a circle
         CaregiverCircleDAO cgcircl = new CaregiverCircleDAO();
 		List<CaregiverCircleBean> lst = cgcircl.getByCircleId(session_init, input.getCircleId());
+		if(lst == null) {
+			output.setMessage("You are not in the circle!");
+			output.setSuccess(false);
+			return output;
+		}
 		tx_init.commit();
 		session_init.close();
 		DocumentMgmtDAO docdao_init = new DocumentMgmtDAO();
