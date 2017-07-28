@@ -106,6 +106,24 @@ public class DocumentMgmtDAO {
 		return obj;
 	}
 	
+	public boolean checkDocument(Session session, DocumentMgmtBean dmb){
+		String mainkey = dmb.getIdentity().getMainkey();
+		String docname = dmb.getIdentity().getDocumentName();
+		if (mainkey == null || mainkey.length() == 0 ||
+				docname == null || docname.length() == 0) {
+			return false;
+		}
+		Query query = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey AND documentName = :docname");
+        query.setString("mainkey", mainkey);
+        query.setString("docname",docname);
+        
+        List<DocumentMgmtBean> list =  query.list();
+        if(list == null) {
+		return true;
+        }
+        
+        return false;
+	}
 	/*
 	 * lets you update the document URL or accesslevel for
 	 * a document identified by mainkey and docname
