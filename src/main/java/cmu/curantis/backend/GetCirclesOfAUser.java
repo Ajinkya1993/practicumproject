@@ -1,4 +1,5 @@
 package cmu.curantis.backend;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -9,14 +10,13 @@ import javax.ws.rs.core.MediaType;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import cmu.curantis.dao.CaregiverCircleDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverCircleBean;
 import cmu.curantis.inputbeans.CircleInput;
+import cmu.curantis.outputbeans.CircleInfo;
 import cmu.curantis.outputbeans.CircleListOutput;
 
 @Path("/getcirclesofauser")
@@ -41,15 +41,15 @@ public class GetCirclesOfAUser {
             output.setMessage("No circle for this caregiver!");
             output.setSuccess(false);
         } else {
-            JSONArray array = new JSONArray();
+            List<CircleInfo> circleList = new ArrayList<CircleInfo>();
             for (CaregiverCircleBean circle : beans) {
-                JSONObject obj = new JSONObject();
-                obj.put("circleId", circle.getIdentity().getCircleID());
-                obj.put("circleName", circle.getCirclename());
-                array.put(obj);
+                CircleInfo obj = new CircleInfo();
+                obj.setCircleId(circle.getIdentity().getCircleID());
+                obj.setCircleName(circle.getCirclename());
+                circleList.add(obj);
             }
             output.setMessage("These are the circles this caregiver is in!");
-            output.setList(array);
+            output.setList(circleList);
             output.setSuccess(true);
         }
         
