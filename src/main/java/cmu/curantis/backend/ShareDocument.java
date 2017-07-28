@@ -50,10 +50,7 @@ public class ShareDocument {
 			session.close();
 			return output;
 		}
-		/**
-		 * Success cases: 1. already exist, just update access level 
-		 * 2. user not exist, adding a new row into the database
-		 */
+		
 		List<Docnest> list = docmgmt.getByMainkey(session, targetMainkey);
 		if (list == null || list.size() == 0) {
 			// The targetmainkey does not have this document yet. Create new row
