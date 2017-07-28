@@ -64,7 +64,14 @@ public class ShareDocument {
 			newBean.setIdentity();
 			newBean.getIdentity().setDocumentName(docname);
 			newBean.getIdentity().setMainkey(targetMainkey);
-			docmgmt.create(session, newBean);
+			boolean status = docmgmt.create(session, newBean);
+			if (!status) {
+				output.setMessage("Error");
+				output.setSuccess(false);
+				tx.commit();
+				session.close();
+				return output;
+			}
 			output.setMessage("Shared Document Successfully!");
 			output.setSuccess(true);
 			tx.commit();
@@ -87,7 +94,14 @@ public class ShareDocument {
 			updateBean.setIdentity();
 			updateBean.getIdentity().setDocumentName(docname);
 			updateBean.getIdentity().setMainkey(targetMainkey);
-			docmgmt.updateDocument(session, updateBean);
+			boolean status = docmgmt.updateDocument(session, updateBean);
+			if (!status) {
+				output.setMessage("Error");
+				output.setSuccess(false);
+				tx.commit();
+				session.close();
+				return output;
+			}
 			output.setMessage("Shared Document Successfully!");
 			output.setSuccess(true);
 			tx.commit();
@@ -101,7 +115,15 @@ public class ShareDocument {
 			newBean.setIdentity();
 			newBean.getIdentity().setDocumentName(docname);
 			newBean.getIdentity().setMainkey(targetMainkey);
-			docmgmt.create(session, newBean);
+			boolean status = docmgmt.create(session, newBean);
+			if (!status) {
+				output.setMessage("Error");
+				output.setSuccess(false);
+				tx.commit();
+				session.close();
+				return output;
+			}
+			
 			output.setMessage("Shared Document Successfully!");
 			output.setSuccess(true);
 			tx.commit();
