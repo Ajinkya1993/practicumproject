@@ -116,7 +116,7 @@ public class DocumentMgmtDAO {
 		Query query = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey AND documentName = :docname");
         query.setString("mainkey", mainkey);
         query.setString("docname",docname);
-        
+ 
         List<DocumentMgmtBean> list =  query.list();
         if(list == null) {
 		return true;
