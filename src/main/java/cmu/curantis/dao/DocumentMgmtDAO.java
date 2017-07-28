@@ -113,16 +113,26 @@ public class DocumentMgmtDAO {
 				docname == null || docname.length() == 0) {
 			return false;
 		}
+		System.out.println(mainkey + docname);
+		Query query_init = session.createQuery("FROM DocumentMgmtBean");
+		List<DocumentMgmtBean> list_init =  query_init.list();
+		if(list_init == null) {
+			System.out.println("Initital list is empty so returning true");
+			return true;
+		}
+		
 		Query query = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey AND documentName = :docname");
         query.setString("mainkey", mainkey);
         query.setString("docname",docname);
  
         List<DocumentMgmtBean> list =  query.list();
-        if(list == null) {
-		return true;
+        System.out.println("Size of list is "+list.size());
+        if(list != null && list.size() > 0) {
+        	System.out.println("Returning false");
+		return false;
         }
         
-        return false;
+        return true;
 	}
 	/*
 	 * lets you update the document URL or accesslevel for
@@ -180,7 +190,8 @@ public class DocumentMgmtDAO {
         query.setString("docname",docname);
         
         List<DocumentMgmtBean> list =  query.list();
-		
+        System.out.println(mainkey + " " + docname);
+		System.out.println("The list size in delete is "+list.size());
         if((list == null || list.size() == 0) || (list != null && list.size() > 1)) {
 			return false;
 		}

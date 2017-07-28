@@ -35,10 +35,11 @@ public class DeleteDocument {
 	    	return output;
 		}
 		
+		
 		//check if its a primary caregiver
 		if(input.getAccessLevel() == false) {
 			output.setSuccess(false);
-			output.setMessage("You do not have the access level to delete the document! Please contact your circle admin");
+			output.setMessage("You do not have the access level to delete the document! Please contact your circle admin!");
 	    	return output;
 		}	
 		
@@ -64,7 +65,6 @@ public class DeleteDocument {
 			//iterate over users of the circle
 		for(CaregiverCircleBean cub: lst) {
 			//Generate main key
-			cub.setIdentity();
 			long circleid = cub.getIdentity().getCircleID();
 			String email = cub.getIdentity().getEmail();
 			

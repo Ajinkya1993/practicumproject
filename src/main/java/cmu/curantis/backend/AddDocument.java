@@ -39,6 +39,7 @@ public class AddDocument {
         Transaction tx_init = session_init.beginTransaction();
         //method to get the list of users of a circle
         CaregiverCircleDAO cgcircl = new CaregiverCircleDAO();
+        System.out.println("The circle ID is" +input.getCircleId());
 		List<CaregiverCircleBean> lst = cgcircl.getByCircleId(session_init, input.getCircleId());
 		if(lst == null) {
 			output.setMessage("You are not in the circle!");
@@ -54,7 +55,7 @@ public class AddDocument {
 			//iterate over users of the circle
         for(CaregiverCircleBean cub: lst) {
         	
-        	cub.setIdentity();
+        	//cub.setIdentity();
 			long circleid = cub.getIdentity().getCircleID();
 			String email = cub.getIdentity().getEmail();
         	
@@ -70,8 +71,10 @@ public class AddDocument {
 			docmgmt.setIdentity();
 			docmgmt.getIdentity().setDocumentName(input.getDocumentName());
 			docmgmt.getIdentity().setMainkey(mainkey);
+			
 			docmgmt.setAccessLevel(true);
 			docmgmt.setDocumentUrl(input.getDocumentUrl());
+			System.out.println("The mainkey here is " +mainkey);
 			Boolean result = docdao_init.checkDocument(session_mi, docmgmt);
 			if (result == false) {
 				output.setMessage("Document with same name exists, please change the name!");
@@ -79,7 +82,6 @@ public class AddDocument {
 				return output;
 			}
         }
-		
 		
 		
 		//Generate main key
@@ -98,6 +100,8 @@ public class AddDocument {
 		docmgmt.getIdentity().setMainkey(mainkey);
 		docmgmt.setAccessLevel(true);
 		docmgmt.setDocumentUrl(input.getDocumentUrl());
+		tx_mi.commit();
+		session_mi.close();
 		
 		//DAO
 		DocumentMgmtDAO docdao = new DocumentMgmtDAO();
