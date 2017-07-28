@@ -11,6 +11,7 @@ public class ShareDocumentInput {
 	private String targetEmail;
 	private String documentName;
 	private Boolean accessLevel;
+	private String documentUrl;
 	
 	public String getMainkey() {
 		return mainkey;
@@ -53,5 +54,11 @@ public class ShareDocumentInput {
 	}
 	public void setAccessLevel(Boolean accessLevel) {
 		this.accessLevel = accessLevel;
+	}
+	public String getDocumentUrl() {
+		return documentUrl;
+	}
+	public void setDocumentUrl(String documentUrl) {
+		this.documentUrl = documentUrl;
 	}
 }

@@ -23,57 +23,90 @@ public class ShareDocument {
 	public ShareDocumentOutput shareDocument(ShareDocumentInput input) {
 		ShareDocumentOutput output = new ShareDocumentOutput();
 		DocumentMgmtDAO docmgmt = new DocumentMgmtDAO();
+		
+		if (input.getEmail() ==  null || input.getEmail().length() == 0 ||
+			input.getTargetEmail() == null || input.getTargetEmail().length() == 0 ||
+			input.getCircleId() == null || input.getCircleId() <= 0 ||
+			input.getService() <= 0 ||
+			input.getDocumentName() == null || input.getDocumentName().length() == 0 ||
+			input.getDocumentUrl() == null || input.getDocumentUrl().length() == 0) {
+				output.setMessage("Missing input parameters");
+				output.setSuccess(false);
+				return output;
+			}
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		String targetEmail = input.getTargetEmail();
-		String updateMainkey = input.getCircleId() + ">" + targetEmail + ">" + input.getService();
+		String email = input.getEmail();
+		String docname = input.getDocumentName();
+		String docurl = input.getDocumentUrl();
+		String targetMainkey = input.getCircleId() + ">" + targetEmail + ">" + input.getService();
+		String mainkey = input.getCircleId() + ">" + email + ">" + input.getService();
+		
+		if (input.getAccessLevel() == false) {
+			output.setMessage("You do not have the permission to share this document");
+			output.setSuccess(false);
+			tx.commit();
+			session.close();
+			return output;
+		}
 		/**
 		 * Success cases: 1. already exist, just update access level 
 		 * 2. user not exist, adding a new row into the database
 		 */
-		List<Docnest> list = docmgmt.getByMainkey(session, updateMainkey);
-		boolean flag = false;
-		Docnest docnest = null;
+		List<Docnest> list = docmgmt.getByMainkey(session, targetMainkey);
 		if (list == null || list.size() == 0) {
-			output.setMessage("No Document Exist!");
-			output.setSuccess(false);
-		} else {
-
-			for (Docnest doc : list) {
-				if (doc.getDocname().equals(input.getDocumentName())) {
-					flag = true;
-					docnest = doc;
-				}
-			}
-			if (flag) {
-				DocumentMgmtBean updateBean = new DocumentMgmtBean();
-				updateBean.setAccessLevel(input.getAccessLevel());
-				updateBean.setDocumentUrl(docnest.docurl);
-				updateBean.setIdentity();
-				updateBean.getIdentity().setDocumentName(docnest.docname);
-				updateBean.getIdentity().setMainkey(updateMainkey);
-				docmgmt.updateDocument(session, updateBean);
-			} else {
-				List<Docnest> docList = docmgmt.getByMainkey(session, input.getMainkey());
-				String url = null;
-				for (Docnest d : docList) {
-					if (d.getDocname().equals(input.getDocumentName())) {
-						url = d.getDocurl();
-					}
-				}
-				DocumentMgmtBean updateBean = new DocumentMgmtBean();
-				updateBean.setDocumentUrl(url);
-				updateBean.setAccessLevel(input.getAccessLevel());
-				updateBean.setIdentity();
-				updateBean.getIdentity().setDocumentName(input.getDocumentName());
-				updateBean.getIdentity().setMainkey(updateMainkey);
-				docmgmt.create(session, updateBean);
+			// The targetmainkey does not have this document yet. Create new row
+			
+			DocumentMgmtBean newBean = new DocumentMgmtBean();
+			newBean.setAccessLevel(input.getAccessLevel());
+			newBean.setDocumentUrl(docurl);
+			newBean.setIdentity();
+			newBean.getIdentity().setDocumentName(docname);
+			newBean.getIdentity().setMainkey(targetMainkey);
+			docmgmt.create(session, newBean);
+			output.setMessage("Shared Document Successfully!");
+			output.setSuccess(true);
+			tx.commit();
+			session.close();
+			return output;
+		}
+		//Need to check whether the doc being shared is the same doc the target email already has
+		boolean isDocSame = false;
+		for (Docnest docnest: list) {
+			if (docnest.docname ==docname) {
+				isDocSame = true;
+				break;
 			}
 		}
-		output.setMessage("Shared Document Success!");
-		output.setSuccess(true);
-		tx.commit();
-		session.close();
-		return output;
+		if (isDocSame) {
+			// the target email has this document already. Updated the row.
+			DocumentMgmtBean updateBean = new DocumentMgmtBean();
+			updateBean.setAccessLevel(input.getAccessLevel());
+			updateBean.setDocumentUrl(docurl);
+			updateBean.setIdentity();
+			updateBean.getIdentity().setDocumentName(docname);
+			updateBean.getIdentity().setMainkey(targetMainkey);
+			docmgmt.updateDocument(session, updateBean);
+			output.setMessage("Shared Document Successfully!");
+			output.setSuccess(true);
+			tx.commit();
+			session.close();
+			return output;
+		} else {
+			// The targetmainkey exists in the table but does not have this document yet. Create new row
+			DocumentMgmtBean newBean = new DocumentMgmtBean();
+			newBean.setAccessLevel(input.getAccessLevel());
+			newBean.setDocumentUrl(docurl);
+			newBean.setIdentity();
+			newBean.getIdentity().setDocumentName(docname);
+			newBean.getIdentity().setMainkey(targetMainkey);
+			docmgmt.create(session, newBean);
+			output.setMessage("Shared Document Successfully!");
+			output.setSuccess(true);
+			tx.commit();
+			session.close();
+			return output;
+		}
 	}
 }
