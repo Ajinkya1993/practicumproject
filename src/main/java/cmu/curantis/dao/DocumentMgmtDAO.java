@@ -10,8 +10,6 @@ import org.hibernate.Session;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cmu.curantis.entities.CaregiverCircleBean;
-import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.entities.DocumentMgmtBean;
 
 public class DocumentMgmtDAO {
