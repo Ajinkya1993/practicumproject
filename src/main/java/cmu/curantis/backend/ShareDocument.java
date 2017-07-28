@@ -66,7 +66,7 @@ public class ShareDocument {
 			newBean.getIdentity().setMainkey(targetMainkey);
 			boolean status = docmgmt.create(session, newBean);
 			if (!status) {
-				output.setMessage("Error");
+				output.setMessage("Error #1");
 				output.setSuccess(false);
 				tx.commit();
 				session.close();
@@ -96,7 +96,7 @@ public class ShareDocument {
 			updateBean.getIdentity().setMainkey(targetMainkey);
 			boolean status = docmgmt.updateDocument(session, updateBean);
 			if (!status) {
-				output.setMessage("Error");
+				output.setMessage("Error #2");
 				output.setSuccess(false);
 				tx.commit();
 				session.close();
@@ -117,7 +117,7 @@ public class ShareDocument {
 			newBean.getIdentity().setMainkey(targetMainkey);
 			boolean status = docmgmt.create(session, newBean);
 			if (!status) {
-				output.setMessage("Error");
+				output.setMessage("Error #3");
 				output.setSuccess(false);
 				tx.commit();
 				session.close();
