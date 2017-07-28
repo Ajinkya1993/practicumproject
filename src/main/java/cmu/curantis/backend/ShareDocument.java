@@ -81,7 +81,7 @@ public class ShareDocument {
 		//Need to check whether the doc being shared is the same doc the target email already has
 		boolean isDocSame = false;
 		for (Docnest docnest: list) {
-			if (docnest.docname ==docname) {
+			if (docnest.docname.equals(docname)) {
 				isDocSame = true;
 				break;
 			}
