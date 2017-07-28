@@ -19,7 +19,7 @@ import cmu.curantis.entities.DocumentMgmtBean;
 import cmu.curantis.inputbeans.DocumentInput;
 import cmu.curantis.outputbeans.DocumentOutput;
 
-@Path("/deleteDocuments")
+@Path("/deleteDocument")
 public class DeleteDocument {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

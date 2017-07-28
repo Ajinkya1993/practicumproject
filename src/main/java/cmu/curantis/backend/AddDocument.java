@@ -13,7 +13,7 @@ import cmu.curantis.entities.DocumentMgmtBean;
 import cmu.curantis.inputbeans.DocumentInput;
 import cmu.curantis.outputbeans.DocumentOutput;
 
-@Path("/addDocuments")
+@Path("/addDocument")
 public class AddDocument {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
