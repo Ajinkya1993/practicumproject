@@ -157,4 +157,5 @@ public class CaregiverCircleDAO {
 		session.delete(mybean);		    
 		return true;
 	}
+	
 }
