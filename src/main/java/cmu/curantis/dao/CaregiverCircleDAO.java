@@ -81,6 +81,17 @@ public class CaregiverCircleDAO {
         return list.get(0);
     }
     
+    public CaregiverCircleBean getByEmailAndName(Session session, String email, String circleName) {
+    	Query query = session.createQuery("FROM CaregiverCircleBean WHERE email = :email AND circle_name = :circle_name");
+        query.setString("email", email);
+        query.setString("circle_name", circleName);
+        List<CaregiverCircleBean> list = query.list();
+        if(list == null || list.size() == 0) {
+            return null;
+        }
+        return list.get(0);
+	}
+    
     public List<CaregiverCircleBean> getByCircleId(Session session, long cicid) {
         Query query = session.createQuery("FROM CaregiverCircleBean WHERE circle_id = :circle_id");
         query.setLong("circle_id", cicid);
@@ -129,6 +140,7 @@ public class CaregiverCircleDAO {
 		session.update(mybean);
 		return true;
 	}
+	
 	
 	public Boolean delete(Session session, CaregiverCircleBean ub) {
 		String em = ub.getIdentity().getEmail();
