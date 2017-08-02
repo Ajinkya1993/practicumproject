@@ -46,7 +46,30 @@ public class CaregiverCircleDAO {
         }
         return list;
     }
+	
+	public List<CaregiverCircleBean> getByEmailAndJoined(Session session, String email) {
+        Query query = session.createQuery("FROM CaregiverCircleBean WHERE email = :email AND join_status = :join_status");
+        query.setString("email", email);
+        query.setBoolean("join_status", true);
+        List<CaregiverCircleBean> list = query.list();
+        if(list == null || list.size() == 0) {
+            return null;
+        }
+        return list;
+    }
     
+	//Not joined entails the ones which are not joined i.e. join_status is false
+	public List<CaregiverCircleBean> getByEmailAndInvited(Session session, String email) {
+        Query query = session.createQuery("FROM CaregiverCircleBean WHERE email = :email AND join_status = :join_status");
+        query.setString("email", email);
+        query.setBoolean("join_status", false);
+        List<CaregiverCircleBean> list = query.list();
+        if(list == null || list.size() == 0) {
+            return null;
+        }
+        return list;
+    }
+	
     public CaregiverCircleBean getByEmailAndId(Session session, String email, long cicid) {
         Query query = session.createQuery("FROM CaregiverCircleBean WHERE email = :email AND circle_id = :circle_id");
         query.setString("email", email);
