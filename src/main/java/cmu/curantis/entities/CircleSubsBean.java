@@ -19,6 +19,11 @@ public class CircleSubsBean {
 	@Column(name = "circle_name")
 	private String circleName;
 	
+	
+	/**
+	 * just going to be a string
+	 * Each service will be separated from the other by the separator '->'
+	 */
 	@Column(name = "services_subscribed")
 	private String servicesSubscribed;
 	

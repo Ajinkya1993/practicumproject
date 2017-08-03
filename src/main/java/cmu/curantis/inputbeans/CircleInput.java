@@ -11,6 +11,7 @@ public class CircleInput {
 	private String triggerEvent;
 	private String natureOfRel;
 	private String geoRel;
+	private String services;
 	
 	public String getEmail() {
 	    return email;
@@ -53,5 +54,11 @@ public class CircleInput {
 	}
 	public void setGeoRel(String geoRel) {
 		this.geoRel = geoRel;
+	}
+	public String getServices() {
+		return services;
+	}
+	public void setServices(String services) {
+		this.services = services;
 	}
 }

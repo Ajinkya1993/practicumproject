@@ -7,6 +7,8 @@ public class CircleOutput {
 	private boolean success;
 	private long circleId;
 	private String message;
+	private String subscribedServices;
+	
 	public boolean isSuccess() {
 		return success;
 	}
@@ -24,5 +26,13 @@ public class CircleOutput {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	
+	public String getSubscribedServices() {
+		return this.subscribedServices;
+	}
+	
+	public void setSubscribedServices(String subscribedServices) {
+		this.subscribedServices = subscribedServices;
 	}
 }

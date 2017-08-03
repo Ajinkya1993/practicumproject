@@ -77,6 +77,33 @@ public class CircleSubsDAO {
 		return true;
 	}
 	
+	public boolean updateServicesSubscribed(Session session, CircleSubsBean bean){
+		Query query = session.createQuery("from CircleSubsBean where circle_id = :circleid");
+		query.setString("circleid", String.valueOf(bean.getCircleId()));
+		List<CircleSubsBean> circles =  query.list();
+		if (circles == null || circles.size() == 0) {
+			return false;
+		}
+		CircleSubsBean oribean = circles.get(0);
+		oribean.setServicesSubscribed(bean.getServicesSubscribed());
+		
+		CircleSubsBean mybean = (CircleSubsBean)session.merge(oribean);
+		session.saveOrUpdate(mybean);		    
+		return true;
+	}
+	
+	public String getServicesSubscribed(Session session, CircleSubsBean bean){
+		Query query = session.createQuery("from CircleSubsBean where circle_id = :circleid");
+		query.setString("circleid", String.valueOf(bean.getCircleId()));
+		List<CircleSubsBean> circles =  query.list();
+		if (circles == null || circles.size() == 0) {
+			return null;
+		}
+		CircleSubsBean oribean = circles.get(0);
+		return oribean.getServicesSubscribed();
+	}
+	
+	
 	/*
 	 * Returns true on deletion. Returns false when row to be deleted is not found.
 	 */
