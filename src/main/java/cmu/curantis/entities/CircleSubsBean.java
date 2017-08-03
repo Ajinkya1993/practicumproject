@@ -21,6 +21,12 @@ public class CircleSubsBean {
 	
 	@Column(name = "services_subscribed")
 	private String servicesSubscribed;
+	
+	/*
+	 * Column to store the S3 Url to the lovedOne's profile picture
+	 */
+    @Column(name = "lovedone_pictureUrl")
+    private String pictureUrl;
 
 	@Column(name = "lovedone_address")
 	private String lovedoneAddress;
@@ -133,5 +139,13 @@ public class CircleSubsBean {
 
 	public void setCardType(String cardType) {
 		this.cardType = cardType;
+	}
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
 	}
 }
