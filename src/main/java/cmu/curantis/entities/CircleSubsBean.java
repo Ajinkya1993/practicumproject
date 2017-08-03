@@ -25,6 +25,12 @@ public class CircleSubsBean {
 	/*
 	 * Column to store the S3 Url to the lovedOne's profile picture
 	 */
+	@Column(name = "lovedone_firstName")
+    private String lovedone_firstName;
+	
+	@Column(name = "lovedone_LastName")
+    private String lovedone_LastName;
+	
     @Column(name = "lovedone_pictureUrl")
     private String pictureUrl;
 
@@ -147,5 +153,21 @@ public class CircleSubsBean {
 
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
+	}
+
+	public String getLovedone_firstName() {
+		return lovedone_firstName;
+	}
+
+	public void setLovedone_firstName(String lovedone_firstName) {
+		this.lovedone_firstName = lovedone_firstName;
+	}
+
+	public String getLovedone_LastName() {
+		return lovedone_LastName;
+	}
+
+	public void setLovedone_LastName(String lovedone_LastName) {
+		this.lovedone_LastName = lovedone_LastName;
 	}
 }
