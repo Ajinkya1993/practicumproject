@@ -7,17 +7,17 @@ import org.json.JSONArray;
 @XmlRootElement
 public class ServicesInput {
 	private long circleId;
-	private JSONArray services;
+	private String services;
 	public long getCircleId() {
 		return circleId;
 	}
 	public void setCircleId(long circleId) {
 		this.circleId = circleId;
 	}
-	public JSONArray getServices() {
+	public String getServices() {
 		return services;
 	}
-	public void setServices(JSONArray services) {
+	public void setServices(String services) {
 		this.services = services;
 	}
 }

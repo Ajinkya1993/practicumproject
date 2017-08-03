@@ -41,12 +41,13 @@ public class ManageServices {
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
 		String curr_services = dao.getServicesSubscribed(session,bean);
-		StringBuffer new_services = new StringBuffer();
-		for (int i=0; i<input.getServices().length(); i++) {
-			new_services.append(input.getServices().getString(i));
-			if (i != (input.getServices().length()-1)) {
-				new_services.append("->");
-			}
+		
+		StringBuffer new_services = new StringBuffer(input.getServices());
+		if (new_services == null || new_services.length() == 0) {
+			output.setSuccess(true);
+			output.setMessage("No services provided to subscribe to. Done.");
+			output.setSubscribedServices(curr_services);
+			return output;
 		}
 		try {
 		
@@ -60,7 +61,7 @@ public class ManageServices {
 				}
 				output.setSuccess(true);
 				output.setMessage("successfully subscribed to services");
-				output.setSubscribedServices(curr_services);
+				output.setSubscribedServices(new_services.toString());
 				return output;
 			} else {
 				StringBuffer more_services = new StringBuffer();
@@ -101,8 +102,15 @@ public class ManageServices {
 		String curr_services = dao.getServicesSubscribed(session,bean);
 		StringBuffer new_services = new StringBuffer();
 		Set<String> deletionSet = new HashSet<String>();
-		for (int i=0; i<input.getServices().length(); i++) {
-			deletionSet.add(input.getServices().getString(i));
+		if (input.getServices() == null || input.getServices().length() == 0) {
+			output.setSuccess(true);
+			output.setMessage("If Circle ID is valid -> successfully deleted services");
+			output.setSubscribedServices(curr_services);
+			return output;
+		}
+		String[] toDelete = input.getServices().split("->");
+		for (int i=0; i<toDelete.length; i++) {
+			deletionSet.add(toDelete[i]);
 		}
 		try {
 			if (curr_services == null || curr_services.length() == 0) {
@@ -116,10 +124,14 @@ public class ManageServices {
 				if (!deletionSet.contains(serviceArray[i])) {
 					new_services.append(serviceArray[i]);
 					deletionSet.add(serviceArray[i]);
+					if (i != serviceArray.length-1) {
+						new_services.append("->");
+					}
 				}
-				if (i != serviceArray.length-1) {
-					new_services.append("->");
-				}
+				
+			}
+			if (new_services.length() > 0 && new_services.charAt(new_services.length()-1) == '>') {
+				new_services.delete(new_services.length()-2, new_services.length());
 			}
 			bean.setServicesSubscribed(new_services.toString());
 			boolean status = dao.updateServicesSubscribed(session, bean);
