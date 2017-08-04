@@ -57,9 +57,11 @@ public class GetUsersOfACircle {
                     output.setMessage("User not in caregiver info table!");
                     output.setSuccess(false);
                 } else {
+                	obj.setEmail(email);
                     obj.setFirstName(infoBean.getFirstName());
                     obj.setMiddleName(infoBean.getMiddleName());
                     obj.setLastName(infoBean.getLastName());
+                    obj.setPhoneNumber(infoBean.getPhoneNumber());
                 }
                 userList.add(obj);
             }

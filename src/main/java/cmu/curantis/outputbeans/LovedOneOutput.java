@@ -13,10 +13,10 @@ public class LovedOneOutput {
     private String relationshipNature;
     private String georelationship;
     private String triggerEvent;
-    private String lovedoneaddr;
-    private String lovedoneURL;
-    private String lovedoneFname;
-    private String lovedoneLname;
+    private String lovedoneAddress;
+    private String pictureUrl;
+    private String lovedone_firstName;
+    private String lovedone_LastName;
 	
 	public boolean isSuccess() {
 		return success;
@@ -36,20 +36,20 @@ public class LovedOneOutput {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getLovedoneFname() {
-		return lovedoneFname;
+	public String getLovedone_firstName() {
+		return lovedone_firstName;
 	}
 
-	public void setLovedoneFname(String lovedoneFname) {
-		this.lovedoneFname = lovedoneFname;
-	}
-	
-	public String getLovedoneLname() {
-		return lovedoneLname;
+	public void setLovedone_firstName(String lovedone_firstName) {
+		this.lovedone_firstName = lovedone_firstName;
 	}
 
-	public void setLovedoneLname(String lovedoneLname) {
-		this.lovedoneLname = lovedoneLname;
+	public String getLovedone_LastName() {
+		return lovedone_LastName;
+	}
+
+	public void setLovedone_LastName(String lovedone_LastName) {
+		this.lovedone_LastName = lovedone_LastName;
 	}
 	public String getSubscribedServices() {
 		return this.subscribedServices;
@@ -97,20 +97,20 @@ public class LovedOneOutput {
         triggerEvent = triggereve;
     }
     
-    public String getLovedAddress() {
-        return lovedoneaddr;
-    }
-    
-    public void setLovedAddress(String addr) {
-    	lovedoneaddr = addr;
-    }
+	public String getLovedoneAddress() {
+		return lovedoneAddress;
+	}
+
+	public void setLovedoneAddress(String lovedoneAddress) {
+		this.lovedoneAddress = lovedoneAddress;
+	}
     
     //Document URL
-    public String getLovedURL() {
-        return lovedoneURL;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
     
-    public void setLovedURL(String lvdurl) {
-    	lovedoneURL = lvdurl;
+    public void setPictureUrl(String lvdurl) {
+    	pictureUrl = lvdurl;
     }
 }

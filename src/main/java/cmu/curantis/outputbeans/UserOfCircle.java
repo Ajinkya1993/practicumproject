@@ -7,6 +7,8 @@ public class UserOfCircle {
     private String email;
     private String firstName;
     private String middleName;
+    private String lastName;
+    private String phoneNumber;
     public String getEmail() {
         return email;
     }
@@ -31,5 +33,10 @@ public class UserOfCircle {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    private String lastName;
+    public String getPhoneNumber() {
+		return phoneNumber;	
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;	
+	}
 }
