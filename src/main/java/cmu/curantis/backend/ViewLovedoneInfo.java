@@ -53,8 +53,8 @@ public class ViewLovedoneInfo {
         output.setLovedURL(csubs.getPictureUrl());
         output.setSubscribedServices(csubs.getServicesSubscribed());
         output.setLovedAddress(csubs.getLovedoneAddress());
-        output.setLovedoneFname(csubs.getLovedoneFname());
-        output.setLovedoneLname(csubs.getLovedoneLname());
+        output.setLovedoneFname(csubs.getLovedone_firstName());
+        output.setLovedoneLname(csubs.getLovedone_LastName());
 	   //error cases would be checked while filling in loved one's information
 	    output.setMessage("Viewing LovedOne Info successfully!");
 	    output.setSuccess(true);

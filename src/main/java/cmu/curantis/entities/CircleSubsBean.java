@@ -42,12 +42,6 @@ public class CircleSubsBean {
 	@Column(name = "lovedone_address")
 	private String lovedoneAddress;
 	
-	@Column(name = "lovedone_fname")
-    private String lovedoneFname;
-	
-	@Column(name = "lovedone_lname")
-    private String lovedoneLname;
-	
 	@Column(name = "card_number")
 	private String cardNumber;
 	
@@ -94,21 +88,6 @@ public class CircleSubsBean {
 		this.servicesSubscribed = servicesSubscribed;
 	}
 
-	public String getLovedoneFname() {
-		return lovedoneFname;
-	}
-
-	public void setLovedoneFname(String lovedoneFname) {
-		this.lovedoneFname = lovedoneFname;
-	}
-	
-	public String getLovedoneLname() {
-		return lovedoneLname;
-	}
-
-	public void setLovedoneLname(String lovedoneLname) {
-		this.lovedoneLname = lovedoneLname;
-	}
 	
 	public String getLovedoneAddress() {
 		return lovedoneAddress;
