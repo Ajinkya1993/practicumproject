@@ -15,14 +15,15 @@ import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverCircleBean;
 import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.inputbeans.CircleInput;
+import cmu.curantis.inputbeans.LovedOneInput;
 import cmu.curantis.outputbeans.LovedOneOutput;
 
-@Path("/viewlovedoneinfo")
-public class ViewLovedoneInfo {
+@Path("/updatelovedoneinfoDB")
+public class UpdateLovedOneInfoDB {
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-	public LovedOneOutput viewLovedoneInfo(CircleInput input) {
+	public LovedOneOutput viewLovedoneInfo(LovedOneInput input) {
 		System.out.println("Fist line debug: email and circle name "+input.getEmail() +" " +input.getCircleName());
 	    LovedOneOutput output = new LovedOneOutput();
 	    if (input.getCircleName() == null || input.getCircleName().length() == 0
@@ -33,8 +34,7 @@ public class ViewLovedoneInfo {
 	    }
 	    String email = input.getEmail();
 	    String circleName = input.getCircleName();
-	    Long circleId;
-	    //Long circleId = input.getCircleId();
+	    Long circleId = input.getCircleId();
 	    
 	    CaregiverCircleDAO caregiverCircleDAO = new CaregiverCircleDAO();
 	    CircleSubsDAO circleSubsDAO = new CircleSubsDAO();
@@ -45,31 +45,31 @@ public class ViewLovedoneInfo {
 	   //or can be email and id
 	    CaregiverCircleBean caregiverCircle = caregiverCircleDAO.getByEmailAndName(session, email, circleName);
 	    CircleSubsBean csubstemp = new CircleSubsBean();
-	    circleId = caregiverCircle.getIdentity().getCircleID();
 	    csubstemp.setCircleId(circleId);
-	    //CircleSubsBean csubs = circleSubsDAO.getCircleSubs(session, csubstemp);
-	    CircleSubsBean csubs = new CircleSubsBean();
-        output.setCircleId(circleId);
-        System.out.println("The circleId IS COMING OUT TO BE "+circleId);
-        output.setCirclename(circleName);
-        output.setGeorelationship(caregiverCircle.getGeorelationship());
-        output.setPrimaryCaregiver(caregiverCircle.getPrimaryCaregiver());
-        output.setRelationshipNature(caregiverCircle.getRelationshipNature());
-       output.setTriggerEvent(caregiverCircle.getTriggerEvent());
-       output.setCircleId(caregiverCircle.getIdentity().getCircleID());
-        output.setPictureUrl("abcdefg");
-        output.setSubscribedServices("Housing Service > Ancillary Service");
-        output.setLovedoneAddress("123 Maryland Street");
-        output.setLovedone_firstName("Johnny");
-        output.setLovedone_LastName("Bravo");
-        /*
-        output.setLovedURL(csubs.getPictureUrl());
-        output.setSubscribedServices(csubs.getServicesSubscribed());
-        output.setLovedAddress(csubs.getLovedoneAddress());
-        output.setLovedoneFname(csubs.getLovedone_firstName());
-        output.setLovedoneLname(csubs.getLovedone_LastName());*/
-	   //error cases would be checked while filling in loved one's information
-	    output.setMessage("Viewing LovedOne Info successfully!");
+	    CircleSubsBean csubs = circleSubsDAO.getCircleSubs(session, csubstemp);
+	   // CircleSubsBean csubs = new CircleSubsBean();
+	    caregiverCircle.setGeorelationship(input.getGeoRel());
+	    caregiverCircle.setPrimaryCaregiver(true);
+	    caregiverCircle.setRelationshipNature(input.getNatureOfRel());
+	    caregiverCircle.setTriggerEvent(input.getTriggerEvent());
+	    csubs.setPictureUrl("abcdefg");
+	    csubs.setLovedoneAddress(input.getLovedoneAddress());
+	    csubs.setLovedone_firstName(input.getLovedone_firstName());
+	    csubs.setLovedone_LastName(input.getLovedone_LastName());
+        Boolean status = caregiverCircleDAO.update(session, caregiverCircle);
+        if(status == false) {
+        	output.setMessage("Could not update LovedOne Info successfully!");
+    	    output.setSuccess(true);
+    	    return output;
+        } 
+        Boolean status_subs = circleSubsDAO.updateCircleSubs(session, csubs);
+        if(status_subs == false) {
+        	output.setMessage("Could not update LovedOne Info successfully!");
+    	    output.setSuccess(true);
+    	    return output;
+        } 
+        
+	    output.setMessage("Updated LovedOne Info successfully!");
 	    output.setSuccess(true);	   
 		
 		tx.commit();
