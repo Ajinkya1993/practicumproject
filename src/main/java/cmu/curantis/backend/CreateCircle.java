@@ -13,7 +13,9 @@ import cmu.curantis.dao.CaregiverCircleDAO;
 import cmu.curantis.dao.CircleSubsDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverCircleBean;
+import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.inputbeans.CircleInput;
+import cmu.curantis.inputbeans.LovedOneInput;
 import cmu.curantis.outputbeans.CircleOutput;
 
 @Path("/createcircle")
@@ -21,7 +23,7 @@ public class CreateCircle {
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-	public CircleOutput createCircle(CircleInput input) {
+	public CircleOutput createCircle(LovedOneInput input) {
 	    CircleOutput output = new CircleOutput();
 	    if (input.getCircleName() == null || input.getCircleName().length() == 0
 	            || input.getEmail() == null || input.getEmail().length() == 0) {
@@ -43,8 +45,13 @@ public class CreateCircle {
 	    }
 	   
 	    CaregiverCircleBean caregiverCircle = new CaregiverCircleBean();
+	    CircleSubsBean subsb =new CircleSubsBean();
+	    subsb.setLovedone_firstName(input.getLovedone_firstName());
+	    subsb.setLovedone_LastName(input.getLovedone_LastName());
+	    subsb.setLovedoneAddress(input.getLovedoneAddress());
+	    subsb.setPictureUrl(input.getPictureUrl());
 	    
-	    long circleId = circleSubsDAO.addCircleSubs(session, input.getCircleName());
+	    long circleId = circleSubsDAO.addCircleSubsLoved(session, subsb);
 	    caregiverCircle.setIdentity();
 	    caregiverCircle.getIdentity().setCircleID(circleId);
 	    caregiverCircle.getIdentity().setEmail(input.getEmail());
@@ -69,3 +76,7 @@ public class CreateCircle {
 		return output;
 	}
 }
+
+
+
+

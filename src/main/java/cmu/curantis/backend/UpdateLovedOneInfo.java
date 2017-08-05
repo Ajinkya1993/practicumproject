@@ -17,8 +17,8 @@ import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.inputbeans.CircleInput;
 import cmu.curantis.outputbeans.LovedOneOutput;
 
-@Path("/viewlovedoneinfo")
-public class ViewLovedoneInfo {
+@Path("/updatelovedoneinfo")
+public class UpdateLovedOneInfo {
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -33,8 +33,7 @@ public class ViewLovedoneInfo {
 	    }
 	    String email = input.getEmail();
 	    String circleName = input.getCircleName();
-	    Long circleId;
-	    //Long circleId = input.getCircleId();
+	    Long circleId = input.getCircleId();
 	    
 	    CaregiverCircleDAO caregiverCircleDAO = new CaregiverCircleDAO();
 	    CircleSubsDAO circleSubsDAO = new CircleSubsDAO();
@@ -45,12 +44,10 @@ public class ViewLovedoneInfo {
 	   //or can be email and id
 	    CaregiverCircleBean caregiverCircle = caregiverCircleDAO.getByEmailAndName(session, email, circleName);
 	    CircleSubsBean csubstemp = new CircleSubsBean();
-	    circleId = caregiverCircle.getIdentity().getCircleID();
 	    csubstemp.setCircleId(circleId);
 	    //CircleSubsBean csubs = circleSubsDAO.getCircleSubs(session, csubstemp);
 	    CircleSubsBean csubs = new CircleSubsBean();
         output.setCircleId(circleId);
-        System.out.println("The circleId IS COMING OUT TO BE "+circleId);
         output.setCirclename(circleName);
         output.setGeorelationship(caregiverCircle.getGeorelationship());
         output.setPrimaryCaregiver(caregiverCircle.getPrimaryCaregiver());
