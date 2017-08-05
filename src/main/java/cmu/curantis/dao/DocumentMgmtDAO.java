@@ -89,6 +89,33 @@ public class DocumentMgmtDAO {
         }
         return result;
     }
+	/*
+	 * Returns the list of documents for the particular mainkey
+	 * the list is consists of docnattr objects -> docattr -> (docname, docurl, accessLevel)
+	 * please see the nested class docattr below for more info on the return type
+	 * returns Null when there are no entries
+	 */
+	public List<Docattr> getListOfDocs(Session session, String mainkey) {
+		Query query = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey");
+        query.setString("mainkey", mainkey);
+        List<DocumentMgmtBean> list = query.list();
+        if(list == null || list.size() == 0) {
+            return null;
+        }
+        List<Docattr> result = new ArrayList<Docattr>();
+        for (DocumentMgmtBean bean: list) {
+        	System.out.println("in DAO: " + bean.getIdentity().getDocumentName());
+        	Query query2 = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey AND documentName = :docname");
+            String docname = bean.getIdentity().getDocumentName();
+        	query2.setString("mainkey", mainkey);
+            query2.setString("docname",docname);
+            List<DocumentMgmtBean> list2 =  query2.list();
+    		Boolean accessLevel = list2.get(0).getAccessLevel();
+        	result.add(new Docattr(bean.getIdentity().getDocumentName(), bean.getDocumentUrl(), accessLevel));
+      
+        }
+        return result;
+    }
 	
 	/*
 	 * checks the access level for a particular caregiver for the specific docname
@@ -235,6 +262,31 @@ public class DocumentMgmtDAO {
 		
 		public String getDocurl () {
 			return this.docurl;
+		}
+	}
+	
+	@XmlRootElement
+	public class Docattr {
+		public String docname;
+		public String docurl;
+		public Boolean accessLevel;
+		
+		public Docattr (String dname, String durl, Boolean aLevel) {
+			docname = dname;
+			docurl = durl;
+			accessLevel = aLevel;
+		}
+		
+		public String getDocname () {
+			return this.docname;
+		}
+		
+		public String getDocurl () {
+			return this.docurl;
+		}
+		
+		public Boolean getDocAccessLevel () {
+			return this.accessLevel;
 		}
 	}
 }

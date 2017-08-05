@@ -11,15 +11,15 @@ import org.hibernate.Transaction;
 import cmu.curantis.dao.DocumentMgmtDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.inputbeans.DocumentInput;
-import cmu.curantis.outputbeans.DocumentOutput;
+import cmu.curantis.outputbeans.ListDocumentsOutput;
 
 @Path("/listDocuments")
 public class ListDocuments {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public DocumentOutput listDocuments(DocumentInput input) {
-		DocumentOutput output = new DocumentOutput();
+	public ListDocumentsOutput listDocuments(DocumentInput input) {
+		ListDocumentsOutput output = new ListDocumentsOutput();
 		
 		if (input.getEmail() == null || input.getEmail().length() == 0 || input.getCircleId() == null || input.getCircleId() == 0 || input.getService() == 0) {
 			output.setMessage("Missing parameters!");
@@ -37,7 +37,9 @@ public class ListDocuments {
 		DocumentMgmtDAO dao = new DocumentMgmtDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
-		List<DocumentMgmtDAO.Docnest> result = dao.getByMainkey(session, mainKey);
+		List<DocumentMgmtDAO.Docattr> result = dao.getListOfDocs(session, mainKey);
+		
+		
 		tx.commit();
 		if (result == null) {
 			output.setMessage("No documents available!");
