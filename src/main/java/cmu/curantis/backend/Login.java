@@ -47,6 +47,7 @@ public class Login {
         	output.setLastName(caregiver.getLastName());
         	output.setMessage("Login success!");
         	output.setSuccess(true);
+        	output.setEmail(caregiver.getEmail());
         }
         tx.commit();
         session.close();

@@ -45,6 +45,7 @@ public class Register {
         	output.setFirstName(input.getFirstName());
         	output.setLastName(input.getLastName());
         	output.setMessage("Register success!");
+        	output.setEmail(input.getEmail());
         	output.setSuccess(true);
         } else {
         	output.setMessage("Account already exist!");
