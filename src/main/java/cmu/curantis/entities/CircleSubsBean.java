@@ -88,6 +88,7 @@ public class CircleSubsBean {
 		this.servicesSubscribed = servicesSubscribed;
 	}
 
+	
 	public String getLovedoneAddress() {
 		return lovedoneAddress;
 	}
