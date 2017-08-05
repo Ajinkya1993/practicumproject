@@ -26,6 +26,15 @@ public class CircleSubsDAO {
 		return result.get(0).getCircleId();        
     }
 	
+	public long addCircleSubsLoved(Session session, CircleSubsBean bean){
+		session.save(bean);
+		List<CircleSubsBean> circles = session.createQuery("from CircleSubsBean ORDER BY circle_id DESC").setMaxResults(1).list();
+		if (circles == null || circles.size() == 0) {
+			return -1;
+		}
+		return circles.get(0).getCircleId();        
+    }
+	
 	 public CircleSubsBean getCircleSubs(Session session, CircleSubsBean bean){
         Query query = session.createQuery("from CircleSubsBean where circle_id = :circleid");
 	    query.setString("circleid", String.valueOf(bean.getCircleId()));

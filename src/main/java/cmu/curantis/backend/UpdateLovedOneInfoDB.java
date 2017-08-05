@@ -18,13 +18,13 @@ import cmu.curantis.inputbeans.CircleInput;
 import cmu.curantis.inputbeans.LovedOneInput;
 import cmu.curantis.outputbeans.LovedOneOutput;
 
-@Path("/updatelovedoneinfoDB")
+@Path("/updatelovedoneinfodb")
 public class UpdateLovedOneInfoDB {
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 	public LovedOneOutput viewLovedoneInfo(LovedOneInput input) {
-		System.out.println("Fist line debug: email and circle name "+input.getEmail() +" " +input.getCircleName());
+		System.out.println("updatelovedoneinfoDB");
 	    LovedOneOutput output = new LovedOneOutput();
 	    if (input.getCircleName() == null || input.getCircleName().length() == 0
 	            || input.getEmail() == null || input.getEmail().length() == 0) {
@@ -35,6 +35,7 @@ public class UpdateLovedOneInfoDB {
 	    String email = input.getEmail();
 	    String circleName = input.getCircleName();
 	    Long circleId = input.getCircleId();
+	    System.out.println("In updatelovedoneinfoDB: Email, circleName and circleId is "+email + " " + circleName + " " + circleId);
 	    
 	    CaregiverCircleDAO caregiverCircleDAO = new CaregiverCircleDAO();
 	    CircleSubsDAO circleSubsDAO = new CircleSubsDAO();
@@ -52,6 +53,7 @@ public class UpdateLovedOneInfoDB {
 	    caregiverCircle.setPrimaryCaregiver(true);
 	    caregiverCircle.setRelationshipNature(input.getNatureOfRel());
 	    caregiverCircle.setTriggerEvent(input.getTriggerEvent());
+	    System.out.println("Checking output before querying DB "+input.getGeoRel() + " " + input.getNatureOfRel() + " " + input.getTriggerEvent());
 	    csubs.setPictureUrl("abcdefg");
 	    csubs.setLovedoneAddress(input.getLovedoneAddress());
 	    csubs.setLovedone_firstName(input.getLovedone_firstName());
