@@ -44,9 +44,8 @@ public class UpdateLovedOneInfo {
 	   //or can be email and id
 	    CaregiverCircleBean caregiverCircle = caregiverCircleDAO.getByEmailAndName(session, email, circleName);
 	    CircleSubsBean csubstemp = new CircleSubsBean();
-	    csubstemp.setCircleId(circleId);
-	    //CircleSubsBean csubs = circleSubsDAO.getCircleSubs(session, csubstemp);
-	    CircleSubsBean csubs = new CircleSubsBean();
+	    csubstemp.setCircleId(caregiverCircle.getIdentity().getCircleID());
+	    CircleSubsBean cic_op = circleSubsDAO.getCircleSubs(session, csubstemp);
         output.setCircleId(circleId);
         output.setCirclename(circleName);
         output.setGeorelationship(caregiverCircle.getGeorelationship());
@@ -54,11 +53,28 @@ public class UpdateLovedOneInfo {
         output.setRelationshipNature(caregiverCircle.getRelationshipNature());
        output.setTriggerEvent(caregiverCircle.getTriggerEvent());
        output.setCircleId(caregiverCircle.getIdentity().getCircleID());
+       if(cic_op == null || cic_op.getLovedoneAddress() == null) {
+           output.setLovedoneAddress("123 Maryland Street");
+           } else {
+           	output.setLovedoneAddress(cic_op.getLovedoneAddress());	
+           }
+           if(cic_op == null || cic_op.getLovedone_firstName() == null) {
+           output.setLovedone_firstName("Johnny");
+           } else {
+           	output.setLovedone_firstName(cic_op.getLovedone_firstName());	
+           }
+           if(cic_op == null || cic_op.getLovedone_LastName() == null) {
+           output.setLovedone_LastName("Bravo");
+           } else {
+           	output.setLovedone_LastName(cic_op.getLovedone_LastName());
+           }
+           if(cic_op == null || cic_op.getServicesSubscribed() == null) {
+               output.setSubscribedServices("Housing Service > Ancillary Service");
+               } else {
+               	output.setSubscribedServices(cic_op.getServicesSubscribed());
+               }
         output.setPictureUrl("abcdefg");
-        output.setSubscribedServices("Housing Service > Ancillary Service");
-        output.setLovedoneAddress("123 Maryland Street");
-        output.setLovedone_firstName("Johnny");
-        output.setLovedone_LastName("Bravo");
+
         /*
         output.setLovedURL(csubs.getPictureUrl());
         output.setSubscribedServices(csubs.getServicesSubscribed());

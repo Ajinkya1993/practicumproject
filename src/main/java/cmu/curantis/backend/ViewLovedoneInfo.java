@@ -49,6 +49,7 @@ public class ViewLovedoneInfo {
 	    csubstemp.setCircleId(circleId);
 	    //CircleSubsBean csubs = circleSubsDAO.getCircleSubs(session, csubstemp);
 	    CircleSubsBean csubs = new CircleSubsBean();
+	    csubs.setCircleId(circleId);
         output.setCircleId(circleId);
         System.out.println("The circleId IS COMING OUT TO BE "+circleId);
         output.setCirclename(circleName);
@@ -59,9 +60,22 @@ public class ViewLovedoneInfo {
        output.setCircleId(caregiverCircle.getIdentity().getCircleID());
         output.setPictureUrl("abcdefg");
         output.setSubscribedServices("Housing Service > Ancillary Service");
+        CircleSubsBean cic_op = circleSubsDAO.getCircleSubs(session, csubs);
+        if(cic_op == null || cic_op.getLovedoneAddress() == null) {
         output.setLovedoneAddress("123 Maryland Street");
+        } else {
+        	output.setLovedoneAddress(cic_op.getLovedoneAddress());	
+        }
+        if(cic_op == null || cic_op.getLovedone_firstName() == null) {
         output.setLovedone_firstName("Johnny");
+        } else {
+        	output.setLovedone_firstName(cic_op.getLovedone_firstName());	
+        }
+        if(cic_op == null || cic_op.getLovedone_LastName() == null) {
         output.setLovedone_LastName("Bravo");
+        } else {
+        	output.setLovedone_LastName(cic_op.getLovedone_LastName());
+        }
         /*
         output.setLovedURL(csubs.getPictureUrl());
         output.setSubscribedServices(csubs.getServicesSubscribed());
