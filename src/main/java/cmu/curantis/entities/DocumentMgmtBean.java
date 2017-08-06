@@ -38,8 +38,7 @@ public class DocumentMgmtBean {
          */
         @Column(name = "documentName")
         private String documentName;
-        
-       
+                
         public String getDocumentName() {
             return documentName;
         }
