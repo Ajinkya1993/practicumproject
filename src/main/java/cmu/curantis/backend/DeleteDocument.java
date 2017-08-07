@@ -16,7 +16,6 @@ import cmu.curantis.dao.CaregiverCircleDAO;
 import cmu.curantis.dao.DocumentMgmtDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverCircleBean;
-import cmu.curantis.entities.CaregiverCircleBean.Identity;
 import cmu.curantis.entities.DocumentMgmtBean;
 import cmu.curantis.inputbeans.DocumentInput;
 import cmu.curantis.outputbeans.DocumentOutput;
