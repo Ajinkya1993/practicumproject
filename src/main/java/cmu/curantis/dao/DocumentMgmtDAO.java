@@ -229,6 +229,14 @@ public class DocumentMgmtDAO {
 			return false;
 		}
 		
+		//if mainkeydoes not exist in db
+		Query query_init = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey");
+		query_init.setString("mainkey", mainkey);
+		List<DocumentMgmtBean> list_init =  query_init.list();
+		if(list_init == null) {
+			return true;
+		}
+		
 		Query query = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey AND documentName = :docname");
         query.setString("mainkey", mainkey);
         query.setString("docname",docname);
