@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.json.JSONException;
 
 import cmu.curantis.dao.CaregiverCircleDAO;
 import cmu.curantis.dao.DocumentMgmtDAO;
@@ -37,11 +38,12 @@ public class DeleteDocument {
 		
 		
 		//check if its a primary caregiver
-		if(input.getAccessLevel() == false) {
+		//this is when it is provided from frontend else will be checked in DAO
+		/*if(input.getAccessLevel() == false) {
 			output.setSuccess(false);
 			output.setMessage("You do not have the access level to delete the document! Please contact your circle admin!");
 	    	return output;
-		}	
+		}*/	
 		
 		
 		CaregiverCircleDAO cgcirc = new CaregiverCircleDAO();
@@ -83,6 +85,28 @@ public class DeleteDocument {
 			docmgmt.getIdentity().setMainkey(mainkey);
 			docmgmt.setAccessLevel(true);
 			docmgmt.setDocumentUrl(input.getDocumentUrl());
+			//debug statements for help
+		/*	try {
+				System.out.println("In Document check access level : success DAO "+docdao.checkAccessLevel(session, docmgmt).get("success"));
+				System.out.println("In Document check access level: access level DAO "+docdao.checkAccessLevel(session, docmgmt).get("accessLevel"));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}*/
+			try {
+				if(docdao.checkAccessLevel(session, docmgmt).getBoolean("success") != true) {
+					output.setSuccess(false);
+					output.setMessage("The document does not exist");
+			    	return output;
+				}
+				if(docdao.checkAccessLevel(session, docmgmt).getBoolean("accessLevel") != true) {
+					output.setSuccess(false);
+					output.setMessage("You do not have the access level to delete the document! Please contact your circle admin!");
+			    	return output;	
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Boolean result = docdao.deleteDocument(session, docmgmt);
 			if (result == false) {
 				output.setMessage("Document could not be deleted!");
