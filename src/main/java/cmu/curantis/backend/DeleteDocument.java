@@ -66,7 +66,6 @@ public class DeleteDocument {
         Transaction tx = session.beginTransaction();
 			//iterate over users of the circle
 		for(CaregiverCircleBean cub: lst) {
-			//if not primary caregiver then goto next
 
 			//Generate main key
 			long circleid = cub.getIdentity().getCircleID();
