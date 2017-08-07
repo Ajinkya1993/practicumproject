@@ -31,7 +31,7 @@ public class DeleteDocument {
 		DocumentOutput output = new DocumentOutput();
 		
 		if (input.getEmail() == null || input.getEmail().length() == 0 || input.getCircleId() == null || input.getCircleId() == 0 || input.getService() <= 0
-				|| input.getDocumentUrl() == null || input.getDocumentUrl().length() == 0 || input.getDocumentName() == null || input.getDocumentName().length() == 0) {
+				|| input.getDocumentName() == null || input.getDocumentName().length() == 0) {
 			output.setSuccess(false);
 			output.setMessage("Missing parameters!");
 	    	return output;
