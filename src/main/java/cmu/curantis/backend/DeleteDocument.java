@@ -67,9 +67,7 @@ public class DeleteDocument {
 			//iterate over users of the circle
 		for(CaregiverCircleBean cub: lst) {
 			//if not primary caregiver then goto next
-			if(cub.getPrimaryCaregiver() == false) {
-				continue;
-			}
+
 			//Generate main key
 			long circleid = cub.getIdentity().getCircleID();
 			String email = cub.getIdentity().getEmail();
