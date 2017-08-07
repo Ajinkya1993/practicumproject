@@ -53,7 +53,7 @@ public class ListDocPeople {
 			}
 		} catch (JSONException e) {
 			output.setSuccess(false);
-			output.setMessage(e.getMessage());
+			output.setMessage("No such Document!");
 			tx.commit();
 	        session.close();
 	        return output;

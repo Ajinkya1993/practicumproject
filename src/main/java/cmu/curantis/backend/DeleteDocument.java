@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import cmu.curantis.dao.CaregiverCircleDAO;
 import cmu.curantis.dao.DocumentMgmtDAO;
@@ -36,34 +37,39 @@ public class DeleteDocument {
 	    	return output;
 		}
 		
-		
-		//check if its a primary caregiver
-		//this is when it is provided from frontend else will be checked in DAO
-		/*if(input.getAccessLevel() == false) {
-			output.setSuccess(false);
-			output.setMessage("You do not have the access level to delete the document! Please contact your circle admin!");
-	    	return output;
-		}*/	
-		
-		
 		CaregiverCircleDAO cgcirc = new CaregiverCircleDAO();
 		//DAO
 		DocumentMgmtDAO docdao = new DocumentMgmtDAO();
 			
 		//If delete caergiver from circle is added later, dividing into two transactions would be better
 			/* Begin transaction */
-		Session session_init = SessionUtil.getSession();        
-        Transaction tx_init = session_init.beginTransaction();
-        
-        	//method to get the list of users of a circle
-		List<CaregiverCircleBean> lst = cgcirc.getByCircleId(session_init, input.getCircleId());
-		tx_init.commit();
-		session_init.close();
-			/* End transaction */
-		
-			/* Begin Transaction */
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
+        
+        DocumentMgmtBean curUser = new DocumentMgmtBean();
+		curUser.setIdentity();
+		curUser.getIdentity().setDocumentName(input.getDocumentName());
+		String key = input.getCircleId() + ">" + input.getEmail() + ">" + input.getService();
+		curUser.getIdentity().setMainkey(key);
+		try {
+			JSONObject res = docdao.checkAccessLevel(session, curUser);
+			if (!res.getBoolean("success") || !res.getBoolean("accessLevel")) {
+				output.setSuccess(false);
+				output.setMessage("Sorry, you don't have the permission to view access levels");
+				tx.commit();
+		        session.close();
+		        return output;
+			}
+		} catch (JSONException e) {
+			output.setSuccess(false);
+			output.setMessage("No such document!");
+			tx.commit();
+	        session.close();
+	        return output;
+		}
+        
+        	//method to get the list of users of a circle
+		List<CaregiverCircleBean> lst = cgcirc.getByCircleId(session, input.getCircleId());
 			//iterate over users of the circle
 		for(CaregiverCircleBean cub: lst) {
 
@@ -84,8 +90,8 @@ public class DeleteDocument {
 			docmgmt.setIdentity();
 			docmgmt.getIdentity().setDocumentName(input.getDocumentName());
 			docmgmt.getIdentity().setMainkey(mainkey);
-			docmgmt.setAccessLevel(true);
-			docmgmt.setDocumentUrl(input.getDocumentUrl());
+			//docmgmt.setAccessLevel(true);
+			//docmgmt.setDocumentUrl(input.getDocumentUrl());
 			//debug statements for help
 		/*	try {
 				System.out.println("In Document check access level : success DAO "+docdao.checkAccessLevel(session, docmgmt).get("success"));
@@ -93,37 +99,14 @@ public class DeleteDocument {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}*/
-			if(docdao.getRow(session, docmgmt) == false) {
-				continue;
-			}
-			try {
-				if(docdao.checkAccessLevel(session, docmgmt).getBoolean("success") != true) {
-					output.setSuccess(false);
-					output.setMessage("The document does not exist");
-			    	return output;
-				}
-				if(docdao.checkAccessLevel(session, docmgmt).getBoolean("accessLevel") != true) {
-					output.setSuccess(false);
-					output.setMessage("You do not have the access level to delete the document! Please contact your circle admin!");
-			    	return output;	
-				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Boolean result = docdao.deleteDocument(session, docmgmt);
-			if (result == false) {
-				output.setMessage("Document could not be deleted!");
-				output.setSuccess(false);
-				return output;
-			}
+			docdao.deleteDocument(session, docmgmt);
 		} 
         tx.commit();
+        session.close();
 			/* End transaction */
         
 		output.setSuccess(true);
 		output.setMessage("Deleted document!");
-        session.close();
         return output;
 	}
 }
