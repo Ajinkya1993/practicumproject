@@ -254,6 +254,23 @@ public class DocumentMgmtDAO {
         return true;
 	}
 	
+	public boolean getRow(Session session, DocumentMgmtBean dmb){
+		String mainkey = dmb.getIdentity().getMainkey();
+		
+		if (mainkey == null || mainkey.length() == 0) {
+			return false;
+		}
+		
+		//if mainkeydoes not exist in db
+		Query query_init = session.createQuery("FROM DocumentMgmtBean WHERE mainkey = :mainkey");
+		query_init.setString("mainkey", mainkey);
+		List<DocumentMgmtBean> list_init =  query_init.list();
+		if(list_init == null) {
+			return false;
+		}
+		return true;
+	}
+	
 	@XmlRootElement
 	public class Docnest {
 		public String docname;

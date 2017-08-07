@@ -93,6 +93,9 @@ public class DeleteDocument {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}*/
+			if(docdao.getRow(session, docmgmt) == false) {
+				continue;
+			}
 			try {
 				if(docdao.checkAccessLevel(session, docmgmt).getBoolean("success") != true) {
 					output.setSuccess(false);
