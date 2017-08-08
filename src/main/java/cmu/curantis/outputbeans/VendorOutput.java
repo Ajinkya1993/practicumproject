@@ -1,6 +1,7 @@
 package cmu.curantis.outputbeans;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,7 +12,7 @@ public class VendorOutput {
 	private boolean success;
 	private String message;
 	private List<VendorMgmtBean> list;
-	
+	private Set<String> set;
 	public boolean isSuccess() {
 		return success;
 	}
@@ -30,5 +31,11 @@ public class VendorOutput {
     }
     public void setList(List<VendorMgmtBean> list) {
         this.list = list;
+    }
+    public Set<String> getSet() {
+        return set;
+    }
+    public void setSet(Set<String> set) {
+        this.set = set;
     }
 }

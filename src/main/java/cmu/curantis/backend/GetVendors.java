@@ -1,6 +1,9 @@
 package cmu.curantis.backend;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -48,12 +51,17 @@ public class GetVendors {
 			vmbean.setIdentity();
 			vmbean.getIdentity().setCircleId(input.getCircleId());
 			List<VendorMgmtBean> lst = vendormgmtdao.getVendors(session, vmbean);
-			if (lst == null) {
+			Set<String> set = new HashSet<String>();
+			//may need to check for lower/upper case
+			for(VendorMgmtBean vb: lst) {
+				set.add(vb.getIdentity().getVendorName());
+			}
+			if (set == null || set.size() == 0) {
 				output.setMessage("Vendor does not exist!");
 				output.setSuccess(false);
 			} else {
 				output.setMessage("Vendor viewed successfully");
-				output.setList(lst);
+				output.setSet(set);
 				output.setSuccess(true);
 			}
 		tx.commit();

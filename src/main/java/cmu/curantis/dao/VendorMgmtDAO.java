@@ -127,6 +127,4 @@ public class VendorMgmtDAO {
         }
         return list;
     }
-	
-	
 }
