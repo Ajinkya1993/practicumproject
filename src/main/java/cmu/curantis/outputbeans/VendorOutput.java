@@ -13,6 +13,7 @@ public class VendorOutput {
 	private String message;
 	private List<VendorMgmtBean> list;
 	private Set<String> set;
+	private VendorMgmtBean vb;
 	public boolean isSuccess() {
 		return success;
 	}
@@ -38,4 +39,10 @@ public class VendorOutput {
     public void setSet(Set<String> set) {
         this.set = set;
     }
+	public void setBean(VendorMgmtBean vb) {
+		vb = this.vb;
+	}
+	public VendorMgmtBean getBean() {
+		return vb;
+	}
 }

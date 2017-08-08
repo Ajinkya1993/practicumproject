@@ -59,7 +59,7 @@ public class ViewLovedoneInfo {
        output.setTriggerEvent(caregiverCircle.getTriggerEvent());
        output.setCircleId(caregiverCircle.getIdentity().getCircleID());
         output.setPictureUrl("abcdefg");
-        output.setSubscribedServices("Housing Service > Ancillary Service");
+        //output.setSubscribedServices("Housing Service > Ancillary Service");
         CircleSubsBean cic_op = circleSubsDAO.getCircleSubs(session, csubs);
         if(cic_op == null || cic_op.getLovedoneAddress() == null) {
         output.setLovedoneAddress("123 Maryland Street");
@@ -76,6 +76,11 @@ public class ViewLovedoneInfo {
         } else {
         	output.setLovedone_LastName(cic_op.getLovedone_LastName());
         }
+        if(cic_op == null || cic_op.getServicesSubscribed() == null) {
+            output.setSubscribedServices("Housing Service > Ancillary Service");
+            } else {
+            	output.setSubscribedServices(cic_op.getServicesSubscribed());
+            }
         /*
         output.setLovedURL(csubs.getPictureUrl());
         output.setSubscribedServices(csubs.getServicesSubscribed());

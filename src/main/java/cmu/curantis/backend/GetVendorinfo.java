@@ -44,7 +44,6 @@ public class GetVendorinfo {
 		Transaction tx = session.beginTransaction();
 		
 			VendorMgmtBean vmbean = new VendorMgmtBean();
-			
 			vmbean.setIdentity();
 			vmbean.getIdentity().setCircleId(input.getCircleId());
 			vmbean.getIdentity().setVendorName(input.getVendorname());

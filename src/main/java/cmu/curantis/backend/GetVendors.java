@@ -27,7 +27,6 @@ import cmu.curantis.inputbeans.PaymentInput;
 import cmu.curantis.inputbeans.RegisterInput;
 import cmu.curantis.inputbeans.VendorInput;
 import cmu.curantis.outputbeans.LoginOutput;
-import cmu.curantis.outputbeans.PaymentOutput;
 import cmu.curantis.outputbeans.VendorOutput;
 
 @Path("/getvendorsofcircle")
