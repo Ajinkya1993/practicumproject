@@ -50,7 +50,7 @@ public class ListDocuments {
 		output.setMessage("Received list of documents!");
 		output.setSuccess(true);
 		output.setListofdocs(result);
-		output.setAccessLevel(true);
+		//output.setAccessLevel(true);
         session.close();
         return output;
 	}

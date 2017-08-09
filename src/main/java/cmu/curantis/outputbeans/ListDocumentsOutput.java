@@ -40,12 +40,12 @@ public class ListDocumentsOutput {
 		return this.message;
 	}
 	
-	public boolean getAccessLevel () {
+	/*public boolean getAccessLevel () {
 		return this.accessLevel;
 	}
 	
 	public void setAccessLevel (Boolean alevel) {
 		this.accessLevel = alevel;
-	}
+	}*/
 	
 }
