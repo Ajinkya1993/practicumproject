@@ -4,13 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
-
-import cmu.curantis.entities.CaregiverCircleBean.Identity;
 
 @Entity
 @Table(name="curated_senior_housing")
@@ -36,7 +32,6 @@ public class SeniorHousingCuratedBean {
 	    @Column(name = "state")
 	    private String state;
 	    
-	    @Id
 	    @Column(name = "zip")
 	    private String zip;
 	
