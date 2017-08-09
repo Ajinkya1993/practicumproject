@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class SeniorHousingCuratedBean {
 	
 	@Embeddable
-	public static class RowKey implements Serializable {
+	public static class Identity implements Serializable {
 	
 		private static final long serialVersionUID = 1L;
 		
@@ -227,14 +227,15 @@ public class SeniorHousingCuratedBean {
 		} 
 		
 	}
-	@EmbeddedId
-	private RowKey id;
 	
-	public RowKey getRowKeyy() {
-    	return id;
+	@EmbeddedId
+    private Identity primid;
+	
+	public Identity getIdentity() {
+    	return primid;
     }
     
-    public void setRowKey() {
-    	id = new RowKey();
+    public void setIdentity() {
+    	primid = new Identity();
     }
 }

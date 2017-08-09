@@ -14,10 +14,10 @@
   <mapping class="cmu.curantis.entities.Employee"/>
   <mapping class="cmu.curantis.entities.CaregiverCircleBean"/>
   <mapping class="cmu.curantis.entities.CaregiverInfoBean"/>
+  <mapping class="cmu.curantis.entities.SeniorHousingCuratedBean"/>
   <mapping class="cmu.curantis.entities.CircleSubsBean"/>
   <mapping class="cmu.curantis.entities.DocumentMgmtBean"/>
   <mapping class="cmu.curantis.entities.SeniorHousingCircleBean"/>
-  <mapping class="cmu.curantis.entities.SeniorHousingCuratedBean"/>
   <mapping class="cmu.curantis.entities.VendorMgmtBean"/>
  </session-factory>
 </hibernate-configuration>
