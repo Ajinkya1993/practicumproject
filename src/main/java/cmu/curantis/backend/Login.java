@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import cmu.curantis.dao.CaregiverInfoDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverInfoBean;
+import cmu.curantis.entities.SeniorHousingCuratedBean;
 import cmu.curantis.inputbeans.LoginInput;
 import cmu.curantis.outputbeans.LoginOutput;
 
@@ -34,6 +35,7 @@ public class Login {
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
         CaregiverInfoBean bean = new CaregiverInfoBean();
+        
         bean.setEmail(input.getEmail());
         CaregiverInfoBean caregiver = caregiverdao.getCaregiverInfo(session, bean);
         if (caregiver == null || !caregiver.getRegisteredStatus()) {
