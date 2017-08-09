@@ -53,7 +53,7 @@ public class ListDocPeople {
 			}
 		} catch (JSONException e) {
 			output.setSuccess(false);
-			output.setMessage("Error!");
+			output.setMessage("No such Document!");
 			tx.commit();
 	        session.close();
 	        return output;
@@ -77,11 +77,12 @@ public class ListDocPeople {
 					list.add(person);
 				}
 			} catch (JSONException e) {
-				output.setSuccess(false);
-				output.setMessage("Error!");
-				tx.commit();
-		        session.close();
-		        return output;
+				System.out.println("document not found for: " + mainKey);
+//				output.setSuccess(false);
+//				output.setMessage(e.getMessage());
+//				tx.commit();
+//		        session.close();
+//		        return output;
 			}
 		}
 		
