@@ -1,7 +1,6 @@
 package cmu.curantis.dao;
 
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -42,8 +41,10 @@ public class VendorMgmtDAO {
 	
 	
 	public Boolean update(Session session, VendorMgmtBean ub) {
+
 		long cicid = ub.getIdentity().getCircleId();
 		String vendorname = ub.getIdentity().getVendorName();
+		System.out.println("Circle ID and vendor name are: "+ cicid + " " + vendorname);
 		Query query = session.createQuery("from VendorMgmtBean where circleId = :circleId AND vendorName = :vendorName");
 		query.setLong("circleId", cicid);
 		query.setString("vendorName", vendorname);
@@ -53,6 +54,7 @@ public class VendorMgmtDAO {
 		}
 		for(int i = 0; i <list.size(); i++) {
 		VendorMgmtBean crcb = list.get(i);
+		System.out.println("Inside DAO method "+ ub.getVendorAccount() +  " " +  ub.getVendorAddress() + " " + ub.getVendorWebsite()+ " " + ub.getExpenses() + " " +  crcb.getIdentity().getMonth() + " " + ub.getIdentity().getCircleId());
 		//updation of circle name is included here and not in another method.
 		if(ub.getVendorAccount() == null || ub.getVendorAccount().length() == 0) {
 			ub.setVendorAccount(crcb.getVendorAccount());
@@ -62,6 +64,18 @@ public class VendorMgmtDAO {
 		}
 		if(ub.getVendorWebsite()== null || ub.getVendorWebsite().length() == 0) {
 			ub.setVendorWebsite(crcb.getVendorWebsite());
+		}
+		if(ub.getExpenses() <= 0) {
+			ub.setVendorWebsite(crcb.getVendorWebsite());
+		}
+		//if(ub.getIdentity().getMonth() <= 0 || ub.getIdentity().getMonth() > 12) {
+			ub.getIdentity().setMonth(crcb.getIdentity().getMonth());
+		//}
+		if(ub.getIdentity().getCircleId() <= 0) {
+			ub.getIdentity().setCircleId(crcb.getIdentity().getCircleId());
+		}
+		if(ub.getIdentity().getVendorName() == null || ub.getIdentity().getVendorName().length() == 0) {
+			ub.getIdentity().setVendorName(crcb.getIdentity().getVendorName());
 		}
 		VendorMgmtBean mybean = (VendorMgmtBean)session.merge(ub);
 		session.update(mybean);

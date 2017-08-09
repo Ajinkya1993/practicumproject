@@ -9,20 +9,10 @@ import javax.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import cmu.curantis.dao.CaregiverCircleDAO;
-import cmu.curantis.dao.CaregiverInfoDAO;
-import cmu.curantis.dao.CircleSubsDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.dao.VendorMgmtDAO;
-import cmu.curantis.entities.CaregiverCircleBean;
-import cmu.curantis.entities.CaregiverInfoBean;
-import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.entities.VendorMgmtBean;
-import cmu.curantis.inputbeans.PaymentInput;
-import cmu.curantis.inputbeans.RegisterInput;
 import cmu.curantis.inputbeans.VendorInput;
-import cmu.curantis.outputbeans.LoginOutput;
-import cmu.curantis.outputbeans.PaymentOutput;
 import cmu.curantis.outputbeans.VendorOutput;
 
 @Path("/updatevendor")
@@ -32,6 +22,17 @@ public class UpdateVendor {
 	@Produces(MediaType.APPLICATION_JSON)
 	public VendorOutput register(VendorInput input) {
 		VendorOutput output = new VendorOutput();
+		if(input.getCircleId() <= 0) {
+			output.setMessage("Missing circleId!");
+	        output.setSuccess(false);
+	        return output;
+		}
+		if(input.getVendorname() == null || input.getVendorname().length() == 0) {
+			output.setMessage("Missing Vendor Name!");
+	        output.setSuccess(false);
+	        return output;
+		}
+		
 		VendorMgmtDAO vendormgmtdao = new VendorMgmtDAO();
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -47,7 +48,6 @@ public class UpdateVendor {
 			vmbean.setVendorAccount(input.getVendoraccountnumber());
 			vmbean.setVendorAddress(input.getVendoraddress());
 			vmbean.setVendorWebsite(input.getVendorwebsite());
-
 			if (!vendormgmtdao.update(session, vmbean)) {
 				output.setMessage("Could not update vendor!");
 				output.setSuccess(false);
