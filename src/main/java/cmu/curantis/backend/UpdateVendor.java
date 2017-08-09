@@ -39,7 +39,6 @@ public class UpdateVendor {
 		//not required to check if user belongs to that circle as it would be done before
 
 			VendorMgmtBean vmbean = new VendorMgmtBean();
-			
 			vmbean.setIdentity();
 			vmbean.getIdentity().setCircleId(input.getCircleId());
 			vmbean.getIdentity().setMonth(input.getMonth());
@@ -48,8 +47,10 @@ public class UpdateVendor {
 			vmbean.setVendorAccount(input.getVendoraccountnumber());
 			vmbean.setVendorAddress(input.getVendoraddress());
 			vmbean.setVendorWebsite(input.getVendorwebsite());
+			System.out.println(input.getVendorname() + " " + vmbean.getVendorAccount() + " " + vmbean.getVendorAddress() + " " + vmbean.getVendorWebsite() + " " + vmbean.getExpenses());
 			if (!vendormgmtdao.update(session, vmbean)) {
 				output.setMessage("Could not update vendor!");
+				System.out.println("Could not update");
 				output.setSuccess(false);
 			} else {
 				output.setMessage("Updated added successfully");

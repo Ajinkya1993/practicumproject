@@ -118,7 +118,6 @@ public class VendorMgmtDAO {
 	public List<VendorMgmtBean> getVendors(Session session, VendorMgmtBean ub) {
 		long cicid = ub.getIdentity().getCircleId();
 		Query query = session.createQuery("from VendorMgmtBean where circleId = :circleId");
-		query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		query.setLong("circleId", cicid);
         List<VendorMgmtBean> list = query.list();
         if(list == null || list.size() == 0) {

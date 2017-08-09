@@ -50,8 +50,14 @@ public class GetVendors {
 			vmbean.setIdentity();
 			vmbean.getIdentity().setCircleId(input.getCircleId());
 			List<VendorMgmtBean> lst = vendormgmtdao.getVendors(session, vmbean);
+			if(lst== null) {
+				output.setMessage("Vendor does not exist!");
+				output.setSuccess(false);
+				return output;
+			}
 			Set<String> set = new HashSet<String>();
 			//may need to check for lower/upper case
+			
 			for(VendorMgmtBean vb: lst) {
 				set.add(vb.getIdentity().getVendorName());
 			}
