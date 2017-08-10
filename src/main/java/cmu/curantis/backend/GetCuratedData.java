@@ -27,12 +27,41 @@ public class GetCuratedData {
 	public SeniorHousingCuratedOutput getData(SeniorHousingCuratedInput input) {
 		SeniorHousingCuratedOutput output = new SeniorHousingCuratedOutput();
 		SeniorHousingCuratedBean bean = new SeniorHousingCuratedBean();
-		bean.setCity(input.getCity());
-		bean.setState(input.getState());
-		bean.setZip(input.getZip());
-		bean.setAddress(input.getAddress());
-		bean.setOverallRating(input.getOverallRating());
-		
+		if(input != null) {
+			if(input.getCity() != null) {
+				bean.setCity(input.getCity());
+			}
+			if(input.getState() != null) {
+				bean.setState(input.getState());
+			}
+			if(input.getZip() != null) {
+				bean.setZip(input.getZip());
+			}
+			if(input.getAddress() != null) {
+				bean.setAddress(input.getAddress());
+			}
+			if(input.getOverallRating() != null) {
+				bean.setOverallRating(input.getOverallRating());
+			}
+			if(input.getMemoryCare() != null) {
+				bean.setMemoryCare(input.getMemoryCare());
+			}
+			if(input.getIndependentCare() != null) {
+				bean.setIndependentCare(input.getIndependentCare());
+			}
+			if(input.getSkilledCare() != null) {
+				bean.setSkilledCare(input.getSkilledCare());
+			}
+			if(input.getUnskilledCare() != null) {
+				bean.setUnskilledCare(input.getUnskilledCare());
+			}
+			if(input.getQualityTier() != null) {
+				bean.setQualityTier(input.getQualityTier());
+			}
+			if(input.getType() != null) {
+				bean.setType(input.getType());
+			}
+		}
 		SeniorHousingCuratedDAO dao = new SeniorHousingCuratedDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
