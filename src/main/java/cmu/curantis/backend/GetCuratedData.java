@@ -27,9 +27,10 @@ public class GetCuratedData {
 	public SeniorHousingCuratedOutput getData(SeniorHousingCuratedInput input) {
 		SeniorHousingCuratedOutput output = new SeniorHousingCuratedOutput();
 		SeniorHousingCuratedBean bean = new SeniorHousingCuratedBean();
-		//bean.setCity(input.getCity());
-		//bean.setState(input.getState());
+		bean.setCity(input.getCity());
+		bean.setState(input.getState());
 		bean.setZip(input.getZip());
+		bean.setAddress(input.getAddress());
 		
 		SeniorHousingCuratedDAO dao = new SeniorHousingCuratedDAO();
 		Session session = SessionUtil.getSession();        

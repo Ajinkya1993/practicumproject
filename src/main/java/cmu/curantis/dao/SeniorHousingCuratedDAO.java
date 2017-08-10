@@ -14,32 +14,32 @@ public class SeniorHousingCuratedDAO {
 		Boolean flag = false;
 		
 		if(bean.getState() != null) {
-			sb.append("state = "+ String.valueOf(bean.getState()));
+			sb.append("state = '"+ String.valueOf(bean.getState())+ "'");
 			flag = true;
 		}
 		if(bean.getCity() != null) {
 			if(flag) {
-				sb.append(" and city = "+String.valueOf(bean.getCity()));
+				sb.append(" and city = '" + String.valueOf(bean.getCity()) + "'");
 			} else {
-				sb.append("city = "+ String.valueOf(bean.getCity()));
+				sb.append("city = '"+ String.valueOf(bean.getCity())+ "'");
 				flag = true;
 			}
 			
 		}
 		if(bean.getZip() != null) {
 			if(flag) {
-				sb.append(" and zip = "+String.valueOf(bean.getZip()));
+				sb.append(" and zip = '"+String.valueOf(bean.getZip())+ "'");
 			} else {
-				sb.append("zip = "+ String.valueOf(bean.getZip()));
+				sb.append("zip = '"+ String.valueOf(bean.getZip())+ "'");
 				flag = true;
 			}
 			
 		}
 		if(bean.getAddress() != null) {
 			if(flag) {
-				sb.append("and address = "+String.valueOf(bean.getAddress()));
+				sb.append("and address = '"+String.valueOf(bean.getAddress())+ "'");
 			} else {
-				sb.append("address = "+String.valueOf(bean.getAddress()));
+				sb.append("address = '"+String.valueOf(bean.getAddress())+ "'");
 				flag = false;
 			}
 			
