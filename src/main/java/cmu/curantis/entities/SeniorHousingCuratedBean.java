@@ -1,10 +1,5 @@
 package cmu.curantis.entities;
-
-import java.io.Serializable;
-
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -84,6 +79,9 @@ public class SeniorHousingCuratedBean {
     
     @Column(name = "rn_staffing_rating")
     private Integer rnStaffingRating;
+    
+    @Column(name = "price")
+    private Integer price;
 
 	public String getName() {
 		return name;
@@ -235,5 +233,13 @@ public class SeniorHousingCuratedBean {
 
 	public void setRnStaffingRating(Integer rnStaffingRating) {
 		this.rnStaffingRating = rnStaffingRating;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
 	} 
 }
