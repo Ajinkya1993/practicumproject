@@ -33,7 +33,6 @@ public class SeniorHousingCuratedDAO {
 				sb.append("zip = '"+ String.valueOf(bean.getZip())+ "'");
 				flag = true;
 			}
-			
 		}
 		if(bean.getAddress() != null) {
 			if(flag) {
@@ -42,8 +41,49 @@ public class SeniorHousingCuratedDAO {
 				sb.append("address = '"+String.valueOf(bean.getAddress())+ "'");
 				flag = false;
 			}
-			
 		}
+		if(bean.getQualityTier() != null) {
+			if(flag) {
+				sb.append("and qualityTier = '"+String.valueOf(bean.getQualityTier())+ "'");
+			} else {
+				sb.append("qualityTier = '"+String.valueOf(bean.getQualityTier())+ "'");
+				flag = false;
+			}
+		}
+		if(bean.getOverallRating() != null) {
+			if(flag) {
+				sb.append("and overallRating = '"+String.valueOf(bean.getOverallRating())+ "'");
+			} else {
+				sb.append("overallRating = '"+String.valueOf(bean.getOverallRating())+ "'");
+				flag = false;
+			}
+		}
+		if(bean.getType() != null) {
+			if(flag) {
+				sb.append("and type = '"+String.valueOf(bean.getType())+ "'");
+			} else {
+				sb.append("type = '"+String.valueOf(bean.getType())+ "'");
+				flag = false;
+			}
+		}
+		if(bean.getMemoryCare()!= null) {
+			if(flag) {
+				sb.append("and memoryCare = '"+String.valueOf(bean.getMemoryCare())+ "'");
+			} else {
+				sb.append("memoryCare = '"+String.valueOf(bean.getMemoryCare())+ "'");
+				flag = false;
+			}
+		}
+		if(bean.getSkilledCare()!= null) {
+			if(flag) {
+				sb.append("and skilledCare = '"+String.valueOf(bean.getSkilledCare())+ "'");
+			} else {
+				sb.append("skilledCare = '"+String.valueOf(bean.getSkilledCare())+ "'");
+				flag = false;
+			}
+		}
+		
+	
 		System.out.println(sb.toString());
 		Query query = session.createQuery("from SeniorHousingCuratedBean where " + sb.toString());
 		List<SeniorHousingCuratedBean> data =  query.list();

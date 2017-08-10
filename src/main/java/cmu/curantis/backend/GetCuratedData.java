@@ -31,6 +31,7 @@ public class GetCuratedData {
 		bean.setState(input.getState());
 		bean.setZip(input.getZip());
 		bean.setAddress(input.getAddress());
+		bean.setOverallRating(input.getOverallRating());
 		
 		SeniorHousingCuratedDAO dao = new SeniorHousingCuratedDAO();
 		Session session = SessionUtil.getSession();        
