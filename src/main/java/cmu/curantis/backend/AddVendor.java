@@ -39,8 +39,22 @@ public class AddVendor {
 		
 		int replication = input.getReplicationfactor();
 		int newmonth = input.getMonth()-1;
-			VendorMgmtBean vmbean = new VendorMgmtBean();
 			
+		//check if duplicate vendor exists
+			VendorMgmtBean vmbean = new VendorMgmtBean();
+			vmbean.setIdentity();
+			vmbean.getIdentity().setVendorName(input.getVendorname());
+			vmbean.getIdentity().setCircleId(input.getCircleId());
+			VendorOutput vo_init = vendormgmtdao.checkVendors(session, vmbean);
+			System.out.println("In add vendor with: "+input.getVendoraddress() + " "+input.getVendoraccountnumber() +" " + input.getVendorname() + " " +input.getCircleId() + " " + input.getExpenses() +" " + input.getMonth() );
+
+			if (vo_init.isSuccess() == false) {
+				output.setMessage(vo_init.getMessage());
+				output.setSuccess(false);
+				return output;
+			}
+			System.out.println("In add vendor with: "+input.getVendorname() + " " +input.getCircleId() + " " + input.getExpenses() +" " + input.getMonth() );
+			//add new vendor (replicate rows with changing months)
 			for(int i = 0; i < replication; i++) {
 			vmbean.setIdentity();
 			vmbean.getIdentity().setCircleId(input.getCircleId());
@@ -52,11 +66,12 @@ public class AddVendor {
 			vmbean.getIdentity().setVendorName(input.getVendorname());
 			vmbean.setExpenses(input.getExpenses());
 			vmbean.setVendorAccount(input.getVendoraccountnumber());
-			vmbean.setVendorAddress(input.getVendoraddress());
+			vmbean.setVendorAddr(input.getVendoraddress());
 			vmbean.setVendorWebsite(input.getVendorwebsite());
-
-			if (!vendormgmtdao.create(session, vmbean)) {
-				output.setMessage("Could not add vendor!");
+			System.out.println("Before creating vendor "+vmbean.getVendorAddr() + " "+vmbean.getVendorAccount());
+			VendorOutput vo = vendormgmtdao.create(session, vmbean);
+			if (vo.isSuccess() == false) {
+				output.setMessage(vo.getMessage());
 				output.setSuccess(false);
 			} else {
 				output.setMessage("Vendor added successfully");
