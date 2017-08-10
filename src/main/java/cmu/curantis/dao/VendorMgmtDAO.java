@@ -6,16 +6,40 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import cmu.curantis.entities.VendorMgmtBean;
+import cmu.curantis.outputbeans.VendorOutput;
 
 public class VendorMgmtDAO {
-	public Boolean create(Session session, VendorMgmtBean ub) {
+	
+	public VendorOutput checkVendors(Session session, VendorMgmtBean ub) {
+		VendorOutput output = new VendorOutput();
+		long cicid = ub.getIdentity().getCircleId();
+		String vendorname = ub.getIdentity().getVendorName();
+		if(cicid <= 0 || vendorname == null || vendorname.length() == 0 ) {
+			output.setSuccess(false);
+			output.setMessage("Fields cannot be empty!");
+			return output;
+		}
+		//check if duplicate vendor name in circle exists
+		Query query_init = session.createQuery("FROM VendorMgmtBean WHERE vendorName = :vendorName AND circleId = :circleId");
+		query_init.setString("vendorName",vendorname);
+		query_init.setLong("circleId",cicid);
+        List<VendorMgmtBean> lst_init =  query_init.list();
+        if(lst_init.size() > 0) {
+        	output.setSuccess(false);
+			output.setMessage("Vendor Name exists!");
+			return output;
+		}
+        output.setSuccess(true);
+		return output;
+	}
+	
+	public VendorOutput create(Session session, VendorMgmtBean ub) {
+		VendorOutput output = new VendorOutput();
 		long cicid = ub.getIdentity().getCircleId();
 		String vendorname = ub.getIdentity().getVendorName();
 		int mth = ub.getIdentity().getMonth();
-		System.out.println("Circle id and vendor name and month  are "+cicid + " " + vendorname + " " + mth);
-		if(cicid <= 0 || vendorname == null || vendorname.length() == 0 || mth <= 0 || mth > 12) {
-			return false;
-		}
+        
+        /*
 		Query query = session.createQuery("FROM VendorMgmtBean WHERE vendorName = :vendorName AND circleId = :circleId AND month = :month");
         query.setString("vendorName",vendorname);
         query.setLong("circleId",cicid);
@@ -24,7 +48,7 @@ public class VendorMgmtDAO {
 		
 		if(lst.size() > 0) {
 			return false;
-		}
+		}*/
 		
 		VendorMgmtBean newub = new VendorMgmtBean();
 		newub.setIdentity();
@@ -33,10 +57,11 @@ public class VendorMgmtDAO {
 		newub.getIdentity().setMonth(mth);
 		newub.setExpenses(ub.getExpenses());
 		newub.setVendorAccount(ub.getVendorAccount());
-		newub.setVendorAddress(ub.getVendorAddress());
+		newub.setVendorAddr(ub.getVendorAddr());
 		newub.setVendorWebsite(ub.getVendorWebsite());
 		session.save(newub);
-		return true;
+		output.setSuccess(true);
+		return output;
 	}
 	
 	
@@ -54,13 +79,13 @@ public class VendorMgmtDAO {
 		}
 		for(int i = 0; i <list.size(); i++) {
 		VendorMgmtBean crcb = list.get(i);
-		System.out.println("Inside DAO method "+ ub.getVendorAccount() +  " " +  ub.getVendorAddress() + " " + ub.getVendorWebsite()+ " " + ub.getExpenses() + " " +  crcb.getIdentity().getMonth() + " " + ub.getIdentity().getCircleId());
+		System.out.println("Inside DAO method "+ ub.getVendorAccount() +  " " +  ub.getVendorAddr() + " " + ub.getVendorWebsite()+ " " + ub.getExpenses() + " " +  crcb.getIdentity().getMonth() + " " + ub.getIdentity().getCircleId());
 		//updation of circle name is included here and not in another method.
 		if(ub.getVendorAccount() == null || ub.getVendorAccount().length() == 0) {
 			ub.setVendorAccount(crcb.getVendorAccount());
 		}
-		if(ub.getVendorAddress() == null || ub.getVendorAddress().length() == 0) {
-			ub.setVendorAddress(crcb.getVendorAddress());
+		if(ub.getVendorAddr() == null || ub.getVendorAddr().length() == 0) {
+			ub.setVendorAddr(crcb.getVendorAddr());
 		}
 		if(ub.getVendorWebsite()== null || ub.getVendorWebsite().length() == 0) {
 			ub.setVendorWebsite(crcb.getVendorWebsite());

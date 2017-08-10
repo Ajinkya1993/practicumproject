@@ -86,8 +86,8 @@ public class VendorMgmtBean {
     /*
      * Column to store the vendors address
      */
-    @Column(name = "vendorAddress")
-    private String vendorAddress;
+    @Column(name = "vendorAddr")
+    private String vendorAddr;
     
     /*
      * Column to store the expense (this would be a monthly payment)
@@ -113,12 +113,12 @@ public class VendorMgmtBean {
     	vendorWebsite = vendorweb;
     }
     
-    public String getVendorAddress() {
-        return vendorAccount;
+    public String getVendorAddr() {
+        return vendorAddr;
     }
     
-    public void setVendorAddress(String vendoradd) {
-    	vendorAddress = vendoradd;
+    public void setVendorAddr(String vendorAddr) {
+    	this.vendorAddr = vendorAddr;
     }
     
     public String getVendorAccount() {
