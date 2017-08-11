@@ -82,6 +82,10 @@ public class SeniorHousingCuratedBean {
     
     @Column(name = "price")
     private Integer price;
+    
+    @Column(name = "image_number")
+    private String imageNumber;
+    
 
 	public String getName() {
 		return name;
@@ -241,5 +245,13 @@ public class SeniorHousingCuratedBean {
 
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+
+	public String getImageNumber() {
+		return imageNumber;
+	}
+
+	public void setImageNumber(String imageNumber) {
+		this.imageNumber = imageNumber;
 	} 
 }
