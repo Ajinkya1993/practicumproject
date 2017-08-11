@@ -27,14 +27,14 @@ import cmu.curantis.outputbeans.LoginOutput;
 import cmu.curantis.outputbeans.PaymentOutput;
 import cmu.curantis.outputbeans.VendorOutput;
 
-@Path("/getvendorinfo")
+@Path("/getvendorexpenses")
 public class GetExpenses {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public VendorOutput register(VendorInput input) {
 		VendorOutput output = new VendorOutput();
-		if(input.getCircleId() <= 0 || input.getVendorname() == null || input.getVendorname().length() == 0) {
+		if(input.getCircleId() <= 0) {
 			output.setSuccess(false);
 			output.setMessage("Missing parameters!");
 	    	return output;
@@ -48,6 +48,7 @@ public class GetExpenses {
 			vmbean.setIdentity();
 			vmbean.getIdentity().setCircleId(input.getCircleId());
 			vmbean.getIdentity().setVendorName(input.getVendorname());
+			//get vendor info by name and circle id
 			List<VendorMgmtBean> lst = vendormgmtdao.getVendorInfo(session, vmbean);
 			if (lst == null) {
 				output.setMessage("Vendor does not exist!");
