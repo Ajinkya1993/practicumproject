@@ -68,21 +68,36 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getMemoryCare()!= null) {
 			if(flag) {
-				sb.append("and memoryCare = '"+String.valueOf(bean.getMemoryCare())+ "'");
+				sb.append("and memoryCare = "+bean.getMemoryCare());
 			} else {
-				sb.append("memoryCare = '"+String.valueOf(bean.getMemoryCare())+ "'");
+				sb.append("memoryCare = "+bean.getMemoryCare());
 				flag = false;
 			}
 		}
 		if(bean.getSkilledCare()!= null) {
 			if(flag) {
-				sb.append("and skilledCare = '"+String.valueOf(bean.getSkilledCare())+ "'");
+				sb.append("and skilledCare = "+bean.getSkilledCare());
 			} else {
-				sb.append("skilledCare = '"+String.valueOf(bean.getSkilledCare())+ "'");
+				sb.append("skilledCare = "+bean.getSkilledCare());
 				flag = false;
 			}
 		}
-		
+		if(bean.getUnskilledCare()!= null) {
+			if(flag) {
+				sb.append("and unskilledCare = "+bean.getUnskilledCare());
+			} else {
+				sb.append("unskilledCare = "+bean.getUnskilledCare());
+				flag = false;
+			}
+		}
+		if(bean.getIndependentCare()!= null) {
+			if(flag) {
+				sb.append("and independentCare = "+bean.getIndependentCare());
+			} else {
+				sb.append("independentCare = "+bean.getIndependentCare());
+				flag = false;
+			}
+		}
 	
 		System.out.println(sb.toString());
 		Query query = session.createQuery("from SeniorHousingCuratedBean where " + sb.toString());
