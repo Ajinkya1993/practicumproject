@@ -12,6 +12,7 @@ public class VendorOutput {
 	private boolean success;
 	private String message;
 	private List<VendorMgmtBean> list;
+	private List<Double> mlist;
 	private Set<String> set;
 	private VendorMgmtBean vb;
 	public boolean isSuccess() {
@@ -33,16 +34,26 @@ public class VendorOutput {
     public void setList(List<VendorMgmtBean> list) {
         this.list = list;
     }
-    public Set<String> getSet() {
-        return set;
+    
+    public List<Double> getMonthlylist() {
+        return mlist;
     }
-    public void setSet(Set<String> set) {
-        this.set = set;
+    public void setMonthlylist(List<Double> mlist) {
+        this.mlist = mlist;
     }
+
 	public void setBean(VendorMgmtBean vb) {
 		vb = this.vb;
 	}
 	public VendorMgmtBean getBean() {
 		return vb;
 	}
+	public void setSet(Set<String> setip) {
+		set = setip;
+	}
+	public Set<String> getSet() {
+		return set;
+	}
+
+	
 }
