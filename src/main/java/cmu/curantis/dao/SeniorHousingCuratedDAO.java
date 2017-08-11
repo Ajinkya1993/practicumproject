@@ -100,7 +100,25 @@ public class SeniorHousingCuratedDAO {
         }
         return result;
 	}
-
+	
+	public List<CuratedDataNest> getPriceResults(Session session, Integer maxPrice, Integer minPrice) {
+		Query query = session.createQuery("from SeniorHousingCuratedBean where price <= " + maxPrice + " and price >= " + minPrice);
+		List<SeniorHousingCuratedBean> data =  query.list();
+		if (data == null || data.size() == 0) {
+	    	return null;
+	    }
+		List<CuratedDataNest> result = new ArrayList<CuratedDataNest>();
+		for (SeniorHousingCuratedBean b: data) {
+			System.out.println(b.getName() + "\t" + b.getPrice());
+        	result.add(new CuratedDataNest(b.getName(), b.getAddress(), b.getQualityTier(), b.getCity(), 
+        			b.getState(), b.getZip(), b.getPhoneNumber(), b.getCertifiedBeds(), b.getResidentsNumber(),
+        			b.getType(), b.getLegalName(), b.getFirstApprovedDate(), b.getIndependentCare(),
+        			b.getUnskilledCare(), b.getSkilledCare(), b.getMemoryCare(), b.getOverallRating(),
+        			b.getHealthInspectionRating(), b.getRnStaffingRating(), b.getPrice()));
+        }
+        return result;
+	}
+	
 	@XmlRootElement
 	public class CuratedDataNest {
 		private String name;
