@@ -1,3 +1,7 @@
+/**
+ * This class is used to retirive a given months expenditure for a given careteam.
+ */
+
 package cmu.curantis.backend;
 
 import java.util.List;
@@ -34,8 +38,7 @@ public class GetMonthlyExpenses {
 	@Produces(MediaType.APPLICATION_JSON)
 	public VendorOutput register(VendorInput input) {
 		VendorOutput output = new VendorOutput();
-		if(input.getCircleId() <= 0 || input.getVendorname() == null || input.getVendorname().length() == 0 || input.getMonth() <= 0 
-	|| input.getMonth() > 12) {
+		if(input.getCircleId() <= 0  || input.getMonth() <= 0 || input.getMonth() > 12) {
 			output.setSuccess(false);
 			output.setMessage("Missing parameters!");
 	    	return output;
@@ -48,14 +51,13 @@ public class GetMonthlyExpenses {
 			
 			vmbean.setIdentity();
 			vmbean.getIdentity().setCircleId(input.getCircleId());
-			vmbean.getIdentity().setVendorName(input.getVendorname());
 			vmbean.getIdentity().setMonth(input.getMonth());
-			List<VendorMgmtBean> lst = vendormgmtdao.getVendorInfo(session, vmbean);
+			List<VendorMgmtBean> lst = vendormgmtdao.getMonthyExpenses(session, vmbean);
 			if (lst == null) {
-				output.setMessage("Vendor does not exist!");
+				output.setMessage("Cost does not exist!");
 				output.setSuccess(false);
 			} else {
-				output.setMessage("Vendor viewed successfully");
+				output.setMessage("Cost viewed successfully");
 				output.setList(lst);
 				output.setSuccess(true);
 			}

@@ -158,11 +158,9 @@ public class VendorMgmtDAO {
 	
 	public List<VendorMgmtBean> getMonthyExpenses(Session session, VendorMgmtBean ub) {
 		long cicid = ub.getIdentity().getCircleId();
-		String vendorname = ub.getIdentity().getVendorName();
 		int month = ub.getIdentity().getMonth();
-		Query query = session.createQuery("from VendorMgmtBean where circleId = :circleId AND vendorName = :vendorName AND month = :month");
+		Query query = session.createQuery("from VendorMgmtBean where circleId = :circleId AND month = :month");
 		query.setLong("circleId", cicid);
-		query.setString("vendorName", vendorname);
 		query.setLong("month", month);
         List<VendorMgmtBean> list = query.list();
         if(list == null || list.size() == 0) {
