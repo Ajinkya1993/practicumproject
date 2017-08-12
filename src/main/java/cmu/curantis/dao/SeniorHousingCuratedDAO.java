@@ -111,7 +111,7 @@ public class SeniorHousingCuratedDAO {
         			b.getState(), b.getZip(), b.getPhoneNumber(), b.getCertifiedBeds(), b.getResidentsNumber(),
         			b.getType(), b.getLegalName(), b.getFirstApprovedDate(), b.getIndependentCare(),
         			b.getUnskilledCare(), b.getSkilledCare(), b.getMemoryCare(), b.getOverallRating(),
-        			b.getHealthInspectionRating(), b.getRnStaffingRating(), b.getPrice()));
+        			b.getHealthInspectionRating(), b.getRnStaffingRating(), b.getPrice(), b.getImageNumber()));
         }
         return result;
 	}
@@ -129,7 +129,7 @@ public class SeniorHousingCuratedDAO {
         			b.getState(), b.getZip(), b.getPhoneNumber(), b.getCertifiedBeds(), b.getResidentsNumber(),
         			b.getType(), b.getLegalName(), b.getFirstApprovedDate(), b.getIndependentCare(),
         			b.getUnskilledCare(), b.getSkilledCare(), b.getMemoryCare(), b.getOverallRating(),
-        			b.getHealthInspectionRating(), b.getRnStaffingRating(), b.getPrice()));
+        			b.getHealthInspectionRating(), b.getRnStaffingRating(), b.getPrice(), b.getImageNumber()));
         }
         return result;
 	}
@@ -156,11 +156,13 @@ public class SeniorHousingCuratedDAO {
 		private Integer healthInspectionRating;
 		private Integer rnStaffingRating;
 		private Integer price;
+		private String imageNumber;
 		
 		public CuratedDataNest(String nm, String addr, String qTier, String city, String state, 
 				String zip, String pNo, Integer beds, Integer residents, String type, 
 				String legalName, String date, Boolean indCare, Boolean unskCare, Boolean skCare, 
-				Boolean memCare, Integer oRating, Integer hiRating, Integer rnStaffRating, Integer price
+				Boolean memCare, Integer oRating, Integer hiRating, Integer rnStaffRating, Integer price, 
+				String imageNumber
 				) {
 			this.name = nm;
 			this.address = addr;
@@ -182,6 +184,21 @@ public class SeniorHousingCuratedDAO {
 			this.healthInspectionRating = hiRating;
 			this.rnStaffingRating = rnStaffRating;
 			this.price = price;	
+		
+			if (imageNumber != null) {
+				this.imageNumber = imageNumber.trim();
+				
+			} else {
+				this.imageNumber = imageNumber;
+			}
+			
+		}
+		public String getImageNumber() {
+			
+			return imageNumber;
+		}
+		public void setImageNumber(String imageNumber) {
+			this.imageNumber = imageNumber;
 		}
 		public String getName() {
 			return name;
