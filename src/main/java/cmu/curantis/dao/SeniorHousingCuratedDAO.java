@@ -9,13 +9,13 @@ import cmu.curantis.entities.SeniorHousingCuratedBean;
 
 public class SeniorHousingCuratedDAO {
 	
-	public List<CuratedDataNest> getFilteredResults(Session session, SeniorHousingCuratedBean bean){
+	public List<CuratedDataNest> getFilteredResults(Session session, SeniorHousingCuratedBean bean, Integer minPrice, Integer maxPrice){
 		StringBuffer sb = new StringBuffer();
 		Boolean flag = false;
 		
 		if(bean.getState() != null) {
 			sb.append("state = '"+ String.valueOf(bean.getState())+ "'");
-			flag = true;
+			flag = true; 
 		}
 		if(bean.getCity() != null) {
 			if(flag) {
@@ -52,9 +52,9 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getOverallRating() != null) {
 			if(flag) {
-				sb.append("and overallRating = '"+String.valueOf(bean.getOverallRating())+ "'");
+				sb.append("and overallRating >= '"+String.valueOf(bean.getOverallRating())+ "'");
 			} else {
-				sb.append("overallRating = '"+String.valueOf(bean.getOverallRating())+ "'");
+				sb.append("overallRating >= '"+String.valueOf(bean.getOverallRating())+ "'");
 				flag = true;
 			}
 		}
@@ -98,7 +98,14 @@ public class SeniorHousingCuratedDAO {
 				flag = true;
 			}
 		}
-	
+		if(minPrice != null && maxPrice != null) {
+			if(flag) {
+				sb.append("and price <= " + maxPrice + " and price >= " + minPrice);
+			} else {
+				sb.append("price <= " + maxPrice + " and price >= " + minPrice);
+				flag = true;
+			}
+		}
 		System.out.println(sb.toString());
 		Query query = session.createQuery("from SeniorHousingCuratedBean where " + sb.toString());
 		List<SeniorHousingCuratedBean> data =  query.list();
@@ -122,8 +129,10 @@ public class SeniorHousingCuratedDAO {
 		if (data == null || data.size() == 0) {
 	    	return null;
 	    }
+		
 		List<CuratedDataNest> result = new ArrayList<CuratedDataNest>();
 		for (SeniorHousingCuratedBean b: data) {
+			
 			System.out.println(b.getName() + "\t" + b.getPrice());
         	result.add(new CuratedDataNest(b.getName(), b.getAddress(), b.getQualityTier(), b.getCity(), 
         			b.getState(), b.getZip(), b.getPhoneNumber(), b.getCertifiedBeds(), b.getResidentsNumber(),
@@ -133,6 +142,24 @@ public class SeniorHousingCuratedDAO {
         }
         return result;
 	}
+	
+	/*public List<CuratedDataNest> getRatingResults(Session session, Integer rating) {
+		Query query = session.createQuery("from SeniorHousingCuratedBean where overallRating >= " + rating);
+		List<SeniorHousingCuratedBean> data =  query.list();
+		if (data == null || data.size() == 0) {
+	    	return null;
+	    }
+		List<CuratedDataNest> result = new ArrayList<CuratedDataNest>();
+		for (SeniorHousingCuratedBean b: data) {
+			System.out.println(b.getName() + "\t" + b.getOverallRating());
+        	result.add(new CuratedDataNest(b.getName(), b.getAddress(), b.getQualityTier(), b.getCity(), 
+        			b.getState(), b.getZip(), b.getPhoneNumber(), b.getCertifiedBeds(), b.getResidentsNumber(),
+        			b.getType(), b.getLegalName(), b.getFirstApprovedDate(), b.getIndependentCare(),
+        			b.getUnskilledCare(), b.getSkilledCare(), b.getMemoryCare(), b.getOverallRating(),
+        			b.getHealthInspectionRating(), b.getRnStaffingRating(), b.getPrice(), b.getImageNumber()));
+        }
+        return result;
+	}*/
 	
 	@XmlRootElement
 	public class CuratedDataNest {
