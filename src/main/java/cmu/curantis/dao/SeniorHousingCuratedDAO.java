@@ -39,7 +39,7 @@ public class SeniorHousingCuratedDAO {
 				sb.append("and address = '"+String.valueOf(bean.getAddress())+ "'");
 			} else {
 				sb.append("address = '"+String.valueOf(bean.getAddress())+ "'");
-				flag = false;
+				flag = true;
 			}
 		}
 		if(bean.getQualityTier() != null) {
@@ -47,7 +47,7 @@ public class SeniorHousingCuratedDAO {
 				sb.append("and qualityTier = '"+String.valueOf(bean.getQualityTier())+ "'");
 			} else {
 				sb.append("qualityTier = '"+String.valueOf(bean.getQualityTier())+ "'");
-				flag = false;
+				flag = true;
 			}
 		}
 		if(bean.getOverallRating() != null) {
@@ -55,7 +55,7 @@ public class SeniorHousingCuratedDAO {
 				sb.append("and overallRating = '"+String.valueOf(bean.getOverallRating())+ "'");
 			} else {
 				sb.append("overallRating = '"+String.valueOf(bean.getOverallRating())+ "'");
-				flag = false;
+				flag = true;
 			}
 		}
 		if(bean.getType() != null) {
@@ -63,7 +63,7 @@ public class SeniorHousingCuratedDAO {
 				sb.append("and type = '"+String.valueOf(bean.getType())+ "'");
 			} else {
 				sb.append("type = '"+String.valueOf(bean.getType())+ "'");
-				flag = false;
+				flag = true;
 			}
 		}
 		if(bean.getMemoryCare()!= null) {
@@ -71,7 +71,7 @@ public class SeniorHousingCuratedDAO {
 				sb.append("and memoryCare = "+bean.getMemoryCare());
 			} else {
 				sb.append("memoryCare = "+bean.getMemoryCare());
-				flag = false;
+				flag = true;
 			}
 		}
 		if(bean.getSkilledCare()!= null) {
@@ -79,7 +79,7 @@ public class SeniorHousingCuratedDAO {
 				sb.append("and skilledCare = "+bean.getSkilledCare());
 			} else {
 				sb.append("skilledCare = "+bean.getSkilledCare());
-				flag = false;
+				flag = true;
 			}
 		}
 		if(bean.getUnskilledCare()!= null) {
@@ -87,7 +87,7 @@ public class SeniorHousingCuratedDAO {
 				sb.append("and unskilledCare = "+bean.getUnskilledCare());
 			} else {
 				sb.append("unskilledCare = "+bean.getUnskilledCare());
-				flag = false;
+				flag = true;
 			}
 		}
 		if(bean.getIndependentCare()!= null) {
@@ -95,7 +95,7 @@ public class SeniorHousingCuratedDAO {
 				sb.append("and independentCare = "+bean.getIndependentCare());
 			} else {
 				sb.append("independentCare = "+bean.getIndependentCare());
-				flag = false;
+				flag = true;
 			}
 		}
 	

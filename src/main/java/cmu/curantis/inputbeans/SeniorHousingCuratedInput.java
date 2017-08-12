@@ -4,18 +4,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class SeniorHousingCuratedInput {
-	private String name;
-	private String address;
-	private String qualityTier;
-	private String city;
-	private String state;
-	private String zip;
-	private String phoneNumber;
+	private String  name;
+	private String  address;
+	private String  qualityTier;
+	private String  city;
+	private String  state;
+	private String  zip;
+	private String  phoneNumber;
 	private Integer certifiedBeds;
 	private Integer residentsNumber;
-	private String type;
-	private String legalName;
-	private String firstApprovedDate;
+	private String  type;
+	private String  legalName;
+	private String  firstApprovedDate;
 	private Boolean independentCare;
 	private Boolean unskilledCare;
 	private Boolean skilledCare;

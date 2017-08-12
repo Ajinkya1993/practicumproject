@@ -28,44 +28,67 @@ public class SeniorHousingResource {
 	public SeniorHousingCuratedOutput getData(SeniorHousingCuratedInput input) {
 		SeniorHousingCuratedOutput output = new SeniorHousingCuratedOutput();
 		SeniorHousingCuratedBean bean = new SeniorHousingCuratedBean();
+		Boolean flag = false;
 		if(input != null) {
 			if(input.getCity() != null) {
 				bean.setCity(input.getCity());
+				flag = true;
 			}
 			if(input.getState() != null) {
 				bean.setState(input.getState());
+				flag = true;
 			}
 			if(input.getZip() != null) {
 				bean.setZip(input.getZip());
+				flag = true;
 			}
 			if(input.getAddress() != null) {
 				bean.setAddress(input.getAddress());
+				flag = true;
 			}
 			if(input.getOverallRating() != null) {
 				bean.setOverallRating(input.getOverallRating());
+				flag = true;
 			}
 			if(input.getMemoryCare() != null) {
 				bean.setMemoryCare(input.getMemoryCare());
+				flag = true;
 			}
 			if(input.getIndependentCare() != null) {
 				bean.setIndependentCare(input.getIndependentCare());
+				flag = true;
 			}
 			if(input.getSkilledCare() != null) {
 				bean.setSkilledCare(input.getSkilledCare());
+				flag = true;
 			}
 			if(input.getUnskilledCare() != null) {
 				bean.setUnskilledCare(input.getUnskilledCare());
+				flag = true;
 			}
 			if(input.getQualityTier() != null) {
 				bean.setQualityTier(input.getQualityTier());
+				flag = true;
 			}
 			if(input.getType() != null) {
 				bean.setType(input.getType());
+				flag = true;
 			}
+		}else {
+			output.setMessage("Input is null!");
+			output.setSuccess(false);
+			output.setListofresults(null);
+			return output;
 		}
 		SeniorHousingCuratedDAO dao = new SeniorHousingCuratedDAO();
 		Session session = SessionUtil.getSession();        
         Transaction tx = session.beginTransaction();
+        if(!flag) {
+        	output.setMessage("No filters passed!");
+			output.setSuccess(false);
+			output.setListofresults(null);
+			return output;
+        }
 		List<SeniorHousingCuratedDAO.CuratedDataNest> result = dao.getFilteredResults(session, bean);
 		tx.commit();
 		if (result == null) {
