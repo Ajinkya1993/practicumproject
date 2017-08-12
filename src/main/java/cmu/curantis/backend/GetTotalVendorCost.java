@@ -1,40 +1,31 @@
 /**
- * This class is used to obtain the monthly costs for all 12 months for the pie chart used in vendor dashboard.
+ * This class is used to obtain the total cost expended for each vendor.
  * 
  */
 
 package cmu.curantis.backend;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import cmu.curantis.dao.CaregiverCircleDAO;
-import cmu.curantis.dao.CaregiverInfoDAO;
-import cmu.curantis.dao.CircleSubsDAO;
 import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.dao.VendorMgmtDAO;
-import cmu.curantis.entities.CaregiverCircleBean;
-import cmu.curantis.entities.CaregiverInfoBean;
-import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.entities.VendorMgmtBean;
-import cmu.curantis.inputbeans.PaymentInput;
-import cmu.curantis.inputbeans.RegisterInput;
 import cmu.curantis.inputbeans.VendorInput;
-import cmu.curantis.outputbeans.LoginOutput;
-import cmu.curantis.outputbeans.PaymentOutput;
 import cmu.curantis.outputbeans.VendorOutput;
 
-@Path("/getmonthlycosttotal")
-public class GetAllMonthlyCosts {
+@Path("/getvendortotalcost")
+public class GetTotalVendorCost {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -53,17 +44,29 @@ public class GetAllMonthlyCosts {
 			
 			vmbean.setIdentity();
 			vmbean.getIdentity().setCircleId(input.getCircleId());
-			Double[] arr = vendormgmtdao.getAllMonthlyCosts(session, vmbean);
-			if (arr == null) {
+			
+			Map<String, Double> mp= vendormgmtdao.getVendorCosts(session, vmbean);
+			if (mp == null) {
 				output.setMessage("No expenses exist!");
 				output.setSuccess(false);
 			} else {
-				output.setMessage("Monthly Total Expenses viewed successfully");
-				List<Double> lst = Arrays.asList(arr);
-				for(int i = 0; i < lst.size(); i++) {
+				output.setMessage("Total Vendor Expenses viewed successfully");
+				/*for(int i = 0; i < lst.size(); i++) {
 					System.out.println("Component of list at "+i+ " is "+lst.get(i));
-				}
-				output.setMonthlylist(lst);
+				}*/
+				List<String>lstnm = new ArrayList<String>();
+				List<Double> lstct = new ArrayList<Double>();
+				
+				Iterator it = mp.entrySet().iterator();
+			    while (it.hasNext()) {
+			        Map.Entry pair = (Map.Entry)it.next();
+			        //String str = pair.getKey() + "space" + pair.getValue();
+			        lstnm.add((String) pair.getKey());
+			        lstct.add((Double) pair.getValue());
+			        it.remove(); // avoids a ConcurrentModificationException
+			    }
+				output.setListv(lstnm);
+				output.setMonthlylist(lstct);
 				output.setSuccess(true);
 			}
 		tx.commit();

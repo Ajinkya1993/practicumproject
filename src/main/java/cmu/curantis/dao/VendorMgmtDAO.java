@@ -1,6 +1,11 @@
 package cmu.curantis.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -186,5 +191,29 @@ public class VendorMgmtDAO {
 		}
 		}
 		return arr;
+    }
+	
+	public Map<String, Double> getVendorCosts(Session session, VendorMgmtBean ub) {
+		long cicid = ub.getIdentity().getCircleId();
+		List<String> lst = new ArrayList<String>();
+		Map<String, Double> mp = new HashMap<String, Double>();
+		Query query = session.createQuery("from VendorMgmtBean where circleId = :circleId");
+		query.setLong("circleId", cicid);
+        List<VendorMgmtBean> list = query.list();
+        if(list == null || list.size() == 0) {
+            return null;
+        }
+        
+		for(int i = 0; i < list.size(); i++) {	
+			String keymp = list.get(i).getIdentity().getVendorName();
+			if(mp.containsKey(keymp)) {
+				double tot = mp.get(keymp);
+           tot += list.get(i).getExpenses();
+           mp.put(keymp, tot);
+			} else {
+				mp.put(keymp, list.get(i).getExpenses());
+			}
+        }
+	    return mp;
     }
 }
