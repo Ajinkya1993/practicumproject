@@ -13,6 +13,7 @@ public class VendorOutput {
 	private String message;
 	private List<VendorMgmtBean> list;
 	private List<Double> mlist;
+	private List<String> listv;
 	private Set<String> set;
 	private VendorMgmtBean vb;
 	public boolean isSuccess() {
@@ -33,6 +34,13 @@ public class VendorOutput {
     }
     public void setList(List<VendorMgmtBean> list) {
         this.list = list;
+    }
+    
+    public List<String> getListv() {
+        return listv;
+    }
+    public void setListv(List<String> listv) {
+        this.listv = listv;
     }
     
     public List<Double> getMonthlylist() {
