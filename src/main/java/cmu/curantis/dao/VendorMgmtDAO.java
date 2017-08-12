@@ -165,4 +165,26 @@ public class VendorMgmtDAO {
         }
         return list;
     }
+	public Double[] getAllMonthlyCosts(Session session, VendorMgmtBean ub) {
+		long cicid = ub.getIdentity().getCircleId();
+		Double[] arr = new Double[12];
+		for(int k = 0; k < 12; k++) {
+			arr[k] = 0.0;
+		}
+
+		for(int i = 0; i < 12; i++) {			
+		Query query = session.createQuery("from VendorMgmtBean where circleId = :circleId AND month = :month");
+		query.setLong("circleId", cicid);
+		query.setLong("month", i+1);
+        List<VendorMgmtBean> list = query.list();
+        if(list == null || list.size() == 0) {
+            continue;
+        } else {
+        for(int j = 0; j < list.size(); j++) {
+        arr[i] += list.get(j).getExpenses();
+        }
+		}
+		}
+		return arr;
+    }
 }

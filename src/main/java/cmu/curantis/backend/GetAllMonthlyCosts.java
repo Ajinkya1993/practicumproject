@@ -1,5 +1,6 @@
 package cmu.curantis.backend;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -27,8 +28,8 @@ import cmu.curantis.outputbeans.LoginOutput;
 import cmu.curantis.outputbeans.PaymentOutput;
 import cmu.curantis.outputbeans.VendorOutput;
 
-@Path("/getvendorexpenses")
-public class GetExpenses {
+@Path("/getmonthlycosttotal")
+public class GetAllMonthlyCosts {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -47,15 +48,17 @@ public class GetExpenses {
 			
 			vmbean.setIdentity();
 			vmbean.getIdentity().setCircleId(input.getCircleId());
-			vmbean.getIdentity().setVendorName(input.getVendorname());
-			//get vendor info by name and circle id
-			List<VendorMgmtBean> lst = vendormgmtdao.getVendorInfo(session, vmbean);
-			if (lst == null) {
-				output.setMessage("Vendor does not exist!");
+			Double[] arr = vendormgmtdao.getAllMonthlyCosts(session, vmbean);
+			if (arr == null) {
+				output.setMessage("No expenses exist!");
 				output.setSuccess(false);
 			} else {
-				output.setMessage("Vendor viewed successfully");
-				output.setList(lst);
+				output.setMessage("Monthly Total Expenses viewed successfully");
+				List<Double> lst = Arrays.asList(arr);
+				for(int i = 0; i < lst.size(); i++) {
+					System.out.println("Component of list at "+i+ " is "+lst.get(i));
+				}
+				output.setMonthlylist(lst);
 				output.setSuccess(true);
 			}
 		tx.commit();
