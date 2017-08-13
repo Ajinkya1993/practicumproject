@@ -1,6 +1,7 @@
 package cmu.curantis.outputbeans;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,6 +17,7 @@ public class VendorOutput {
 	private List<String> listv;
 	private Set<String> set;
 	private VendorMgmtBean vb;
+	private Map<String, List<Double>> mp;
 	public boolean isSuccess() {
 		return success;
 	}
@@ -61,6 +63,12 @@ public class VendorOutput {
 	}
 	public Set<String> getSet() {
 		return set;
+	}
+	public void setMap(Map<String, List<Double>> mp) {
+		this.mp = mp;
+	}
+	public Map<String, List<Double>> getMap() {
+		return mp;
 	}
 
 	
