@@ -1,8 +1,10 @@
 package cmu.curantis.backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
@@ -58,8 +60,17 @@ public class GetVendors {
 			Set<String> set = new HashSet<String>();
 			//may need to check for lower/upper case
 			
+			//to get monthly cost
+			Map<String, List<Double>> mp = new HashMap<String, List<Double>>();
 			for(VendorMgmtBean vb: lst) {
 				set.add(vb.getIdentity().getVendorName());
+				//assuming monthly cost is the same throughout
+				if(!mp.containsKey(vb.getIdentity().getVendorName())) {
+					List<Double> list = new ArrayList<Double>();
+					list.add(vb.getExpenses());
+					list.add((double)vb.getIdentity().getMonth());
+					mp.put(vb.getIdentity().getVendorName(), list);
+				}
 			}
 			if (set == null || set.size() == 0) {
 				output.setMessage("Vendor does not exist!");
@@ -68,6 +79,7 @@ public class GetVendors {
 				output.setMessage("Vendor viewed successfully");
 				output.setSet(set);
 				output.setSuccess(true);
+				output.setMap(mp);
 			}
 		tx.commit();
 		session.close();

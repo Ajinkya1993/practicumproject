@@ -33,7 +33,7 @@ import cmu.curantis.outputbeans.VendorOutput;
 
 @Path("/getexpensesvendor")
 public class GetVendorExpenses {
-	@POST
+	@POST 
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public VendorOutput register(VendorInput input) {
