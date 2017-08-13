@@ -43,6 +43,13 @@ public class VendorMgmtBean {
         @Column(name = "month")
         private int month;
         
+        /*
+         * Column where the day will be stored (integer)
+         * This is made primary key as there may be multiple payments in a month to a vendor
+         */
+        @Column(name = "day")
+        private int day;
+        
         public long getCircleId() {
             return circleId;
         }
@@ -65,6 +72,14 @@ public class VendorMgmtBean {
         
         public void setMonth(int mth) {
             month = mth;
+        }
+        
+        public int getDay() {
+            return day;
+        }
+        
+        public void setDay(int dy) {
+            day = dy;
         }
     }
 	

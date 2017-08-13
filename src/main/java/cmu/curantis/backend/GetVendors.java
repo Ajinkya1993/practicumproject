@@ -68,8 +68,11 @@ public class GetVendors {
 				if(!mp.containsKey(vb.getIdentity().getVendorName())) {
 					List<Double> list = new ArrayList<Double>();
 					list.add(vb.getExpenses());
-					list.add((double)vb.getIdentity().getMonth());
+					list.add((double)vb.getIdentity().getDay());
 					mp.put(vb.getIdentity().getVendorName(), list);
+					System.out.println("IN GET VENDOR DAO with vendor name "+vb.getIdentity().getVendorName());
+					System.out.println("Map entry with expense is "+list.get(0));
+					System.out.println("Map entry with day is "+list.get(1));
 				}
 			}
 			if (set == null || set.size() == 0) {
