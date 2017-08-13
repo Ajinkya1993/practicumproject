@@ -36,7 +36,7 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getAddress() != null) {
 			if(flag) {
-				sb.append("and address = '"+String.valueOf(bean.getAddress())+ "'");
+				sb.append(" and address = '"+String.valueOf(bean.getAddress())+ "'");
 			} else {
 				sb.append("address = '"+String.valueOf(bean.getAddress())+ "'");
 				flag = true;
@@ -44,7 +44,7 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getQualityTier() != null) {
 			if(flag) {
-				sb.append("and qualityTier = '"+String.valueOf(bean.getQualityTier())+ "'");
+				sb.append(" and qualityTier = '"+String.valueOf(bean.getQualityTier())+ "'");
 			} else {
 				sb.append("qualityTier = '"+String.valueOf(bean.getQualityTier())+ "'");
 				flag = true;
@@ -52,7 +52,7 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getOverallRating() != null) {
 			if(flag) {
-				sb.append("and overallRating >= '"+String.valueOf(bean.getOverallRating())+ "'");
+				sb.append(" and overallRating >= '"+String.valueOf(bean.getOverallRating())+ "'");
 			} else {
 				sb.append("overallRating >= '"+String.valueOf(bean.getOverallRating())+ "'");
 				flag = true;
@@ -60,7 +60,7 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getType() != null) {
 			if(flag) {
-				sb.append("and type = '"+String.valueOf(bean.getType())+ "'");
+				sb.append(" and type = '"+String.valueOf(bean.getType())+ "'");
 			} else {
 				sb.append("type = '"+String.valueOf(bean.getType())+ "'");
 				flag = true;
@@ -68,7 +68,7 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getMemoryCare()!= null) {
 			if(flag) {
-				sb.append("and memoryCare = "+bean.getMemoryCare());
+				sb.append(" and memoryCare = "+bean.getMemoryCare());
 			} else {
 				sb.append("memoryCare = "+bean.getMemoryCare());
 				flag = true;
@@ -76,7 +76,7 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getSkilledCare()!= null) {
 			if(flag) {
-				sb.append("and skilledCare = "+bean.getSkilledCare());
+				sb.append(" and skilledCare = "+bean.getSkilledCare());
 			} else {
 				sb.append("skilledCare = "+bean.getSkilledCare());
 				flag = true;
@@ -84,7 +84,7 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getUnskilledCare()!= null) {
 			if(flag) {
-				sb.append("and unskilledCare = "+bean.getUnskilledCare());
+				sb.append(" and unskilledCare = "+bean.getUnskilledCare());
 			} else {
 				sb.append("unskilledCare = "+bean.getUnskilledCare());
 				flag = true;
@@ -92,7 +92,7 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getIndependentCare()!= null) {
 			if(flag) {
-				sb.append("and independentCare = "+bean.getIndependentCare());
+				sb.append(" and independentCare = "+bean.getIndependentCare());
 			} else {
 				sb.append("independentCare = "+bean.getIndependentCare());
 				flag = true;
@@ -100,7 +100,7 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(minPrice != null && maxPrice != null) {
 			if(flag) {
-				sb.append("and price <= " + maxPrice + " and price >= " + minPrice);
+				sb.append(" and price <= " + maxPrice + " and price >= " + minPrice);
 			} else {
 				sb.append("price <= " + maxPrice + " and price >= " + minPrice);
 				flag = true;
