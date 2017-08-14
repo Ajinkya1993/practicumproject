@@ -10,6 +10,7 @@ public class VendorInput {
 	private String vendoraddress;
 	private String vendoraccountnumber;
 	private int month;
+	private int day;
 	private int replicationfactor;
 	private double expenses;
 	
@@ -60,6 +61,12 @@ public class VendorInput {
 	}
 	public void setExpenses(double expenses) {
 		this.expenses = expenses;
+	}
+	public int getDay() {
+		return day;
+	}
+	public void setDay(int day) {
+		this.day = day;
 	}
 
 }
