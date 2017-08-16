@@ -63,6 +63,7 @@ public class AddVendor {
 				newmonth = 1;
 			}
 			vmbean.getIdentity().setMonth(newmonth);
+			vmbean.getIdentity().setDay(input.getDay());
 			vmbean.getIdentity().setVendorName(input.getVendorname());
 			vmbean.setExpenses(input.getExpenses());
 			vmbean.setVendorAccount(input.getVendoraccountnumber());

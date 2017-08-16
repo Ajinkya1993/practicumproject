@@ -60,6 +60,7 @@ public class VendorMgmtDAO {
 		newub.getIdentity().setCircleId(cicid);
 		newub.getIdentity().setVendorName(vendorname);
 		newub.getIdentity().setMonth(mth);
+		newub.getIdentity().setDay(ub.getIdentity().getDay());
 		newub.setExpenses(ub.getExpenses());
 		newub.setVendorAccount(ub.getVendorAccount());
 		newub.setVendorAddr(ub.getVendorAddr());
