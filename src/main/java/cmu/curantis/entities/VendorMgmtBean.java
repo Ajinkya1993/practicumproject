@@ -110,6 +110,30 @@ public class VendorMgmtBean {
     @Column(name = "expenses")
     private double expenses;
     
+    /*
+     * Column to store the vendor type
+     */
+    @Column(name = "vendortype")
+    private String vendortype;
+    
+    /*
+     * Column to store the contact person
+     */
+    @Column(name = "contactperson")
+    private String contactperson;
+    
+    /*
+     * Column to store the phone number of vendor
+     */
+    @Column(name = "phoneno")
+    private long phoneno;  
+    
+    /*
+     * Column to store the payment source
+     */
+    @Column(name = "paymentsource")
+    private String paymentsource;
+    
     
     
     public Identity getIdentity() {
@@ -151,4 +175,28 @@ public class VendorMgmtBean {
     public void setExpenses(double exp) {
     	expenses = exp;
     }
+    public String getVendortype() {
+		return vendortype;
+	}
+	public void setVendortype(String vendortype) {
+		this.vendortype = vendortype;
+	}
+	public String getContactperson() {
+		return contactperson;
+	}
+	public void setContactperson(String contactperson) {
+		this.contactperson = contactperson;
+	}
+	public long getPhoneno() {
+		return phoneno;
+	}
+	public void setPhoneno(long l) {
+		this.phoneno = l;
+	}
+	public String getPaymentsource() {
+		return paymentsource;
+	}
+	public void setPaymentsource(String paymentsource) {
+		this.paymentsource = paymentsource;
+	}
 }

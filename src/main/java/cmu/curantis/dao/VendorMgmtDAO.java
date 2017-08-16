@@ -65,6 +65,11 @@ public class VendorMgmtDAO {
 		newub.setVendorAccount(ub.getVendorAccount());
 		newub.setVendorAddr(ub.getVendorAddr());
 		newub.setVendorWebsite(ub.getVendorWebsite());
+		newub.setContactperson(ub.getContactperson());
+		newub.setPaymentsource(ub.getPaymentsource());
+		newub.setPhoneno(ub.getPhoneno());
+		newub.setVendortype(ub.getVendortype());
+		
 		session.save(newub);
 		output.setSuccess(true);
 		return output;
@@ -107,6 +112,18 @@ public class VendorMgmtDAO {
 		}
 		if(ub.getIdentity().getVendorName() == null || ub.getIdentity().getVendorName().length() == 0) {
 			ub.getIdentity().setVendorName(crcb.getIdentity().getVendorName());
+		}
+		if(ub.getContactperson() == null || ub.getContactperson().length() == 0) {
+			ub.setContactperson(crcb.getContactperson());
+		}
+		if(ub.getPaymentsource() == null || ub.getPaymentsource().length() == 0) {
+			ub.setPaymentsource(crcb.getPaymentsource());
+		}
+		if(ub.getPhoneno() < 0 || ub.getPhoneno() > Integer.MAX_VALUE) {
+			ub.setPhoneno(crcb.getPhoneno());
+		}
+		if(ub.getVendortype() == null || ub.getVendortype().length() == 0) {
+			ub.setVendortype(crcb.getVendortype());
 		}
 		VendorMgmtBean mybean = (VendorMgmtBean)session.merge(ub);
 		session.update(mybean);

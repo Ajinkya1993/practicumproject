@@ -83,6 +83,10 @@ public class GetVendors {
 				long diffInMilis = miliSecondForDate2 - miliSecondForDate1;
 				long diffInDays = diffInMilis / (24 * 60 * 60 * 1000);
 				
+				//to take into account next months due (otherwise will fall short by 1) 
+				if(vb.getIdentity().getDay() < day_current) {
+					diffInDays++;
+				}
 				
 				set.add(vb.getIdentity().getVendorName());
 				//assuming monthly cost is the same throughout
@@ -103,7 +107,7 @@ public class GetVendors {
 					if(diffInDays > 0) {
 					list.add((double)diffInDays);
 					}else {
-						list.add(0.0);	
+						list.add((double)Integer.MAX_VALUE);	
 					}
 					}
 					mp.put(vb.getIdentity().getVendorName(), list);

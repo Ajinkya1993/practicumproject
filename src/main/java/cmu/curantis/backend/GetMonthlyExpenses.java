@@ -40,7 +40,7 @@ public class GetMonthlyExpenses {
 		VendorOutput output = new VendorOutput();
 		if(input.getCircleId() <= 0  || input.getMonth() <= 0 || input.getMonth() > 12) {
 			output.setSuccess(false);
-			output.setMessage("Missing parameters!");
+			output.setMessage("Missing parameters!"); 
 	    	return output;
 		}
 		VendorMgmtDAO vendormgmtdao = new VendorMgmtDAO();

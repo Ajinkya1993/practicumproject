@@ -12,7 +12,11 @@ public class VendorInput {
 	private int month;
 	private int day;
 	private int replicationfactor;
-	private double expenses;
+	private double expenses; 
+	private String vendortype;
+	private String contactperson;
+	private long phoneno;
+	private String paymentsource;
 	
 	public long getCircleId() {
 		return circleId;
@@ -67,6 +71,30 @@ public class VendorInput {
 	}
 	public void setDay(int day) {
 		this.day = day;
+	}
+	public String getVendortype() {
+		return vendortype;
+	}
+	public void setVendortype(String vendortype) {
+		this.vendortype = vendortype;
+	}
+	public String getContactperson() {
+		return contactperson;
+	}
+	public void setContactperson(String contactperson) {
+		this.contactperson = contactperson;
+	}
+	public long getPhoneno() {
+		return phoneno;
+	}
+	public void setPhoneno(long phoneno) {
+		this.phoneno = phoneno;
+	}
+	public String getPaymentsource() {
+		return paymentsource;
+	}
+	public void setPaymentsource(String paymentsource) {
+		this.paymentsource = paymentsource;
 	}
 
 }

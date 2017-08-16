@@ -53,6 +53,16 @@ public class AddVendor {
 				output.setSuccess(false);
 				return output;
 			}
+			if(input.getCircleId() <= 0) {
+				output.setMessage("Missing circleId!");
+		        output.setSuccess(false);
+		        return output;
+			}
+			if(input.getVendorname() == null || input.getVendorname().length() == 0) {
+				output.setMessage("Missing Vendor Name!");
+		        output.setSuccess(false);
+		        return output;
+			}
 			System.out.println("In add vendor with: "+input.getVendorname() + " " +input.getCircleId() + " " + input.getExpenses() +" " + input.getMonth() );
 			//add new vendor (replicate rows with changing months)
 			for(int i = 0; i < replication; i++) {
@@ -69,6 +79,10 @@ public class AddVendor {
 			vmbean.setVendorAccount(input.getVendoraccountnumber());
 			vmbean.setVendorAddr(input.getVendoraddress());
 			vmbean.setVendorWebsite(input.getVendorwebsite());
+			vmbean.setContactperson(input.getContactperson());
+			vmbean.setPaymentsource(input.getPaymentsource());
+			vmbean.setVendortype(input.getVendortype());
+			vmbean.setPhoneno(input.getPhoneno());
 			System.out.println("Before creating vendor "+vmbean.getVendorAddr() + " "+vmbean.getVendorAccount());
 			VendorOutput vo = vendormgmtdao.create(session, vmbean);
 			if (vo.isSuccess() == false) {

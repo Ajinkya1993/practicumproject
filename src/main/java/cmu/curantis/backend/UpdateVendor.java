@@ -48,6 +48,10 @@ public class UpdateVendor {
 			vmbean.setVendorAccount(input.getVendoraccountnumber());
 			vmbean.setVendorAddr(input.getVendoraddress());
 			vmbean.setVendorWebsite(input.getVendorwebsite());
+			vmbean.setContactperson(input.getContactperson());
+			vmbean.setPaymentsource(input.getPaymentsource());
+			vmbean.setVendortype(input.getVendortype());
+			vmbean.setPhoneno(input.getPhoneno());
 			System.out.println(input.getDay() + " " + input.getVendorname() + " " + vmbean.getVendorAccount() + " " + vmbean.getVendorAddr() + " " + vmbean.getVendorWebsite() + " " + vmbean.getExpenses());
 			if (!vendormgmtdao.update(session, vmbean)) {
 				output.setMessage("Could not update vendor!");
