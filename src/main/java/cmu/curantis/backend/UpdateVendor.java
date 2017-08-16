@@ -42,12 +42,13 @@ public class UpdateVendor {
 			vmbean.setIdentity();
 			vmbean.getIdentity().setCircleId(input.getCircleId());
 			vmbean.getIdentity().setMonth(input.getMonth());
+			vmbean.getIdentity().setDay(input.getDay());
 			vmbean.getIdentity().setVendorName(input.getVendorname());
 			vmbean.setExpenses(input.getExpenses());
 			vmbean.setVendorAccount(input.getVendoraccountnumber());
 			vmbean.setVendorAddr(input.getVendoraddress());
 			vmbean.setVendorWebsite(input.getVendorwebsite());
-			System.out.println(input.getVendorname() + " " + vmbean.getVendorAccount() + " " + vmbean.getVendorAddr() + " " + vmbean.getVendorWebsite() + " " + vmbean.getExpenses());
+			System.out.println(input.getDay() + " " + input.getVendorname() + " " + vmbean.getVendorAccount() + " " + vmbean.getVendorAddr() + " " + vmbean.getVendorWebsite() + " " + vmbean.getExpenses());
 			if (!vendormgmtdao.update(session, vmbean)) {
 				output.setMessage("Could not update vendor!");
 				System.out.println("Could not update");
