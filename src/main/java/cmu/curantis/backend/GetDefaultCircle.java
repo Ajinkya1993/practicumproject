@@ -35,15 +35,20 @@ public class GetDefaultCircle {
         Transaction tx = session.beginTransaction();
         
         List<CaregiverCircleBean> list = caregiverCircleDAO.getByEmail(session, input.getEmail());
-        if (list == null) {
-        	output.setSuccess(false);
-        	output.setMessage("Not in a cicle yet.");
-        } else {
-        	CaregiverCircleBean circle = list.get(0);
-        	output.setSuccess(true);
-        	output.setMessage("Get default circle success!");
-        	output.setCircleName(circle.getCirclename());
+        if (list != null) {
+        	for (CaregiverCircleBean circle : list) {
+        		if (circle.getJoinStatus()) {
+                	output.setSuccess(true);
+                	output.setMessage("Get default circle success!");
+                	output.setCircleName(circle.getCirclename());
+                	tx.commit();
+                    session.close();
+                    return output;
+        		}
+        	}
         }
+        output.setSuccess(false);
+    	output.setMessage("Not in a cicle yet.");
         
         tx.commit();
         session.close();
