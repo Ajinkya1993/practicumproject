@@ -107,11 +107,6 @@ public class ListDocPeople {
 				}
 			} catch (JSONException e) {
 				System.out.println("document not found for: " + mainKey);
-//				output.setSuccess(false);
-//				output.setMessage(e.getMessage());
-//				tx.commit();
-//		        session.close();
-//		        return output;
 			}
 		}
 		
