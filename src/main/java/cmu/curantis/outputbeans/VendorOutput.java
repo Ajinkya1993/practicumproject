@@ -17,7 +17,7 @@ public class VendorOutput {
 	private List<String> listv;
 	private Set<String> set;
 	private VendorMgmtBean vb;
-	private Map<String, List<Double>> mp;
+	private Map<String, VendorMgmtBean> mp;
 	public boolean isSuccess() {
 		return success;
 	}
@@ -64,10 +64,10 @@ public class VendorOutput {
 	public Set<String> getSet() {
 		return set;
 	}
-	public void setMap(Map<String, List<Double>> mp) {
+	public void setMap(Map<String, VendorMgmtBean> mp) {
 		this.mp = mp;
 	}
-	public Map<String, List<Double>> getMap() {
+	public Map<String, VendorMgmtBean> getMap() {
 		return mp;
 	}
 

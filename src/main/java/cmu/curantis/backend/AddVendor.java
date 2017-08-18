@@ -63,6 +63,9 @@ public class AddVendor {
 		        output.setSuccess(false);
 		        return output;
 			}
+			//harcoding some values
+			
+			
 			System.out.println("In add vendor with: "+input.getVendorname() + " " +input.getCircleId() + " " + input.getExpenses() +" " + input.getMonth() );
 			//add new vendor (replicate rows with changing months)
 			for(int i = 0; i < replication; i++) {
@@ -82,6 +85,8 @@ public class AddVendor {
 			vmbean.setContactperson(input.getContactperson());
 			vmbean.setPaymentsource(input.getPaymentsource());
 			vmbean.setVendortype(input.getVendortype());
+			vmbean.setPhoneno(input.getPhoneno());
+			
 			vmbean.setPhoneno(input.getPhoneno());
 			System.out.println("Before creating vendor "+vmbean.getVendorAddr() + " "+vmbean.getVendorAccount());
 			VendorOutput vo = vendormgmtdao.create(session, vmbean);

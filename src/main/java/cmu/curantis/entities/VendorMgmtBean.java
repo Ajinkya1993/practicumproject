@@ -134,7 +134,11 @@ public class VendorMgmtBean {
     @Column(name = "paymentsource")
     private String paymentsource;
     
+    //If notification is to be pushed or not
+    private Boolean notification;
     
+    //If notification to be pushed then the number of remaining days for the payment due date
+    private long remdays;
     
     public Identity getIdentity() {
     	return identity;
@@ -198,5 +202,21 @@ public class VendorMgmtBean {
 	}
 	public void setPaymentsource(String paymentsource) {
 		this.paymentsource = paymentsource;
+	}
+
+	public Boolean getNotification() {
+		return notification;
+	}
+
+	public void setNotification(Boolean notification) {
+		this.notification = notification;
+	}
+
+	public long getRemdays() {
+		return remdays;
+	}
+
+	public void setRemdays(long remdays) {
+		this.remdays = remdays;
 	}
 }

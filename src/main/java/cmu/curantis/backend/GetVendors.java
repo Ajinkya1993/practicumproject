@@ -74,7 +74,7 @@ public class GetVendors {
 		    long miliSecondForDate1 = calendar1.getTimeInMillis();
 		    
 			//to get monthly cost
-			Map<String, List<Double>> mp = new HashMap<String, List<Double>>();
+			Map<String, VendorMgmtBean> mp = new HashMap<String, VendorMgmtBean>();
 			for(VendorMgmtBean vb: lst) {
 				
 				Calendar calendar2 = Calendar.getInstance();
@@ -91,40 +91,39 @@ public class GetVendors {
 				set.add(vb.getIdentity().getVendorName());
 				//assuming monthly cost is the same throughout
 				if(!mp.containsKey(vb.getIdentity().getVendorName())) {
-					List<Double> list = new ArrayList<Double>();
-					list.add(vb.getExpenses());
-					list.add((double) vb.getIdentity().getMonth());
+					List<String> list = new ArrayList<String>();
+
 					//0 denotes false 1 denotes true, so if 1 then it means they need notification
 					if(0 < diffInDays && diffInDays <= 7) {
-					list.add(1.0);
+					vb.setNotification(true);
 					if(diffInDays > 0) {
-					list.add((double)diffInDays);
+						vb.setRemdays(diffInDays);
 					} else {
-						list.add(0.0);	
+						vb.setRemdays(0);
 					}
 					} else {
-					list.add(0.0);	
+						vb.setNotification(false);	
 					if(diffInDays > 0) {
-					list.add((double)diffInDays);
+						vb.setRemdays(diffInDays);
 					}else {
-						list.add((double)Integer.MAX_VALUE);	
+						vb.setRemdays(Integer.MAX_VALUE);
 					}
 					}
-					mp.put(vb.getIdentity().getVendorName(), list);
+					mp.put(vb.getIdentity().getVendorName(), vb);
 				}else {
-					List<Double> lstnw = mp.get(vb.getIdentity().getVendorName());
+					VendorMgmtBean vmb = mp.get(vb.getIdentity().getVendorName());
 					
 					//lst.get(2) is a boolean to push notification or not...if not, then latest no of rem days should be calculated
-					if(lstnw.get(2) == 0) {
+					if(vmb.getNotification() == false) {
 						if(0 < diffInDays && diffInDays <= 7){
-							lstnw.set(1, (double) vb.getIdentity().getMonth());
-							lstnw.set(2, 1.0);
-							lstnw.set(3, (double)diffInDays);
-							mp.put(vb.getIdentity().getVendorName(), lstnw);
+							vmb.getIdentity().setMonth(vb.getIdentity().getMonth());
+							vmb.setNotification(true);
+							vmb.setRemdays(diffInDays);
+							mp.put(vb.getIdentity().getVendorName(), vmb);
 						} else {
-							if(0 <diffInDays && diffInDays < lstnw.get(3)) { 
-								lstnw.set(1, (double) vb.getIdentity().getMonth());
-								lstnw.set(3, (double)diffInDays);
+							if(0 <diffInDays && diffInDays < vmb.getRemdays()) { 
+								vmb.getIdentity().setMonth(vb.getIdentity().getMonth());
+								vmb.setRemdays(diffInDays);
 							}
 						}
 					}

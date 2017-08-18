@@ -61,24 +61,23 @@ public class GetNotification {
 			//may need to check for lower/upper case
 			
 			//to get monthly cost
-			Map<String, List<Double>> mp = new HashMap<String, List<Double>>();
+			Map<String, VendorMgmtBean> mp = new HashMap<String, VendorMgmtBean>();
 			for(VendorMgmtBean vb: lst) {
 				set.add(vb.getIdentity().getVendorName());
 				//assuming monthly cost is the same throughout
 				if(!mp.containsKey(vb.getIdentity().getVendorName())) {
 					List<Double> list = new ArrayList<Double>();
-					list.add((double)vb.getIdentity().getDay());
-					list.add((double)vb.getIdentity().getMonth());
-					mp.put(vb.getIdentity().getVendorName(), list);
-					System.out.println("IN GET VENDOR DAO with vendor name "+vb.getIdentity().getVendorName());
-					System.out.println("Map entry with expense is "+list.get(0));
-					System.out.println("Map entry with day is "+list.get(1));
+
+					mp.put(vb.getIdentity().getVendorName(), vb);
+					//System.out.println("IN GET VENDOR DAO with vendor name "+vb.getIdentity().getVendorName());
+					//System.out.println("Map entry with expense is "+list.get(0));
+					//System.out.println("Map entry with day is "+list.get(1));
 				} else {
-					List<Double> lstnw = mp.get(vb.getIdentity().getVendorName());
-					if(lstnw.get(1) != null && lstnw.get(1) < (double)vb.getIdentity().getMonth()) {
-						lstnw.remove(1);
-						lstnw.add((double)vb.getIdentity().getMonth());
-						mp.put(vb.getIdentity().getVendorName(), lstnw);
+					//List<Double> lstnw = mp.get(vb.getIdentity().getVendorName());
+					VendorMgmtBean vbeans = mp.get(vb.getIdentity().getVendorName());
+					if(vbeans.getIdentity().getMonth() > 0 && vbeans.getIdentity().getMonth() < vb.getIdentity().getMonth()) {
+						vbeans.getIdentity().setMonth(vb.getIdentity().getMonth());
+						mp.put(vb.getIdentity().getVendorName(), vbeans);
 					}
 				}
 			}
