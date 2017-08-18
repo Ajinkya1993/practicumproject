@@ -15,7 +15,26 @@ import cmu.curantis.entities.CaregiverInfoBean;
 import cmu.curantis.entities.SeniorHousingCuratedBean;
 import cmu.curantis.inputbeans.LoginInput;
 import cmu.curantis.outputbeans.LoginOutput;
-
+/**
+ * The resource that deals with login actions.
+ * 
+ * Input fields: email, password
+ * Input example:
+ * {"email":"john@gmail.com","password":"123"}
+ * 
+ * Output fields: email, firstName, lastName, message, success
+ * Output example:
+ * {
+    "email": "john@gmail.com",
+    "firstName": "John",
+    "lastName": "Banta",
+    "message": "Login success!",
+    "success": true
+   }
+ * 
+ * @author jingzhu
+ *
+ */
 @Path("/login")
 public class Login {
 	
