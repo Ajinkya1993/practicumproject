@@ -46,6 +46,9 @@ public class GetUsersOfACircle {
         } else {
             List<UserOfCircle> userList = new ArrayList<UserOfCircle>();
             for (CaregiverCircleBean circleBean : beans) {
+                if (!circleBean.getJoinStatus()) {
+                    continue;
+                }
                 UserOfCircle obj = new UserOfCircle();
                 String email = circleBean.getIdentity().getEmail();
                 obj.setEmail(email);
@@ -62,6 +65,8 @@ public class GetUsersOfACircle {
                     obj.setMiddleName(infoBean.getMiddleName());
                     obj.setLastName(infoBean.getLastName());
                     obj.setPhoneNumber(infoBean.getPhoneNumber());
+                    obj.setNatureOfRel(circleBean.getRelationshipNature());
+                    obj.setPrimaryCaregiver(circleBean.getPrimaryCaregiver());
                 }
                 userList.add(obj);
             }

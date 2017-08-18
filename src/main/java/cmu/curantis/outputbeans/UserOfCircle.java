@@ -9,6 +9,20 @@ public class UserOfCircle {
     private String middleName;
     private String lastName;
     private String phoneNumber;
+    private String natureOfRel;
+    private boolean primaryCaregiver;
+    public String getNatureOfRel() {
+        return natureOfRel;
+    }
+    public void setNatureOfRel(String natureOfRel) {
+        this.natureOfRel = natureOfRel;
+    }
+    public boolean isPrimaryCaregiver() {
+        return primaryCaregiver;
+    }
+    public void setPrimaryCaregiver(boolean primaryCaregiver) {
+        this.primaryCaregiver = primaryCaregiver;
+    }
     public String getEmail() {
         return email;
     }
