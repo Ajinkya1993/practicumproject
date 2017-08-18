@@ -16,7 +16,24 @@ import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverCircleBean;
 import cmu.curantis.inputbeans.CircleInput;
 import cmu.curantis.outputbeans.DefaultCircleOutput;
-
+/**
+ * The resource that returns the default careteam of a caregiver.
+ * 
+ * Input fields: email
+ * Input example:
+ * {"email":"john@gmail.com"}
+ * 
+ * Output fields: circleId, circleName, message, success
+ * Output example:
+ * {
+    "circleId": 1,
+    "circleName": "John Banta",
+    "message": "Get default circle success!",
+    "success": true
+   }
+ * @author jingzhu
+ *
+ */
 @Path("/getDefaultCircle")
 public class GetDefaultCircle {
 	@POST
@@ -40,6 +57,7 @@ public class GetDefaultCircle {
         		if (circle.getJoinStatus()) {
                 	output.setSuccess(true);
                 	output.setMessage("Get default circle success!");
+                	output.setCircleId(circle.getIdentity().getCircleID());
                 	output.setCircleName(circle.getCirclename());
                 	tx.commit();
                     session.close();

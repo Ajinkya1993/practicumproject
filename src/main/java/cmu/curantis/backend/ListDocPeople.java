@@ -22,7 +22,36 @@ import cmu.curantis.entities.DocumentMgmtBean;
 import cmu.curantis.inputbeans.DocumentInput;
 import cmu.curantis.outputbeans.DocumentPeople;
 import cmu.curantis.outputbeans.DocumentPeopleOutput;
-
+/**
+ * The resource that returns the people who have access to a given document.
+ * 
+ * Input fields: email, circleId, service, documentName
+ * Input example:
+ * {"email":"john@gmail.com","circleId":1,"service":1,"documentName":"f8843.pdf"}
+ * 
+ * Output fields: people (accessLevel, email), message, success
+ * Output example:
+ * {
+    "message": "Get people success!",
+    "people": [
+        {
+            "accessLevel": true,
+            "email": "elizabeth@gmail.com"
+        },
+        {
+            "accessLevel": false,
+            "email": "jessica@gmail.com"
+        },
+        {
+            "accessLevel": true,
+            "email": "john@gmail.com"
+        }
+    ],
+    "success": true
+  }
+ * @author jingzhu
+ *
+ */
 @Path("/listpeople")
 public class ListDocPeople {
 	@POST
