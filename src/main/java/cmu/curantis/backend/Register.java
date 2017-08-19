@@ -14,7 +14,33 @@ import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.CaregiverInfoBean;
 import cmu.curantis.inputbeans.RegisterInput;
 import cmu.curantis.outputbeans.LoginOutput;
-
+/**
+ * The resource that deals with register actions.
+ * 
+ * Input fields: email, firstName, middleName, lastName, password, address, phoneNo
+ * Input example:
+ * {
+ *  "email":"j@gmail.com",
+ *  "firstName":"John",
+ *  "lastName":"Smith",
+ *  "password":"123",
+ *  "address":"5000 Forbes Ave",
+ *  "phoneNo":"1234567"
+ * }
+ * 
+ * Output fields: email, firstName, lastName, message, success
+ * Output example:
+ * {
+    "email": "j@gmail.com",
+    "firstName": "John",
+    "lastName": "Smith",
+    "message": "Register success!",
+    "success": true
+   }
+ * 
+ * @author jingzhu
+ *
+ */
 @Path("/register")
 public class Register {
 	@POST
