@@ -28,9 +28,9 @@ public class SeniorHousingCuratedDAO {
 		}
 		if(bean.getZip() != null) {
 			if(flag) {
-				sb.append(" and zip = '"+String.valueOf(bean.getZip())+ "'");
+				sb.append(" and zip = "+String.valueOf(bean.getZip())+ "");
 			} else {
-				sb.append("zip = '"+ String.valueOf(bean.getZip())+ "'");
+				sb.append("zip = "+ String.valueOf(bean.getZip())+ "");
 				flag = true;
 			}
 		}
