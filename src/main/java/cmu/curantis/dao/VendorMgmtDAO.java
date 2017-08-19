@@ -90,7 +90,7 @@ public class VendorMgmtDAO {
 		}
 		for(int i = 0; i <list.size(); i++) {
 		VendorMgmtBean crcb = list.get(i);
-		System.out.println("Inside DAO method "+ ub.getVendorAccount() +  " " +  ub.getVendorAddr() + " " + ub.getVendorWebsite()+ " " + ub.getExpenses() + " " +  crcb.getIdentity().getMonth() + " " + ub.getIdentity().getCircleId());
+		System.out.println("Inside DAO method "+ ub.getVendorAccount() +  " " +  ub.getVendorAddr() + " " + ub.getVendorWebsite()+ " " + ub.getExpenses() + " " +  crcb.getIdentity().getMonth() + " " + ub.getIdentity().getCircleId() + " " + ub.getPhoneno() + " " + ub.getContactperson() + " " + ub.getPaymentsource() + " " + ub.getVendortype()) ;
 		//updation of circle name is included here and not in another method.
 		if(ub.getVendorAccount() == null || ub.getVendorAccount().length() == 0) {
 			ub.setVendorAccount(crcb.getVendorAccount());
@@ -108,7 +108,7 @@ public class VendorMgmtDAO {
 			ub.getIdentity().setMonth(crcb.getIdentity().getMonth());
 			ub.getIdentity().setDay(crcb.getIdentity().getDay());
 		//}
-		if(ub.getIdentity().getCircleId() <= 0) {
+		if(ub.getIdentity().getCircleId() <= 0) {  
 			ub.getIdentity().setCircleId(crcb.getIdentity().getCircleId());
 		}
 		if(ub.getIdentity().getVendorName() == null || ub.getIdentity().getVendorName().length() == 0) {
@@ -120,7 +120,7 @@ public class VendorMgmtDAO {
 		if(ub.getPaymentsource() == null || ub.getPaymentsource().length() == 0) {
 			ub.setPaymentsource(crcb.getPaymentsource());
 		}
-		if(ub.getPhoneno() < 0 || ub.getPhoneno() > Integer.MAX_VALUE) {
+		if(ub.getPhoneno() < 0) {  
 			ub.setPhoneno(crcb.getPhoneno());
 		}
 		if(ub.getVendortype() == null || ub.getVendortype().length() == 0) {
