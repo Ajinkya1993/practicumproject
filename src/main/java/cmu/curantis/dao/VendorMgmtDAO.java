@@ -77,7 +77,7 @@ public class VendorMgmtDAO {
 	
 	
 	public Boolean update(Session session, VendorMgmtBean ub) {
-
+		
 		long cicid = ub.getIdentity().getCircleId();
 		String vendorname = ub.getIdentity().getVendorName();
 		System.out.println("Circle ID and vendor name are: "+ cicid + " " + vendorname);
@@ -106,6 +106,7 @@ public class VendorMgmtDAO {
 		}
 		//if(ub.getIdentity().getMonth() <= 0 || ub.getIdentity().getMonth() > 12) {
 			ub.getIdentity().setMonth(crcb.getIdentity().getMonth());
+			ub.getIdentity().setDay(crcb.getIdentity().getDay());
 		//}
 		if(ub.getIdentity().getCircleId() <= 0) {
 			ub.getIdentity().setCircleId(crcb.getIdentity().getCircleId());

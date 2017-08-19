@@ -66,7 +66,7 @@ public class GetUsersOfACircle {
                     obj.setLastName(infoBean.getLastName());
                     obj.setPhoneNumber(infoBean.getPhoneNumber());
                     obj.setNatureOfRel(circleBean.getRelationshipNature());
-                    obj.setPrimaryCaregiver(circleBean.getPrimaryCaregiver());
+                    obj.setPrimaryCaregiver(circleBean.getPrimaryCaregiver());   
                 }
                 userList.add(obj);
             }
