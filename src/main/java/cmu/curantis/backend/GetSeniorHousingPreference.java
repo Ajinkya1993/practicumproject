@@ -14,7 +14,22 @@ import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.SeniorHousingCircleBean;
 import cmu.curantis.inputbeans.SeniorHousingPrfInput;
 import cmu.curantis.outputbeans.SeniorHousingPrfOutput;
-
+/**
+ * The resource that fetch the senior housing preference information of a care team.
+ * 
+ * Input fields: circleId
+ * Input example: {"circleId":1}
+ * 
+ * Output fields: message, preference, success
+ * Output example: 
+ * {
+    "message": "Get preference successful!",
+    "preference": "{\"location\":\"Pittsburgh\",\"price\":\"100-200\"}",
+    "success": true
+   }
+ * @author jingzhu
+ *
+ */
 @Path("/seniorhousing/getPreference")
 public class GetSeniorHousingPreference {
 	@POST
