@@ -21,7 +21,27 @@ import cmu.curantis.entities.CaregiverInfoBean;
 import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.inputbeans.CircleInput;
 import cmu.curantis.outputbeans.CircleOutput;
-
+/**
+ * The resource that deals with adding a person to a care team(circle)
+ * 
+ * Input fields: email, circleId, emailToAdd
+ * Input example:
+ * {
+ * "email": "john@gmail.com",
+ * "circleId": "1",
+ * "emailToAdd": "hillary@gmail.com"
+ * }
+ * 
+ * Output fields: success, circleId, message, subscribedServices
+ * {
+ * "success": true,
+ * "circleId": 1,
+ * "message": "Added to circle!"
+ * }
+ * 
+ * @author junyisong
+ *
+ */
 @Path("/addToCircle")
 public class AddToCircle {
     @POST

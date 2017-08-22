@@ -17,7 +17,34 @@ import cmu.curantis.entities.CircleSubsBean;
 import cmu.curantis.inputbeans.CircleInput;
 import cmu.curantis.inputbeans.LovedOneInput;
 import cmu.curantis.outputbeans.CircleOutput;
-
+/**
+ * The resource that deals with creating a care team(circle).
+ * 
+ * Input fields: email, circleName, triggerEvent, natureOfRel, geoRel, lovedone_firstName, lovedone_LastName, pictureUrl, lovedoneAddress
+ * Input example:
+ * {
+ * "email":"john@gmail.com", 
+ * "circleName":"John Banta",
+ * "triggerEvent":"Heart Attack",
+ * "natureOfRel":"Son",
+ * "geoRel":"Local",
+ * "lovedone_firstName":"Carl",
+ * "lovedone_LastName":"Banta",
+ * "pictureUrl":"www.s3.com",
+ * "lovedoneAddress":"Greater Chicago Area",
+ * }
+ * 
+ * Output fields: circleId, success, message
+ * Output example:
+ * {
+ * "circleId": 1,
+ * "success": true,
+ * "message": "Circle created!"
+ * }
+ * 
+ * @author junyisong
+ *
+ */
 @Path("/createcircle")
 public class CreateCircle {
 	@POST
