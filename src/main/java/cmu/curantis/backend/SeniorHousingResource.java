@@ -18,6 +18,19 @@ import cmu.curantis.inputbeans.SeniorHousingCuratedInput;
 import cmu.curantis.outputbeans.SeniorHousingCuratedOutput;
 
 
+/**
+ * The resource that deals with retrieving documents for a careteam's service.
+ * 
+ * Input fields: filters
+ * Input example:
+ * {"city":"chicago", "maxPrice":"3500"}
+ * 
+ * Output fields: facility details
+ 
+ * @author namitasibal
+ *
+ */
+
 @Path("/seniorHousing")
 public class SeniorHousingResource {
 

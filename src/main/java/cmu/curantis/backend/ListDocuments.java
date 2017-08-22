@@ -13,6 +13,31 @@ import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.inputbeans.DocumentInput;
 import cmu.curantis.outputbeans.ListDocumentsOutput;
 
+/**
+ * The resource that deals with retrieving documents for a careteam's service.
+ * 
+ * Input fields: email, password
+ * Input example:
+ * {"email":"john@gmail.com, "service":"2", "circleId" "1"}
+ * 
+ * Output fields: accessLevel, docname, docurl, message, success
+ * Output example:
+ * {
+    "listofdocs": [
+        {
+            "accessLevel": true,
+            "docAccessLevel": true,
+            "docname": "abc.pdf",
+            "docurl": "https://team-curantis-jing.s3-us-west-2.amazonaws.com/Team1/SeniorHousing/abc.pdf"
+        }
+    ],
+    "message": "Received list of documents!",
+    "success": true
+}
+ * 
+ * @author namitasibal
+ *
+ */
 @Path("/listDocuments")
 public class ListDocuments {
 	@POST

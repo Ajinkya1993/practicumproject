@@ -21,6 +21,25 @@ import cmu.curantis.inputbeans.RegisterInput;
 import cmu.curantis.outputbeans.LoginOutput;
 import cmu.curantis.outputbeans.PaymentOutput;
 
+/**
+ * The resource that deals with login actions.
+ * 
+ * Input fields: email, circleId, card details
+ * Input example:
+ * {"email":"john@gmail.com","circleId":"1", "cardNo":"123456", "cardmemberFirstName":"John", 
+ * "cardMemberLastName":"Banta", "expirationDate":"08/09/2018","cardType":"Visa", "cvvNo":"987" }
+ * 
+ * Output fields: message, success
+ * Output example:
+ * {
+    "message": "Add Payment Success!",
+    "success": true
+   }
+ * 
+ * @author namitasibal
+ *
+ */
+
 @Path("/addpayment")
 public class AddPayment {
 	@POST
