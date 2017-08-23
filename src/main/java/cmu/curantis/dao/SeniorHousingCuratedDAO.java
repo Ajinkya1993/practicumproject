@@ -59,10 +59,21 @@ public class SeniorHousingCuratedDAO {
 			}
 		}
 		if(bean.getType() != null) {
+			String[] values = String.valueOf(bean.getType()).split(",");
+			StringBuffer mySb = new StringBuffer();
+			mySb.append("( ");
+			for(int i = 0; i < values.length-1; i++) {
+				mySb.append("'"+ values[i] + "'");
+				mySb.append(" , ");
+			}
+			mySb.append("'"+ values[values.length-1]+ "'");
+			mySb.append(" )");
 			if(flag) {
-				sb.append(" and type = '"+String.valueOf(bean.getType())+ "'");
+				System.out.println(String.valueOf(bean.getType()));
+				sb.append(" and type IN " + mySb.toString());
 			} else {
-				sb.append("type = '"+String.valueOf(bean.getType())+ "'");
+				System.out.println(String.valueOf(bean.getType()));
+				sb.append("type IN " + mySb.toString());
 				flag = true;
 			}
 		}
