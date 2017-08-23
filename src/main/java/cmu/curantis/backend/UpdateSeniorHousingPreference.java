@@ -14,7 +14,21 @@ import cmu.curantis.dao.SessionUtil;
 import cmu.curantis.entities.SeniorHousingCircleBean;
 import cmu.curantis.inputbeans.SeniorHousingPrfInput;
 import cmu.curantis.outputbeans.SeniorHousingPrfOutput;
-
+/**
+ * The resource that updates the senior housing preference information.
+ * 
+ * Input fields: circleId, preference
+ * Input example: {"circleId":1,"preference":"{\"price\":\"150-200\"}"}
+ * 
+ * Output fileds: message, success
+ * Output example:
+ * {
+    "message": "Preference updated!",
+    "success": true
+   }
+ * @author jingzhu
+ *
+ */
 @Path("/seniorhousing/updatePreference")
 public class UpdateSeniorHousingPreference {
 	@POST
