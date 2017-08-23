@@ -62,7 +62,11 @@ public class ViewLovedoneInfo {
         //output.setSubscribedServices("Housing Service > Ancillary Service");
         CircleSubsBean cic_op = circleSubsDAO.getCircleSubs(session, csubs);
         
+        
         output.setPictureUrl(cic_op.getPictureUrl());
+        if(cic_op.getPictureUrl() == null) {
+        	output.setPictureUrl("www.abc.com");
+        }
         	output.setLovedoneAddress(cic_op.getLovedoneAddress());	
         
         	output.setLovedone_firstName(cic_op.getLovedone_firstName());	
