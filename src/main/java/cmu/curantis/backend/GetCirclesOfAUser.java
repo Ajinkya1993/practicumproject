@@ -18,7 +18,34 @@ import cmu.curantis.entities.CaregiverCircleBean;
 import cmu.curantis.inputbeans.CircleInput;
 import cmu.curantis.outputbeans.CircleInfo;
 import cmu.curantis.outputbeans.CircleListOutput;
-
+/**
+ * The resource that reals with getting all the circles that a user is in.
+ * 
+ * Input fields: email
+ * Input example:
+ * {
+ * "email": "john@gmail.com"
+ * }
+ * 
+ * Output fields: message, list, success
+ * Output example:
+ * {
+ * "message": ""These are the circles this caregiver is in!",
+ * "list": [
+        {
+            "circleId": 1,
+            "circleName": "Maxine Banta"
+        },
+        {
+            "circleId": 2,
+            "circleName": "Tony Maushart"
+        }
+    ],
+ * "success": true
+ * }
+ * @author junyisong
+ *
+ */
 @Path("/getcirclesofauser")
 public class GetCirclesOfAUser {
     @POST

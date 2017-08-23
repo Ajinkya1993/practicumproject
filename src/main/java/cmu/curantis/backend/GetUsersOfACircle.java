@@ -21,7 +21,44 @@ import cmu.curantis.entities.CaregiverInfoBean;
 import cmu.curantis.inputbeans.CircleInput;
 import cmu.curantis.outputbeans.UserListOutput;
 import cmu.curantis.outputbeans.UserOfCircle;
-
+/**
+ * The resource that delas with getting all the members in a care team
+ * 
+ * Input fields: circleId
+ * Input example:
+ * {
+ * "circleId": 1
+ * }
+ * 
+ * Output fields: list, message, success
+ * Output example:
+ * {
+ * "list": [
+        {
+            "email": "barry@gmail.com",
+            "firstName": "Barry",
+            "lastName": "Siegel",
+            "middleName": null,
+            "natureOfRel": "Lawyer",
+            "phoneNumber": "2122016790",
+            "primaryCaregiver": false
+        },
+        {
+            "email": "john@gmail.com",
+            "firstName": "John",
+            "lastName": "Banta",
+            "middleName": null,
+            "natureOfRel": "Son",
+            "phoneNumber": "3122976560",
+            "primaryCaregiver": true
+        }
+    ],
+  "message": "These are caregivers in this circle!",
+  "success": true
+ * }
+ * @author junyisong
+ *
+ */
 @Path("/getusersofacircle")
 public class GetUsersOfACircle {
     @POST
