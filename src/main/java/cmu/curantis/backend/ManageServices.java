@@ -28,6 +28,8 @@ public class ManageServices {
 	
 	/*
 	 * send the extra services to be added in the input bean as JSON Array.
+	 * Input Fields: circleId (long), services (String)  - multiple services can be added in one request with the separator as “->”
+	 * Output Fields: Fields: subscribedServices (String) - multiples services can be separated with “->”, success (Boolean), message (String)
 	 */
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -87,6 +89,8 @@ public class ManageServices {
 	
 	/*
 	 * send the services to be deleted in the input bean as JSON Array.
+	 * Input Fields : circleId (long), services (String)  - multiple services can be unsubscribed in one request with the separator as “->”
+	 * Output Fields: Fields: subscribedServices (String) - multiples services can be separated with “->”, success (Boolean), message (String)
 	 */
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -150,6 +154,12 @@ public class ManageServices {
 		}
 		
 	}
+	
+	/*
+	 * This resource allows the user to know which services he is subscribed to
+	 * Input Fields : circleId (long)
+	 * Output Fields: subscribedServices (String) , success (Boolean), message (String)
+	 */
 	
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
