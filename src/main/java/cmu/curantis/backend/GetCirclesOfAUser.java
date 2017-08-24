@@ -43,7 +43,7 @@ import cmu.curantis.outputbeans.CircleListOutput;
     ],
  * "success": true
  * }
- * @author junyisong
+ * @author curantisTeamCMU
  *
  */
 @Path("/getcirclesofauser")

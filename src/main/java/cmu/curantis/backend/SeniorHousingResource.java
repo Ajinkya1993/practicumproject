@@ -27,7 +27,7 @@ import cmu.curantis.outputbeans.SeniorHousingCuratedOutput;
  * 
  * Output fields: facility details
  
- * @author namitasibal
+ * @author curantisTeamCMU
  *
  */
 

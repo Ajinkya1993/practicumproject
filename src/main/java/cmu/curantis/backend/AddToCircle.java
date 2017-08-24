@@ -39,7 +39,7 @@ import cmu.curantis.outputbeans.CircleOutput;
  * "message": "Added to circle!"
  * }
  * 
- * @author junyisong
+ * @author curantisTeamCMU
  *
  */
 @Path("/addToCircle")

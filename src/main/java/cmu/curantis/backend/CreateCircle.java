@@ -42,7 +42,7 @@ import cmu.curantis.outputbeans.CircleOutput;
  * "message": "Circle created!"
  * }
  * 
- * @author junyisong
+ * @author curantisTeamCMU
  *
  */
 @Path("/createcircle")

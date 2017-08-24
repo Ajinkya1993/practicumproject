@@ -26,7 +26,7 @@ import cmu.curantis.outputbeans.SeniorHousingPrfOutput;
     "message": "Add preference successful!",
     "success": true
    }
- * @author jingzhu
+ * @author curantisTeamCMU
  *
  */
 @Path("/seniorhousing/addPreference")

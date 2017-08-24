@@ -36,7 +36,7 @@ import cmu.curantis.outputbeans.PaymentOutput;
     "success": true
    }
  * 
- * @author namitasibal
+ * @author curantisTeamCMU
  *
  */
 

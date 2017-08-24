@@ -31,7 +31,7 @@ import cmu.curantis.outputbeans.DefaultCircleOutput;
     "message": "Get default circle success!",
     "success": true
    }
- * @author jingzhu
+ * @author curantisTeamCMU
  *
  */
 @Path("/getDefaultCircle")

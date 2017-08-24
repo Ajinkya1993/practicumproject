@@ -38,7 +38,7 @@ import cmu.curantis.outputbeans.LoginOutput;
     "success": true
    }
  * 
- * @author jingzhu
+ * @author curantisTeamCMU
  *
  */
 @Path("/register")

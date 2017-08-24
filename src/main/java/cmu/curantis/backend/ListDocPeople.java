@@ -49,7 +49,7 @@ import cmu.curantis.outputbeans.DocumentPeopleOutput;
     ],
     "success": true
   }
- * @author jingzhu
+ * @author curantisTeamCMU
  *
  */
 @Path("/listpeople")

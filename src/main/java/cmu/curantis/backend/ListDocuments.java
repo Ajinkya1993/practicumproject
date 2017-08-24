@@ -35,7 +35,7 @@ import cmu.curantis.outputbeans.ListDocumentsOutput;
     "success": true
 }
  * 
- * @author namitasibal
+ * @author curantisTeamCMU
  *
  */
 @Path("/listDocuments")

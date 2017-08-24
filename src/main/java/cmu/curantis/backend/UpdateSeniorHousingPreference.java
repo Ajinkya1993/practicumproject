@@ -26,7 +26,7 @@ import cmu.curantis.outputbeans.SeniorHousingPrfOutput;
     "message": "Preference updated!",
     "success": true
    }
- * @author jingzhu
+ * @author curantisTeamCMU
  *
  */
 @Path("/seniorhousing/updatePreference")

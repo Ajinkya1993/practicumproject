@@ -27,7 +27,7 @@ import cmu.curantis.outputbeans.SeniorHousingPrfOutput;
     "preference": "{\"location\":\"Pittsburgh\",\"price\":\"100-200\"}",
     "success": true
    }
- * @author jingzhu
+ * @author curantisTeamCMU
  *
  */
 @Path("/seniorhousing/getPreference")

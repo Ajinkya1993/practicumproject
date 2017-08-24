@@ -56,7 +56,7 @@ import cmu.curantis.outputbeans.UserOfCircle;
   "message": "These are caregivers in this circle!",
   "success": true
  * }
- * @author junyisong
+ * @author curantisTeamCMU
  *
  */
 @Path("/getusersofacircle")
