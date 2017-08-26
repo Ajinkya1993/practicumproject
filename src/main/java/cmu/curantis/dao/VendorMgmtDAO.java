@@ -43,17 +43,6 @@ public class VendorMgmtDAO {
 		long cicid = ub.getIdentity().getCircleId();
 		String vendorname = ub.getIdentity().getVendorName();
 		int mth = ub.getIdentity().getMonth();
-        
-        /*
-		Query query = session.createQuery("FROM VendorMgmtBean WHERE vendorName = :vendorName AND circleId = :circleId AND month = :month");
-        query.setString("vendorName",vendorname);
-        query.setLong("circleId",cicid);
-        query.setInteger("month",mth);
-        List<VendorMgmtBean> lst =  query.list();
-		
-		if(lst.size() > 0) {
-			return false;
-		}*/
 		
 		VendorMgmtBean newub = new VendorMgmtBean();
 		newub.setIdentity();
@@ -75,12 +64,13 @@ public class VendorMgmtDAO {
 		return output;
 	}
 	
-	
+	/**
+	 * To update all rows for a given vendor.(as there is replication)
+	 */
 	public Boolean update(Session session, VendorMgmtBean ub) {
 		
 		long cicid = ub.getIdentity().getCircleId();
 		String vendorname = ub.getIdentity().getVendorName();
-		System.out.println("Circle ID and vendor name are: "+ cicid + " " + vendorname);
 		Query query = session.createQuery("from VendorMgmtBean where circleId = :circleId AND vendorName = :vendorName");
 		query.setLong("circleId", cicid);
 		query.setString("vendorName", vendorname);
@@ -90,8 +80,6 @@ public class VendorMgmtDAO {
 		}
 		for(int i = 0; i <list.size(); i++) {
 		VendorMgmtBean crcb = list.get(i);
-		System.out.println("Inside DAO method "+ ub.getVendorAccount() +  " " +  ub.getVendorAddr() + " " + ub.getVendorWebsite()+ " " + ub.getExpenses() + " " +  crcb.getIdentity().getMonth() + " " + ub.getIdentity().getCircleId() + " " + ub.getPhoneno() + " " + ub.getContactperson() + " " + ub.getPaymentsource() + " " + ub.getVendortype()) ;
-		//updation of circle name is included here and not in another method.
 		if(ub.getVendorAccount() == null || ub.getVendorAccount().length() == 0) {
 			ub.setVendorAccount(crcb.getVendorAccount());
 		}
@@ -104,10 +92,8 @@ public class VendorMgmtDAO {
 		if(ub.getExpenses() <= 0) {
 			ub.setVendorWebsite(crcb.getVendorWebsite());
 		}
-		//if(ub.getIdentity().getMonth() <= 0 || ub.getIdentity().getMonth() > 12) {
 			ub.getIdentity().setMonth(crcb.getIdentity().getMonth());
 			ub.getIdentity().setDay(crcb.getIdentity().getDay());
-		//}
 		if(ub.getIdentity().getCircleId() <= 0) {  
 			ub.getIdentity().setCircleId(crcb.getIdentity().getCircleId());
 		}
@@ -132,7 +118,9 @@ public class VendorMgmtDAO {
 		return true;
 	}
 	
-	
+	/*
+	 * Deletes all rows (considering replication)
+	 */
 	public Boolean delete(Session session, VendorMgmtBean ub) {
 		long cicid = ub.getIdentity().getCircleId();
 		String vendorname = ub.getIdentity().getVendorName();
@@ -187,6 +175,10 @@ public class VendorMgmtDAO {
         }
         return list;
     }
+	
+	/*
+	 * Computes the monthly cost for the vendors.
+	 */
 	public Double[] getAllMonthlyCosts(Session session, VendorMgmtBean ub) {
 		long cicid = ub.getIdentity().getCircleId();
 		Double[] arr = new Double[12];
@@ -210,6 +202,9 @@ public class VendorMgmtDAO {
 		return arr;
     }
 	
+	/*
+	 * Gets the cost for a vendor.
+	 */
 	public Map<String, Double> getVendorCosts(Session session, VendorMgmtBean ub) {
 		long cicid = ub.getIdentity().getCircleId();
 		List<String> lst = new ArrayList<String>();

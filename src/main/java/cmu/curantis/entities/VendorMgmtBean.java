@@ -1,6 +1,7 @@
+/**
+ * This Bean creates the table for vendor management (using hibernate)
+ */
 package cmu.curantis.entities;
-
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -13,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-
 
 @Entity
 @Table(name="vendor_mgmt")

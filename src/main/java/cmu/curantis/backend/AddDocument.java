@@ -1,3 +1,24 @@
+/**
+ * This resource allows the caregiver to add a document to a service within a care team.
+ * 
+ * Input fields: email, circleId, service, documentName, documentUrl
+ * Input example:
+ * {
+ * "email":"john@gmail.com","circleId":1,
+ * "service":1,"documentName":"document",
+ * "documentUrl":"www.url.com"
+ * }
+ * 
+ * Output fields: message, success
+ * {
+ * "message": "Added document!",
+ *   "success": true
+ * }
+ * 
+ * @author curantisTeamCMU
+ *
+ */
+
 package cmu.curantis.backend;
 
 import java.util.List;
@@ -39,7 +60,6 @@ public class AddDocument {
         Transaction tx_init = session_init.beginTransaction();
         //method to get the list of users of a circle
         CaregiverCircleDAO cgcircl = new CaregiverCircleDAO();
-        System.out.println("The circle ID is" +input.getCircleId());
 		List<CaregiverCircleBean> lst = cgcircl.getByCircleId(session_init, input.getCircleId());
 		if(lst == null) {
 			output.setMessage("You are not in the circle!");
@@ -74,7 +94,6 @@ public class AddDocument {
 			
 			docmgmt.setAccessLevel(true);
 			docmgmt.setDocumentUrl(input.getDocumentUrl());
-			System.out.println("The mainkey here is " +mainkey);
 			Boolean result = docdao_init.checkDocument(session_mi, docmgmt);
 			if (result == false) {
 				output.setMessage("Document with same name exists, please change the name!");

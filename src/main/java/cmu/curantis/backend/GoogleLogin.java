@@ -39,7 +39,6 @@ public class GoogleLogin {
         bean.setEmail(input.getEmail());
         CaregiverInfoBean caregiver = caregiverdao.getCaregiverInfo(session, bean);
         if (caregiver == null || !caregiver.getRegisteredStatus()) {
-        	//System.out.println("No emailId found in backend");
         	output.setMessage("Account doesn't exist!");
         	output.setSuccess(false);
         }

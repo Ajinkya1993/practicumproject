@@ -1,3 +1,25 @@
+/**
+ * This resource allows a caregiver to delete a vendor from the vendor list.
+ * 
+ * Input fields: circleId, vendorname
+ * Input example:
+ * {
+ *  "circleId":1 ,
+ *	"vendorname":"Duquesnue vendors"
+ * }
+ * 
+ * Output fields: message, success
+ * Output Example:
+ * {
+ * "message": "Vendor deleted successfully",
+ * "success": true
+ * }
+ * 
+ * @author curantisTeamCMU
+ *
+ */
+
+
 package cmu.curantis.backend;
 
 import javax.ws.rs.Consumes;

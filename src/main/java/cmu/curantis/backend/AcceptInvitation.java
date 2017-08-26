@@ -37,8 +37,6 @@ public class AcceptInvitation {
 	    Session session = SessionUtil.getSession();
 	    Transaction tx = session.beginTransaction();
 	    
-	    System.out.println("Input email here is "+input.getEmail());
-	    System.out.println("Input careteam here is "+input.getCircleName());
 	    CaregiverCircleBean circle = caregiverCircleDAO.getByEmailAndName(session, input.getEmail(), input.getCircleName());
 	    if (circle == null) {
 	        output.setMessage("Not invited to this circle!");

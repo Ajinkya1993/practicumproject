@@ -1,3 +1,26 @@
+/**
+ * This resource allows the caregiver with the right access level to delete a document.
+ * 
+ * Input fields: email, circleId, service, documentName
+ * Input example:
+ * {
+ * "email":"john@gmail.com",
+ * "circleId":1,
+ * "service":1,
+ * "documentName":"document"
+ * }
+ * 
+ * Output fields: message, success
+ * Output Example:
+ * {
+ * "message": "Deleted document!",
+ *   "success": true
+ * }
+ * 
+ * @author curantisTeamCMU
+ *
+ */
+
 package cmu.curantis.backend;
 
 import java.util.List;

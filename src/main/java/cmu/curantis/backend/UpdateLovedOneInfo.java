@@ -1,3 +1,34 @@
+/**
+ * This resource allows the user to view loved one’s information before updating it.
+ * 
+ * Input fields: email, circleName
+ * Input example:
+ * {
+ * "circleName":"John Banta",
+ * "email":"john@gmail.com"}
+ * 
+ * Output fields: circleId, circlename, georelationship, lovedone_firstName, lovedone_LastName, lovedoneAddress,
+ *  message,pictureUrl, primaryCaregiver, relationshipNature, subscribedServices, success, triggerEvent
+ * {
+ *   "circleId": 1,
+ *   "circlename": "John Banta",
+ *   "georelationship": "Local",
+ *   "lovedone_firstName": "Carl",
+ *   "lovedone_LastName": "Banta",
+ *   "lovedoneAddress": "Greater Chicago Area",
+ *   "message": "Viewing LovedOne Info successfully!",
+ *   "pictureUrl": "abcdefg",
+ *   "primaryCaregiver": true,
+ *   "relationshipNature": "Son",
+ *   "subscribedServices": "Vendor Service->Senior Housing",
+ *   "success": true,
+ *   "triggerEvent": "Heart Attack"
+ * }
+ * 
+ * @author curantisTeamCMU
+ *
+ */
+
 package cmu.curantis.backend;
 
 import javax.ws.rs.Consumes;
@@ -51,36 +82,14 @@ public class UpdateLovedOneInfo {
         output.setGeorelationship(caregiverCircle.getGeorelationship());
         output.setPrimaryCaregiver(caregiverCircle.getPrimaryCaregiver());
         output.setRelationshipNature(caregiverCircle.getRelationshipNature());
-       output.setTriggerEvent(caregiverCircle.getTriggerEvent());
-       output.setCircleId(caregiverCircle.getIdentity().getCircleID());
-       if(cic_op == null || cic_op.getLovedoneAddress() == null) {
-           output.setLovedoneAddress("123 Maryland Street");
-           } else {
-           	output.setLovedoneAddress(cic_op.getLovedoneAddress());	
-           }
-           if(cic_op == null || cic_op.getLovedone_firstName() == null) {
-           output.setLovedone_firstName("Johnny");
-           } else {
-           	output.setLovedone_firstName(cic_op.getLovedone_firstName());	
-           }
-           if(cic_op == null || cic_op.getLovedone_LastName() == null) {
-           output.setLovedone_LastName("Bravo");
-           } else {
-           	output.setLovedone_LastName(cic_op.getLovedone_LastName());
-           }
-           if(cic_op == null || cic_op.getServicesSubscribed() == null) {
-               output.setSubscribedServices("Housing Service > Ancillary Service");
-               } else {
-               	output.setSubscribedServices(cic_op.getServicesSubscribed());
-               }
-        output.setPictureUrl("abcdefg");
+        output.setTriggerEvent(caregiverCircle.getTriggerEvent());
+        output.setCircleId(caregiverCircle.getIdentity().getCircleID());
 
-        /*
-        output.setLovedURL(csubs.getPictureUrl());
-        output.setSubscribedServices(csubs.getServicesSubscribed());
-        output.setLovedAddress(csubs.getLovedoneAddress());
-        output.setLovedoneFname(csubs.getLovedone_firstName());
-        output.setLovedoneLname(csubs.getLovedone_LastName());*/
+           	output.setLovedoneAddress(cic_op.getLovedoneAddress());	
+           	output.setLovedone_firstName(cic_op.getLovedone_firstName());
+           	output.setLovedone_LastName(cic_op.getLovedone_LastName());
+            output.setSubscribedServices(cic_op.getServicesSubscribed());
+
 	   //error cases would be checked while filling in loved one's information
 	    output.setMessage("Viewing LovedOne Info successfully!");
 	    output.setSuccess(true);	   

@@ -1,3 +1,38 @@
+/**
+ * This resource allows to update a user’s information stored in the database.
+ * 
+ * Input fields: circleId, email, circleName, georelationship,
+ *  lovedone_firstName, lovedone_LastName, lovedoneAddress, pictureUrl, primaryCaregiverrelationshipNature, triggerEvent
+ * Input example:
+ * {
+ * "circleId": 1,
+ * "email":"john@gmail.com",
+ *   "circleName": "John Banta",
+ *   "georelationship": "Remote",
+ *   "lovedone_firstName": "Carl",
+ *   "lovedone_LastName": "Banta",
+ *   "lovedoneAddress": "Greater Chicago Area",
+ *   "message": "Viewing LovedOne Info successfully!",
+ *   "pictureUrl": "abcdefg",
+ *   "primaryCaregiver": true,
+ *   "relationshipNature": "Son",
+ *   "subscribedServices": "Vendor Service->Senior Housing",
+ *   "success": true,
+ *   "triggerEvent": "Heart Attack"
+ * }
+ * 
+ * Output fields: message, success
+ * Output Examples:
+ * {
+ * "message": "Updated LovedOne Info successfully!",
+ * "success": true
+ * }
+ * 
+ * @author curantisTeamCMU
+ *
+ */
+
+
 package cmu.curantis.backend;
 
 import javax.ws.rs.Consumes;
@@ -35,7 +70,6 @@ public class UpdateLovedOneInfoDB {
 	    String email = input.getEmail();
 	    String circleName = input.getCircleName();
 	    Long circleId = input.getCircleId();
-	    System.out.println("In updatelovedoneinfoDB: Email, circleName and circleId is "+email + " " + circleName + " " + circleId);
 	    
 	    CaregiverCircleDAO caregiverCircleDAO = new CaregiverCircleDAO();
 	    CircleSubsDAO circleSubsDAO = new CircleSubsDAO();
@@ -48,12 +82,10 @@ public class UpdateLovedOneInfoDB {
 	    CircleSubsBean csubstemp = new CircleSubsBean();
 	    csubstemp.setCircleId(circleId);
 	    CircleSubsBean csubs = circleSubsDAO.getCircleSubs(session, csubstemp);
-	   // CircleSubsBean csubs = new CircleSubsBean();
 	    caregiverCircle.setGeorelationship(input.getGeoRel());
 	    caregiverCircle.setPrimaryCaregiver(true);
 	    caregiverCircle.setRelationshipNature(input.getNatureOfRel());
 	    caregiverCircle.setTriggerEvent(input.getTriggerEvent());
-	    System.out.println("Checking output before querying DB "+input.getGeoRel() + " " + input.getNatureOfRel() + " " + input.getTriggerEvent());
 	    csubs.setPictureUrl("abcdefg");
 	    csubs.setLovedoneAddress(input.getLovedoneAddress());
 	    csubs.setLovedone_firstName(input.getLovedone_firstName());

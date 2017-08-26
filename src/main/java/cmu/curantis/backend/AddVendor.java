@@ -1,3 +1,38 @@
+/**
+ * This resource adds a vendor to the vendor list.
+ * 
+ * Input fields: circleId, circleName, vendorname, vendorwebsite, vendoraddress, vendoraddress,
+ *  vendoraccountnumber, month, day, replicationfactor, expenses, vendortype, contactperson, phoneno, paymentsource
+ * Input example:
+ * {
+ * "circleId":1 ,
+ *   "email":"john@gmail.com",
+ *   "circleName": "John Banta",
+ *	"vendorname":"Duquesnue vendors",
+ *	"vendorwebsite":"http://www.google.com",
+ *	"vendoraddress":"Duquesnue Light, Chicago, IL, 600120",
+ *	"vendoraccountnumber":"615242",
+ *	"month":"7",
+ *	"day":"24",
+ *	"replicationfactor":"3",
+ *	"expenses" :"1200",
+ *	"vendortype":"Housing Service",
+ *	"contactperson":"James Hunt",
+ *	"phoneno":"84236182931",
+ *	"paymentsource":"Schwab Checking"
+ * }
+ * 
+ * Output fields: message, success
+ * {
+ * "message": "Vendor added successfully",
+ * "success": true
+ * }
+ * 
+ * @author curantisTeamCMU
+ *
+ */
+
+
 package cmu.curantis.backend;
 
 import javax.ws.rs.Consumes;
@@ -46,7 +81,6 @@ public class AddVendor {
 			vmbean.getIdentity().setVendorName(input.getVendorname());
 			vmbean.getIdentity().setCircleId(input.getCircleId());
 			VendorOutput vo_init = vendormgmtdao.checkVendors(session, vmbean);
-			System.out.println("In add vendor with: "+input.getVendoraddress() + " "+input.getVendoraccountnumber() +" " + input.getVendorname() + " " +input.getCircleId() + " " + input.getExpenses() +" " + input.getMonth() );
 
 			if (vo_init.isSuccess() == false) {
 				output.setMessage(vo_init.getMessage());
@@ -63,10 +97,8 @@ public class AddVendor {
 		        output.setSuccess(false);
 		        return output;
 			}
-			//harcoding some values
 			
 			
-			System.out.println("In add vendor with: "+input.getVendorname() + " " +input.getCircleId() + " " + input.getExpenses() +" " + input.getMonth() );
 			//add new vendor (replicate rows with changing months)
 			for(int i = 0; i < replication; i++) {
 			vmbean.setIdentity();
@@ -88,7 +120,6 @@ public class AddVendor {
 			vmbean.setPhoneno(input.getPhoneno());
 			
 			vmbean.setPhoneno(input.getPhoneno());
-			System.out.println("Before creating vendor "+vmbean.getVendorAddr() + " "+vmbean.getVendorAccount());
 			VendorOutput vo = vendormgmtdao.create(session, vmbean);
 			if (vo.isSuccess() == false) {
 				output.setMessage(vo.getMessage());
