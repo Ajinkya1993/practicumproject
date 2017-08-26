@@ -1,5 +1,48 @@
 /**
- * This class is used to retirive a given vendors expenditure.
+ * This class is used to retrieve a given vendors expenditure.
+ * 
+ * Input fields: circleId, vendorname
+ * Input example:
+ * {
+ * "circleId": "1",
+ * "vendorname":"City of Chicago"
+ * }
+ * 
+ * Output fields:  list, contactperson, expenses,circleId,day,month,vendorName,notification,
+ *  paymentsource, phoneno, remdays,  vendorAccount, vendorAddr, vendortype, vendorWebsite
+ * Output Example: 
+ * {
+ *   "bean": null,
+ *   "list": [
+ *       {
+ *           "contactperson": "NA",
+ *           "expenses": 240,
+ *           "identity": {
+ *               "circleId": 1,
+ *               "day": 23,
+ *               "month": 1,
+ *               "vendorName": "City of Chicago"
+ *           },
+ *           "notification": null,
+ *           "paymentsource": "Chase autopay",
+ *           "phoneno": 3127445000,
+ *           "remdays": 0,
+ *           "vendorAccount": "7621973629",
+ *           "vendorAddr": "121 City Hall, Chicago, IL 60602",
+ *           "vendortype": "Water",
+ *           "vendorWebsite": "www.cityofchicago.com"
+ *       }
+ *   ],
+ *   "listv": null,
+ *   "map": null,
+ *   "message": "Vendor Cost viewed successfully",
+ *   "monthlylist": null,
+ *   "set": null,
+ *   "success": true
+ * }
+ * 
+ * @author curantisTeamCMU
+ * 
  */
 
 package cmu.curantis.backend;

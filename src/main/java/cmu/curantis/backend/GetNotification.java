@@ -10,41 +10,39 @@
  * Output fields:  contactperson, expenses, circleId, day, month, vendorName, paymentsource, 
  * Output Example:
  * {
-    "map": {
-        "Exelon": {
-            "contactperson": "NA",
-            "expenses": 215,
-            "identity": {
-                "circleId": 1,
-                "day": 25,
-                "month": 12,
-                "vendorName": "Exelon"
-            },
-            "notification": null,
-            "paymentsource": "Chase autopay",
-            "phoneno": 8004833220,
-            "remdays": 0,
-            "vendorAccount": "11109672834",
-            "vendorAddr": "P.O. Box 805398, Chicago, IL, 60680",
-            "vendortype": "Electricity",
-            "vendorWebsite": "www.excelon.com"
-        }
-          },
-    "message": "Vendor viewed successfully",
-    "monthlylist": null,
-    "set": [
-        "Exelon",
-        "Peoples Gas",
-        "City of Chicago",
-        "The Admiral at the Lake",
-        "North Shore Medical",
-        "Benchmark Home Healthcare",
-        "BlueCross Blue Shield of IL"
-    ],
-    "success": true
-}
-
-
+ *  "map": {
+ *       "Exelon": {
+ *          "contactperson": "NA",
+ *           "expenses": 215,
+ *           "identity": {
+ *               "circleId": 1,
+ *               "day": 25,
+ *               "month": 12,
+ *               "vendorName": "Exelon"
+ *           },
+ *           "notification": null,
+ *           "paymentsource": "Chase autopay",
+ *           "phoneno": 8004833220,
+ *           "remdays": 0,
+ *           "vendorAccount": "11109672834",
+ *           "vendorAddr": "P.O. Box 805398, Chicago, IL, 60680",
+ *           "vendortype": "Electricity",
+ *           "vendorWebsite": "www.excelon.com"
+ *       }
+ *         },
+ *   "message": "Vendor viewed successfully",
+ *   "monthlylist": null,
+ *   "set": [
+ *       "Exelon",
+ *       "Peoples Gas",
+ *       "City of Chicago",
+ *       "The Admiral at the Lake",
+ *       "North Shore Medical",
+ *       "Benchmark Home Healthcare",
+ *       "BlueCross Blue Shield of IL"
+ *   ],
+ *   "success": true
+ * }
  * 
  * @author curantisTeamCMU
  *
@@ -121,11 +119,7 @@ public class GetNotification {
 					List<Double> list = new ArrayList<Double>();
 
 					mp.put(vb.getIdentity().getVendorName(), vb);
-					//System.out.println("IN GET VENDOR DAO with vendor name "+vb.getIdentity().getVendorName());
-					//System.out.println("Map entry with expense is "+list.get(0));
-					//System.out.println("Map entry with day is "+list.get(1));
 				} else {
-					//List<Double> lstnw = mp.get(vb.getIdentity().getVendorName());
 					VendorMgmtBean vbeans = mp.get(vb.getIdentity().getVendorName());
 					if(vbeans.getIdentity().getMonth() > 0 && vbeans.getIdentity().getMonth() < vb.getIdentity().getMonth()) {
 						vbeans.getIdentity().setMonth(vb.getIdentity().getMonth());

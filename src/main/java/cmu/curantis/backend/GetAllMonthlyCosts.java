@@ -1,7 +1,26 @@
 /**
  * This class is used to obtain the monthly costs for all 12 months for the pie chart used in vendor dashboard.
  * 
+ * Input fields: email, circleId, emailToAdd
+ * Input example:
+ * {
+ * "email": "john@gmail.com",
+ * "circleId": "1",
+ * "emailToAdd": "hillary@gmail.com"
+ * }
+ * 
+ * Output fields: success, circleId, message, subscribedServices
+ * Output Example:
+ * {
+ * "success": true,
+ * "circleId": 1,
+ * "message": "Added to circle!"
+ * }
+ * 
+ * @author curantisTeamCMU
+ *
  */
+
 
 package cmu.curantis.backend;
 
