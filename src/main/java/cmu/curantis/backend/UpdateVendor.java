@@ -1,3 +1,32 @@
+/**
+ * This resource allows to update vendors information.
+
+ *  Input Fields: circleId, circleName, vendorname, vendorwebsite, vendoraddress, vendoraddress, vendoraccountnumber, month, day, replicationfactor, expenses, vendortype, contactperson, phoneno, paymentsource
+ *  Input Example: {   "circleId":1 ,
+ * "email":"john@gmail.com",
+ *   "circleName": "John Banta",
+ *	"vendorname":"Duquesnue Light Vendor",
+ *	"vendorwebsite":"http://www.google.com",
+ *	"vendoraddress":"Duquesnue Light, Chicago, IL, 600120",
+ *	"vendoraccountnumber":"52161",
+ *	"month":"7",
+ *	"day":"24",
+ *	"replicationfactor":"3",
+ *	"expenses" :"1200",
+ *	"vendortype":"Housing Service",
+ *	"contactperson":"Enrique Hunt",
+ *	"phoneno":"84236182931",
+ *  "paymentsource":"Schwab Checking"
+ *  }
+ * Output Fields: message, success
+ * Output Example: {
+ *   "message": "Updated added successfully",
+ *   "success": true
+ * }
+
+ * @author curantisTeamCMU
+ */
+
 package cmu.curantis.backend;
 
 import javax.ws.rs.Consumes;

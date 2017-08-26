@@ -1,3 +1,55 @@
+/**
+ * 
+ * This class is used to get the notifications by obtaining the due dates for vendors and then using current system time in frontend to get the notifications.
+ * Input fields: circleId
+ * Input example:
+ * {
+ * "circleId": "1",
+ * }
+ * 
+ * Output fields:  contactperson, expenses, circleId, day, month, vendorName, paymentsource, 
+ * Output Example:
+ * {
+    "map": {
+        "Exelon": {
+            "contactperson": "NA",
+            "expenses": 215,
+            "identity": {
+                "circleId": 1,
+                "day": 25,
+                "month": 12,
+                "vendorName": "Exelon"
+            },
+            "notification": null,
+            "paymentsource": "Chase autopay",
+            "phoneno": 8004833220,
+            "remdays": 0,
+            "vendorAccount": "11109672834",
+            "vendorAddr": "P.O. Box 805398, Chicago, IL, 60680",
+            "vendortype": "Electricity",
+            "vendorWebsite": "www.excelon.com"
+        }
+          },
+    "message": "Vendor viewed successfully",
+    "monthlylist": null,
+    "set": [
+        "Exelon",
+        "Peoples Gas",
+        "City of Chicago",
+        "The Admiral at the Lake",
+        "North Shore Medical",
+        "Benchmark Home Healthcare",
+        "BlueCross Blue Shield of IL"
+    ],
+    "success": true
+}
+
+
+ * 
+ * @author curantisTeamCMU
+ *
+ */
+
 package cmu.curantis.backend;
 
 import java.util.ArrayList;

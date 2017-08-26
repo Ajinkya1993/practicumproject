@@ -1,3 +1,51 @@
+/**
+ * 
+ * This resource is used to get the vendor information.
+ * 
+ * Input fields: circleId, vendorname
+ * Input Example: {
+ *           "circleId":"1",
+ *	"vendorname":"Exelon"
+ * }
+ * 
+ * Output fields: contactperson, expenses, circleId, day, month, vendorName, notification,
+ *  paymentsource, phoneno, remdays, vendorAccount, vendorAddr, vendortype, vendorWebsite
+ * 
+ * Output Example: 
+ *  "bean": null,
+ *   "list": [
+ *       {
+ *           "contactperson": "NA",
+ *           "expenses": 215,
+ *           "identity": {
+ *               "circleId": 1,
+ *               "day": 25,
+ *               "month": 1,
+ *               "vendorName": "Exelon"
+ *           },
+ *           "notification": null,
+ *           "paymentsource": "Chase autopay",
+ *           "phoneno": 8004833220,
+ *           "remdays": 0,
+ *           "vendorAccount": "11109672834",
+ *           "vendorAddr": "P.O. Box 805398, Chicago, IL, 60680",
+ *           "vendortype": "Electricity",
+ *           "vendorWebsite": "www.excelon.com"
+ *       }
+ *   ],
+ *   "listv": null,
+ *   "map": null,
+ *   "message": "Vendor viewed successfully",
+ *   "monthlylist": null,
+ *   "set": null,
+ *   "success": true
+ * }
+
+ * 
+ * @author curantisTeamCMU
+ *
+ */
+
 package cmu.curantis.backend;
 
 import java.util.List;

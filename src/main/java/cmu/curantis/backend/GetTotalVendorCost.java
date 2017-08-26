@@ -1,6 +1,39 @@
 /**
  * This class is used to obtain the total cost expended for each vendor.
  * 
+ * Input fields: email, circleId, emailToAdd
+ * Input example:
+ * {
+ * "circleId": "1",
+ * }
+ * 
+ * Output fields:  listv, monthlylist, message, success
+ * Output Example:
+ * {
+ *   "listv": [
+ *       "Exelon",
+ *       "Peoples Gas",
+ *       "City of Chicago",
+ *       "The Admiral at the Lake",
+ *       "North Shore Medical",
+ *       "Benchmark Home Healthcare",
+ *       "BlueCross Blue Shield of IL"
+ *   ],
+ *   "message": "Total Vendor Expenses viewed successfully",
+ *   "monthlylist": [
+ *       2580,
+ *       2340,
+ *       2880,
+ *       89100,
+ *       1200,
+ *       3600,
+ *       3240
+ *   ],
+ *   "success": true
+ * }
+ * 
+ * @author curantisTeamCMU
+ *
  */
 
 package cmu.curantis.backend;

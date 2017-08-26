@@ -1,3 +1,43 @@
+/**
+ * This resource is used to display the vendors of a careteam.
+ * 
+ * The resource that deals with adding a person to a care team(circle)
+ * 
+ * Input fields: circleId
+ * Input example:
+ * {
+ * "circleId": "1",
+ * }
+ * 
+ * Output fields: contactperson, expenses, circleId, day, month, vendorName, notification, 
+ * paymentsource, phoneno, remdays, vendorAccount, vendorAddr, vendortype, vendorWebsite
+ * "map": {
+ *       "Exelon": {
+ *          "contactperson": "NA",
+ *           "expenses": 215,
+ *           "identity": {
+ *               "circleId": 1,
+ *               "day": 25,
+ *               "month": 8,
+ *               "vendorName": "Exelon"
+ *           },
+ *           "notification": true,
+ *           "paymentsource": "Chase autopay",
+ *           "phoneno": 8004833220,
+ *           "remdays": 2,
+ *           "vendorAccount": "11109672834",
+ *           "vendorAddr": "P.O. Box 805398, Chicago, IL, 60680",
+ *           "vendortype": "Electricity",
+ *           "vendorWebsite": "www.excelon.com"
+ *       },
+ *       "success": true
+ *}
+
+ * 
+ * @author curantisTeamCMU
+ *
+ */
+
 package cmu.curantis.backend;
 
 import java.util.ArrayList;

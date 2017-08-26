@@ -1,5 +1,48 @@
 /**
- * This class is used to retirive a given months expenditure for a given careteam.
+ * This class is used to retrieve a given months expenditure for a given careteam.
+ * 
+ * Input fields: circleId, month
+ * Input example:
+ * {
+ * "circleId":1,
+ * "month":7
+ * }
+ * 
+ * Output fields: contactperson, expenses, circleId, day, month, vendorName,
+ *  paymentsource, phoneno, remdays, vendorAccount, vendorAddr, vendortype, vendorWebsite
+ * Output Example:
+ * {
+ *   "bean": null,
+ *   "list": [
+ *       {
+ *           "contactperson": "Maureen Slivkin",
+ *           "expenses": 8100,
+ *           "identity": {
+ *               "circleId": 1,
+ *               "day": 1,
+ *               "month": 7,
+ *               "vendorName": "The Admiral at the Lake"
+ *           },
+ *           "notification": null,
+ *           "paymentsource": "Schwab Checking",
+ *           "phoneno": 7734331800,
+ *           "remdays": 0,
+ *           "vendorAccount": "37821",
+ *           "vendorAddr": "929 Foster Avenue, Chicago, IL 60640 ",
+ *           "vendortype": "Senior Housing",
+ *           "vendorWebsite": "www.admiral.kendal.org"
+ *       }
+ *   ],
+ *   "listv": null,
+ *   "map": null,
+ *   "message": "Cost viewed successfully",
+ *   "monthlylist": null,
+ *   "set": null,
+ *   "success": true
+ * }
+ * 
+ * @author curantisTeamCMU
+ *
  */
 
 package cmu.curantis.backend;
